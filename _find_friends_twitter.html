@@ -1,0 +1,89 @@
+{% if request.current_signup.crawling_twitter? %}
+
+  <div class="row">
+    <div class="col twitter-followings" id="twitter_followings">
+      <img src="{{ "bert-loader-small.gif" | asset_path }}" border="0"> Checking Twitter for people who have joined...
+      {{ request.current_signup.crawling_twitter_status_url | auto_refresh }}
+    </div>
+  </div>
+
+{% else %}
+
+  {% if request.current_signup.followings_count_from_twitter == 0 %}
+    <div class="row">
+      <div class="col">None of the people you follow on Twitter have joined.</div>
+    </div>
+  {% else %}
+    <div class="row">
+      <div class="col"><strong>{{ request.current_signup.followings_count_from_twitter }}</strong> people you follow on Twitter have joined.<br/>
+      You are automatically following them.</div>
+    </div>
+
+    {% if request.current_signup.followings_count_from_twitter > 6 %}
+      <div class="row">
+        <div class="col">
+          <div class="supporter-follow-details">Including...</div>
+        </div>
+      </div>
+    {% endif %}
+
+    <hr>
+
+    <ul class="list-unstyled">
+      {% for signup in request.current_signup.followers_from_twitter %}
+      <li {% unless forloop.last == true %}class="mb-3 pb-3 border-bottom"{% endunless %}>
+        <div class="media align-items-center">
+          <div class="mr-3">
+            <a href="{{ signup.profile_url }}">
+              {% include "avatar" signup: signup, size: 48 %}
+            </a>
+          </div>
+          <div class="media-body">{{ signup.published_name_linked }}</div>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+
+  {% endif %}
+
+  <div class="mt-4">
+    {% if request.current_signup.followers_count_from_twitter == 0 %}
+    <div class="row">
+      <div class="col">None of your Twitter followers have joined.</div>
+    </div>
+    {% else %}
+      <div class="row">
+        <div class="col"><strong>{{ request.current_signup.followers_count_from_twitter }}</strong> of your Twitter followers have already joined.<br/>
+        They are automatically following <em>you</em>.</div>
+      </div>
+
+      {% if request.current_signup.followers_count_from_twitter > 6 %}
+        <div class="row">
+          <div class="col">
+            <div class="supporter-follow-details">Including...</div>
+          </div>
+        </div>
+      {% endif %}
+
+      <hr>
+
+      <ul class="list-unstyled">
+        {% for signup in request.current_signup.followers_from_twitter %}
+        <li {% unless forloop.last == true %}class="mb-3 pb-3 border-bottom"{% endunless %}>
+          <div class="media align-items-center">
+            <div class="mr-3">
+              <a href="{{ signup.profile_url }}">
+                {% include "avatar" signup: signup, size: 48 %}
+              </a>
+            </div>
+            <div class="media-body">{{ signup.published_name_linked }}</div>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+
+    {% endif %}
+
+  </div>
+
+{% endif %}

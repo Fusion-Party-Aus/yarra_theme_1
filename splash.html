@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ page_title }}</title>
+
+    <link href="theme.scss" rel="stylesheet" />
+
+    <!-- start of content for header -->
+    {{ content_for_header }}
+    <!-- end of content for header -->
+
+    <script type="text/javascript">
+      NB.appConfig.userIsLoggedIn = {{ request.logged_in? }};
+    </script>
+
+  </head>
+  <body class="bootstrap-theme v3-theme {{ page.page_class_name }} js">
+    <header class="navbar navbar-light py-4">
+      <div class="container">
+        <a class="navbar-brand w-25" href="/">
+          {% if site.has_meta_image? %}
+            <img src="{{ site.meta_image_url }}" class="navbar-brand-img mw-100" alt="{{ site.name }}" style="max-height:100px;">
+          {% else %}
+            {{ site.name }}
+          {% endif %}
+        </a>
+      </div>
+    </header>
+
+
+    {% if site.has_header_image? %}
+      <div class="container mb-4">
+        <img src="{{ site.header_image_url_1026 }}" class="mw-100" border="0" />
+      </div>
+    {% endif %}
+
+    <div class="container">
+      {% if page.features_count > 0 %}
+        {% include "features" %}
+      {% endif %}
+
+      {% yield %}
+
+      <div class="my-4 text-center">
+        <p><a href="/">Continue to {{ site.name }} →</a></p>
+        {% if request.is_intern? and page.is_editing_available? %}
+          <p class="my-2"><a href="{{ page.admin_edit_url }}">Edit this page</a></p>
+        {% endif %}
+      </div>
+    </div>
+
+    {{ content_for_notifications }}
+
+    {{ content_for_footer }}
+
+    {% if site.has_background_image? %}
+      <style>
+        body {
+          background: url('{{ site.background_image_url }}') no-repeat center center fixed;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+        }
+      </style>
+    {% endif %}
+  </body>
+</html>

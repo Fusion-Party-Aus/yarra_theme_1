@@ -1,0 +1,176 @@
+<h2 class="mb-3">{{ event_page.page.headline }}</h2>
+
+
+{% form_for event_page %}
+  <div class="form">
+
+    <div class="form-errors">{% error_messages_for event_page %}</div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="event_page_start_at_chronic">When</label>
+        {% text_field "start_at_chronic", class:"form-control" %}
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="event_page_duration_chronic">Length</label>
+        {% text_field "duration_chronic", class:"form-control" %}
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6 notranslate">
+        <label for="event_page_time_zone">Time zone</label>
+        {% select_field "time_zone", event_page.time_zones, class:"form-control" %}
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="event_page_capacity_count">Maximum capacity</label>
+        {% text_field "capacity_count", class:"form-control" %}
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="form-group">
+      <h4>Contact info</h4>
+    </div>
+
+    <div class="form-group">
+      <label for="event_page_contact_name">Name</label>
+      {% text_field "contact_name", class:"form-control" %}
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="event_page_contact_email">Email</label>
+        {% text_field "contact_email", class:"form-control" %}
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="event_page_contact_phone_number">Phone</label>
+        {% text_field "contact_phone_number", class:"form-control" %}
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <div class="custom-control custom-checkbox">
+          {% check_box "is_contact_email_private", class:"custom-control-input" %}
+          <label for="event_page_is_contact_email_private" class="custom-control-label">Don't publish email address</label>
+        </div>
+      </div>
+
+      <div class="form-group col-md-6">
+        <div class="custom-control custom-checkbox">
+          {% check_box "is_contact_phone_private", class:"custom-control-input" %}
+          <label for="event_page_is_contact_phone_private" class="custom-control-label">Don't publish phone number</label>
+        </div>
+      </div>
+    </div>
+
+    <hr class="my-4">
+
+    <div class="form-group">
+      <h4>Location</h4>
+    </div>
+
+    <div class="form-group">
+      <label for="event_page_venue_name">Venue name</label>
+      {% text_field "venue_name", class:"form-control" %}
+    </div>
+
+    <div class="form-group">
+      <label for="event_page_address1">Address</label>
+      {% text_field "venue_address.address1", class:"form-control" %}
+      {% text_field "venue_address.address2", class:"form-control mt-2" %}
+    </div>
+
+    <div class="form-row">
+
+      <div class="form-group col-md-4">
+        <label for="event_page_city">City</label>
+        {% text_field "venue_address.city", class:"form-control" %}
+      </div>
+
+      {% if settings.has_states? %}
+        <div class="form-group col-md-4">
+          <label for="event_page_state">State</label>
+          {% text_field "venue_address.state", class:"form-control" %}
+        </div>
+      {% endif %}
+
+      <div class="form-group col-md-4">
+        <label for="event_page_zip">Postal code</label>
+        {% text_field "venue_address.zip", class:"form-control" %}
+      </div>
+    </div>
+
+    <hr class="my-4">
+
+    <div class="form-group">
+      <h4>Ticket price</h4>
+      <small>If free, just leave at 0.00.</small>
+    </div>
+
+    <div class="form-rpw">
+      <div class="form-group col-md-2">
+        <label for="event_page_user_ticket_price">Amount</label>
+        {% text_field "user_ticket_price", class:"form-control" %}
+      </div>
+
+      <div class="form-group col-md-10">
+        <label for="event_page_user_ticket_currency">Currency</label>
+        {% select_field "user_ticket_currency", event_page.currencies_available, class:"form-control" %}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="event_page_user_ticket_purchase_url">Ticket purchase URL</label>
+      {% text_field "user_ticket_purchase_url", class:"form-control" %}
+    </div>
+
+    <hr class="my-4">
+
+    <div class="form-group">
+      <h4>Description, include directions</h4>
+    </div>
+
+    <div class="form-group">
+      {% text_area "content_editable", class:"form-control textarea-tinymce" %}
+    </div>
+
+    <div class="form-group">
+      <div class="custom-control custom-checkbox">
+        {% check_box "accept_rsvps", class:"custom-control-input" %}
+        <label for="event_page_accept_rsvps" class="custom-control-label">Allow people to RSVP</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="custom-control custom-checkbox">
+        {% check_box "allow_guests", class:"custom-control-input" %}
+        <label for="event_page_allow_guests" class="custom-control-label">Allow people to bring guests (+1)</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="custom-control custom-checkbox">
+        {% check_box "show_guests", class:"custom-control-input" %}
+        <label for="event_page_show_guests" class="custom-control-label">Show who is coming</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="custom-control custom-checkbox">
+        {% check_box "is_private", class:"custom-control-input" %}
+        <label for="event_page_is_private" class="custom-control-label">Keep the RSVP page hidden from the rest of the site</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      {% submit_tag "Save and update page", class:"btn btn-primary submit-button" %}
+      <div class="form-submit"></div>
+    </div>
+  </div>
+{% endform_for %}

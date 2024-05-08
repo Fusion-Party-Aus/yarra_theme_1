@@ -1,0 +1,287 @@
+/*!
+ * Bootstrap v4.3.1 (https://getbootstrap.com/)
+ * Copyright 2011-2019 The Bootstrap Authors
+ * Copyright 2011-2019 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
+
+@import 'functions';
+@import 'variables';
+
+$facebook: #3b5998;
+$twitter: #4099ff;
+$whatsapp: #25d366;
+$theme-colors: map-merge(
+  (
+    'facebook': $facebook,
+    'twitter': $twitter,
+    'whatsapp': $whatsapp,
+  ),
+  $theme-colors
+);
+
+@import 'mixins';
+@import 'reboot';
+@import 'type';
+@import 'images';
+@import 'code';
+@import 'grid';
+@import 'tables';
+@import 'forms';
+
+.form-errors {
+  ul {
+    @extend .list-unstyled;
+    color: $danger;
+  }
+  .errorExplanation {
+    h2 {
+      @extend h5;
+      color: $danger;
+    }
+  }
+}
+
+.error-message {
+  @extend .invalid-feedback;
+}
+
+@import 'buttons';
+
+.whatsapp-share-button {
+  display: inline-block;
+  background-image: url('/assets/whatsapp-share-btn.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 67px 20px;
+  width: 67px;
+  height: 20px;
+  text-indent: -99999em;
+}
+
+@import 'transitions';
+@import 'dropdown';
+@import 'button-group';
+@import 'input-group';
+@import 'custom-forms';
+@import 'nav';
+@import 'navbar';
+@import 'card';
+@import 'breadcrumb';
+@import 'pagination';
+
+@media (max-width: 992px) {
+  .page-item:not(:first-of-type):not(:last-of-type) {
+    display: none;
+  }
+}
+
+@import 'badge';
+@import 'jumbotron';
+@import 'alert';
+
+.alert-notice,
+.alert-share {
+  @extend .alert-info;
+}
+
+.alert-error {
+  @extend .alert-danger;
+}
+
+.alert-notifications {
+  @extend .alert-warning;
+}
+
+@import 'progress';
+@import 'media';
+@import 'list-group';
+@import 'close';
+@import 'toasts';
+@import 'modal';
+@import 'tooltip';
+@import 'popover';
+@import 'carousel';
+
+.carousel-item .container {
+  left: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+@import 'spinners';
+@import 'utilities';
+
+.hide {
+  display: none;
+}
+
+@import 'print';
+
+/* NationBuilder Add-ons
+-----------------------------------------------*/
+@import 'moneybomb';
+@import 'slider-card';
+@import 'stripe';
+
+#header .navbar-brand-img {
+  object-fit: contain;
+  max-height: 100px;
+  min-height: 32px;
+}
+
+.expand {
+  position: relative;
+  .card-header {
+    cursor: pointer;
+    &:after {
+      content: '+';
+      position: absolute;
+      right: 1rem;
+      top: 0.7rem;
+    }
+  }
+  .card-header:not(.collapsed) {
+    &:after {
+      content: '-';
+    }
+  }
+}
+
+.svg-icon-inline {
+  transform: translateY(-1px);
+}
+
+/* Activity
+-----------------------------------------------*/
+.activity-content {
+  &:empty {
+    display: none;
+  }
+}
+
+/* Donation v1
+-----------------------------------------------*/
+img.icon-cc {
+  width: 28px;
+}
+
+.expiration-selects {
+  * {
+    float: left;
+  }
+  .year {
+    max-width: calc(50% - #{$form-grid-gutter-width});
+  }
+  .month {
+    margin-right: $form-grid-gutter-width;
+    max-width: 50%;
+  }
+}
+
+/* Alerts and flash messages
+-----------------------------------------------*/
+#flash_container {
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: $zindex-fixed;
+}
+
+#flash {
+  text-align: center;
+  margin: $spacer auto;
+}
+
+/* reCaptcha
+-----------------------------------------------*/
+.grecaptcha-badge {
+  z-index: 9994;
+}
+
+/* Express payment options
+-----------------------------------------------*/
+#payment-methods {
+  display: none;
+  .StripeElement {
+    border: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+}
+
+#cc-request-button {
+  padding-top: 1rem;
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    width: 100%;
+    height: 40px;
+  }
+}
+
+#credit-card-icon {
+  display: inline-block;
+  background-image: url("/assets/icons/ic_creditcard.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 32px 32px;
+  width: 32px;
+  height: 32px;
+  margin-right: 0.5em;
+}
+
+#selected-payment-method {
+  display: none;
+  border-radius: 2px;
+  text-align: center;
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  p {
+    font-size: 1em;
+  }
+  a {
+    font-size: 1em;
+  }
+}
+
+#payment-method-icon {
+  display: inline-block;
+  background-image: url("/assets/icons/ic_expresspay-other.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 40px 24px;
+  width: 40px;
+  height: 24px;
+  margin-right: 1em;
+  &[data-type="apple_pay"] {
+    background-image: url("/assets/icons/ic_applepay.svg");
+  }
+  &[data-type="google_pay"] {
+    background-image: url("/assets/icons/ic_googlepay.svg");
+  }
+}
+
+#submitted-payment-method,
+#demographics-read-only,
+#address-read-only,
+#apple-pay-notice,
+#your-info,
+#cc-info {
+  display: none;
+}
+
+#edit-demographics,
+#edit-address {
+  float: right;
+}
+
+.address-line {
+  display: block;
+}

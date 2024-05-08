@@ -1,0 +1,134 @@
+{% if page.headline.size > 0 %}
+  <h2 class="mb-3">{{ page.headline }}</h2>
+{% endif %}
+
+<div id="content">
+
+  {% if page.suggestion_box.content.size > 0 %}
+    <div id="intro" class="intro">
+      {{ page.suggestion_box.content }}
+    </div>
+  {% endif %}
+
+  <div class="card bg-light mb-4">
+    <div class="card-body">
+      {% form_for suggestion_page %}
+        <div class="form-errors">{% error_messages_for suggestion_page %}</div>
+
+        <div id="suggestion-page-page-headline-input" class="suggestion-headline">
+          {% text_field "page_headline", class:"form-control text", placeholder:"Add your suggestion", required: "required" %}
+        </div>
+
+        <div id="suggestion-page-form-expanded" class="hide suggestion-page-form-expanded">
+          <div class="my-4">
+            {% text_area "content_editable", class: "form-control" %}
+          </div>
+
+          {% if page.suggestion_box.is_image? %}
+            <div class="my-4">
+              <div class="custom-file">
+                {% file_field "image", class:"custom-file-input file" %}
+                <label class="custom-file-label" for="suggestion_page_image">Upload a picture ({% if page.suggestion_box.require_image? == false %}optional, {% endif %}600px wide)</label>
+              </div>
+            </div>
+          {% endif %}
+
+          {% if page.show_consent_form? %}
+            {% include "consent_form" %}
+          {% endif %}
+
+          <div class="mt-4">
+            {% submit_tag "Post", class:"btn btn-primary submit-button" %}
+            <div class="form-submit"></div>
+          </div>
+        </div>
+      {% endform_for %}
+
+      {% unless request.logged_in? %}
+        <div class="user-session-form-container hide">
+          {% include "user_session_form" %}
+        </div>
+      {% endunless %}
+    </div>
+  </div>
+
+  <div class="my-3">
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item"><a class="badge {% if request.url_path == page.url or request.url_path == '/' + page.slug %}badge-dark{% else %}badge-secondary{% endif %}" href="{{ page.url }}">Most recent</a></li>
+      {% capture alphabetical_url %}/{{ page.slug }}/alphabetical{% endcapture %}
+      <li class="list-inline-item"><a class="badge {% if request.url_path == alphabetical_url %}badge-dark{% else %}badge-secondary{% endif %}" href="{{ alphabetical_url }}">Alphabetical</a></li>
+      {% for tag_name in page.suggestion_box.tag_names %}
+      {% capture tag_url %}/{{ page.slug }}/tags/{{ tag_name }}{% endcapture %}
+      <li class="list-inline-item"><a class="badge {% if request.url_path == tag_url %}badge-dark{% else %}badge-secondary{% endif %}" href="{{ tag_url }}">{{ tag_name | capitalize }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="suggestion-box content-list" id="suggestion-box-page-{{ page.id }}">
+    {% if request.url_path == page.url or request.url_path == '/' + page.slug %}
+      <!-- show most recent -->
+      {% assign suggestions = page.suggestion_box.most_recent_suggestions %}
+    {% elsif request.url_path == alphabetical_url %}
+      <!-- show alphabetical -->
+      {% assign suggestions = page.suggestion_box.alphabetical_suggestions %}
+    {% else %}
+      <!-- show tagged -->
+      {% assign suggestions = page.suggestion_box.tagged_suggestion_pages %}
+    {% endif %}
+
+    <ul class="list-unstyled mb-4">
+    {% for post in page.suggestion_box.most_recent_suggestions %}
+      <li class="{% unless forloop.last == true %}mb-4 pb-4 border-bottom{% endunless %} page-excerpt" id="suggestion-page-{{ post.id }}">
+        <header class="mb-3">
+          <h3 class="mt-0 mb-1"><a href="{{ post.url }}">{{ post.headline }}</a></h3>
+          <div class="byline text-muted small">
+            Posted by {{ post.author.published_name_linked }} on {{ post.published_at | date: '%B %d, %Y %l:%M %p' }}
+            {% if post.show_stream? and post.public_activities_count > 0 %}
+            &middot; <a href="{{ post.url }}#reactions">{{ post.public_activities_count }} reaction{% if post.public_activities_count > 1 %}s{% endif %}</a>
+            {% endif %}
+          </div>
+        </header>
+
+        {% if post.suggestion.content.size > 0 %}
+          <div class="excerpt truncate-500" data-truncate="500">
+            {{ post.suggestion.content }}
+          </div>
+        {% endif %}
+
+        {% if post.suggestion.is_answered? %}
+        <div class="answer">
+          <div>
+            <strong>
+              Official response from {{ post.suggestion.answer_author.published_name_linked }}
+              {% if post.suggestion.is_answer_type? %}
+                {{ post.suggestion.answer_type_html }}
+              {% endif %}
+            </strong>
+          </div>
+          {% if post.suggestion.answer.size > 0 %}
+            <div class="answer-wrap truncate-500" data-truncate="500">{{ post.suggestion.answer }}</div>
+          {% endif %}
+        </div>
+        {% endif %}
+      </li>
+    {% endfor %}
+    </ul>
+
+    {% if request.url_path == page.url %} <!-- show most recent -->
+      {{ page.suggestion_box.most_recent_suggestions | paginate prev_label: "Previous" next_label: "Next" }}
+    {% elsif request.url_path == alphabetical_url %}
+      {{ page.suggestion_box.alphabetical_suggestions | paginate prev_label: "Previous" next_label: "Next" }}
+    {% else %}
+      {{ page.suggestion_box.tagged_suggestions | paginate prev_label: "Previous" next_label: "Next" }}
+    {% endif %}
+  </div>
+
+  {% include "like_page" heading: "Like this page to spread the word" %}
+</div>
+
+<script src="/assets/liquid/suggestions.js"></script>
+<script type="text/javascript">
+  $(function(){
+    new NB.Liquid.Suggestions();
+  });
+</script>

@@ -1,0 +1,51 @@
+{% if page.headline.size > 0 %}
+  <div class="mb-3">
+    <h2 class="m-1">{{ page.headline }}</h2>
+
+    {% if page.has_author? %}
+      {% include "page_byline" %}
+    {% endif %}
+  </div>
+{% endif %}
+
+{% if page.suggestion.has_image? %}
+  <div class="my-3">
+    <img src="{{ page.suggestion.image_url }}" width="600" border="0" />
+  </div>
+{% endif %}
+
+<div id="content">
+  <div id="intro" class="intro">
+    {% if page.suggestion.content.size > 0 %}
+      {{ page.suggestion.content }}
+    {% endif %}
+
+    {% if page.suggestion.is_answered? %}
+      <div class="my-4">
+        <p class="m-0 d-flex align-items-center small text-uppercase">
+          <span class="font-weight-bold">Official response from {{ page.suggestion.answer_author.published_name_linked }}</span>
+          {% if page.suggestion.is_answer_type? %}
+          <span class="ml-1 badge badge-secondary">{{ page.suggestion.answer_type_html }}</span>
+          {% endif %}
+        </p>
+        {% if page.suggestion.answer.size > 0 %}
+          <div class="mt-1">
+            {{ page.suggestion.answer }}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+
+  {% if page.tags_count > 0 %}
+    <div id="page-tags" class="page-tags">
+      {% include "page_tags" with page %}
+    </div>
+  {% endif %}
+
+  {% include "like_page" heading: "Do you like this suggestion?" %}
+
+  {% if page.show_stream? %}
+    {% include "page_stream" %}
+  {% endif %}
+</div>
