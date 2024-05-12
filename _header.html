@@ -38,7 +38,8 @@
                     {% comment %}
                     We'll find the closest space to the middle, and use the two halves as separate spans
                     {% endcomment %}
-                    {% assign best_distance_to_midpoint = page.headline.size | divided_by: 2 %}
+                    {% assign midpoint = page.headline.size | divided_by: 2 %}
+                    {% assign best_distance_to_midpoint = midpoint %}
                     {% assign best_split_index = 0 %}
                     {% assign current_length = 0 %}
                     {% for phrase in phrases %}
