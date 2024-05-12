@@ -48,7 +48,6 @@
               <nav id="toc" data-toggle="toc"></nav>
           </div>
           <div class="col-12 col-md-9 col-lg-8">
-            <!-- Owen, in your designs, this would now be a div class="container"> -->
             {% if page.features_count > 0 %}
               {% include "features" %}
             {% endif %}
@@ -56,7 +55,9 @@
               {% include "content", sidebar: request.is_sidebar? %}
             </main>
           </div>
-          <div class="d-none d-lg-block col-lg-2"></div>
+          <div class="d-none d-lg-block col-lg-2">
+            <!-- If we wanted to bring back the sidebar, this is where it would go -->
+          </div>
         </div>
       </div>
       {% include "footer" %}
