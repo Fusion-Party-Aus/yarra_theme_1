@@ -34,21 +34,31 @@
     </script>
 
   </head>
-  <body class="d-flex flex-column bootstrap-theme v3-theme {%if page.is_homepage %}homepage{% endif %} {{ page.page_class_name }} page-{{ request.template | replace: '_', '-' }} js">
-
-    {% unless page.type_name == "Donation (v2)" %}
-      {% include "header" %}
-      {% if site.has_header_image? %}
-        <div class="container mb-4">
-          <img src="{{ site.header_image_url_1026 }}" class="mw-100" border="0" />
+  <body class="d-flex flex-column bg-transparent bg-viewport text-gray-900 relative bootstrap-theme v3-theme {%if page.is_homepage %}homepage{% endif %} {{ page.page_class_name }} page-{{ request.template | replace: '_', '-' }} js"
+         data-bs-spy="scroll" data-bs-target="#toc">
+    {% unless page.type_name contains "Donation" %}
+      {% include "nav" %}
+      <div class="bg-charm"></div>
+      <div class="w-100 pb-4">
+        <div class="row d-block">
+          {% include "header" %}
         </div>
-      {% endif %}
-      {% if page.features_count > 0 %}
-        {% include "features" %}
-      {% endif %}
-      <main id="content" role="main">
-        {% include "content", sidebar: request.is_sidebar? %}
-      </main>
+        <div class="row">
+          <div class="d-none d-md-block col-0 col-md-3 col-lg-2 sidebar">
+              <nav id="toc" data-toggle="toc"></nav>
+          </div>
+          <div class="col-12 col-md-9 col-lg-8">
+            <!-- Owen, in your designs, this would now be a div class="container"> -->
+            {% if page.features_count > 0 %}
+              {% include "features" %}
+            {% endif %}
+            <main id="content" role="main">
+              {% include "content", sidebar: request.is_sidebar? %}
+            </main>
+          </div>
+          <div class="d-none d-lg-block col-lg-2"></div>
+        </div>
+      </div>
       {% include "footer" %}
     {% else %}
       {% yield %}

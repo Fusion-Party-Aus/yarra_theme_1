@@ -1,12 +1,24 @@
-<header id="header" class="navbar navbar-expand-lg navbar-light py-4">
-  <div class="container">
-    <a class="navbar-brand w-25" href="/">
-      {% if site.has_meta_image? %}
-        <img src="{{ site.meta_image_url }}" class="navbar-brand-img mw-100" alt="{{ site.long_name }}"/>
-      {% else %}
-        {{ site.long_name }}
+<header id="header" class="m-0 w-100 position-relative" style="padding-top: 60px">
+  <div class="header-container">
+    {% assign heroImage = 'https://fusionparty.space/images/forest_portal_2.webp' %}
+    {% assign altText = 'Forest portal' %}
+    {% for att in page.attachments %}
+      {% if att.file_name contains "hero_" %}
+          {% comment %}
+            Images are served faster from Cloudfront than from NationBuilder. The NationBuilder path will be like
+            https://assets.nationbuilder.com/futureparty/pages/4040/meta_images/original/hero_cloudfront_pink_library.png?1715400334
+          {% endcomment %}
+          <script>console.log('We might replace page meta image URL {{ att.file_name }}');</script>
+          {% assign nameParts = att.file_name | split: 'cloudfront_' %}
+          {% if nameParts.size >= 2 %}
+            {% assign heroImage = 'https://fusionparty.space/images/' | append: nameParts[1] %}
+            <script>console.log('The hero URL has been overwritten as {{ heroImage }}')</script>
+          {% endif %}
+          {% assign altText = replace att.file_name, '_', ' ' %}
+          <script>console.log('The alt text is {{ altText }}')</script>
+          {% break %}
       {% endif %}
-    </a>
-    {% include "nav" %}
+    {% endfor %}
+    <img class="mt-0 mt-lg-2" src="{{ heroImage }}" alt="{{ altText }}"/>
   </div>
 </header>

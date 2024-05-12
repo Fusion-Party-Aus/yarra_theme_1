@@ -1,35 +1,89 @@
-<button
-  class="navbar-toggler"
-  type="button"
-  data-toggle="collapse"
-  data-target="#primaryNav"
-  aria-controls="primaryNav"
-  aria-expanded="false"
-  aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon"></span>
-</button>
-<div class="collapse navbar-collapse" id="primaryNav">
-  <ul class="navbar-nav ml-auto">
-    {% for child in site.root_nav_pages %}
-      {% if child.leaf? or child.nav_children.size == 0 %}
-        <li class="nav-item">
-          <a href="{{ child.url }}" class="nav-link" >{{ child.name }}</a>
-        </li>
-      {% else %}
-        <li class="nav-item dropdown">
-          <a href="{{ child.url }}" class="nav-link dropdown-toggle" id="{{child.slug}}{{child.id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{ child.name }}
-          </a>
-          <div class="dropdown-menu" aria-labelledby="{{child.slug}}{{child.id}}">
-            {% if site.show_parent_in_nav_dropdown? %}
-              <a class="dropdown-item" href="{{ child.url }}">{{ child.name }}</a>
-            {% endif %}
-            {% for child2 in child.nav_children %}
-              <a class="dropdown-item" href="{{ child2.url }}">{{ child2.name }}</a>
-            {% endfor %}
-          </div>
-        </li>
-      {% endif %}
-    {% endfor %}
-  </ul>
-</div>
+<nav id="header-nav" class="w-100 navbar navbar-expand-lg navbar-light bg-glass">
+    <!-- todo: use the variables from NationBuilder -->
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/"><img class="logo navbar-brand active"
+                                              src="https://fusionparty.space/images/solo_colour.svg"
+                                              alt="Fusion logo"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
+                aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarToggler">
+            <ul class="navbar-nav mr-auto mb-2 mb-lg-0 nav-left">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="policyDropdown" role="button"
+                       data-toggle="dropdown" aria-expanded="false">Policy</a>
+                    <ul class="dropdown-menu" aria-labelledby="policyDropdown">
+                        <li><a class="dropdown-item" href="/policy/policy_overview.html">Policy Overview</a></li>
+                        <li class="divider">
+                            <hr class="dropdown-divider my-0">
+                        </li>
+                        <li><a class="dropdown-item" href="/policy/climate_rescue.html">Climate Rescue</a></li>
+                        <li><a class="dropdown-item" href="/policy/future_focused.html">Future Focused</a></li>
+                        <li><a class="dropdown-item" href="/policy/education_for_life.html">Education for Life</a></li>
+                        <li><a class="dropdown-item" href="/policy/ethical_governance.html">Ethical Governance</a></li>
+                        <li><a class="dropdown-item" href="/policy/fair_inclusive_society.html">Fair + Inclusive
+                            Society</a></li>
+                        <li><a class="dropdown-item" href="/policy/individual_freedoms.html">Individual Freedoms</a>
+                        </li>
+                        <li><a class="dropdown-item" href="/policy/ecological_restoration.html">Ecological
+                            Restoration</a></li>
+                        <li><a class="dropdown-item" href="/policy/civil_digital_liberties.html">Civil + Digital
+                            Liberties</a></li>
+                        <li><a class="dropdown-item" href="/policy/secular_humanism.html">Secular Humanism</a></li>
+                        <li><a class="dropdown-item" href="/policy/fair_foreign_policy.html">Fair Foreign Policy</a>
+                        </li>
+                        <li><a class="dropdown-item" href="/policy/policy_intake.html">Policy Intake Form</a></li>
+                        <li><a class="dropdown-item" href="/policy/policy_faq.html">Other positions and policy FAQ</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button"
+                       data-toggle="dropdown" aria-expanded="false">About</a>
+                    <ul class="dropdown-menu" aria-labelledby="aboutDropdown" data-popper="static">
+                        <li><a class="dropdown-item" href="/our_party">Our Party</a></li>
+                        <li><a class="dropdown-item" href="/live">Livestreams</a></li>
+                        <li><a class="dropdown-item" href="/contact">Contact</a></li>
+                        <li><a class="dropdown-item" href="/faqs">FAQs</a></li>
+                        <li><a class="dropdown-item" href="/store">store</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="newsDropdown" role="button"
+                       data-toggle="dropdown" aria-expanded="false">News</a>
+                    <ul class="dropdown-menu" aria-labelledby="newsDropdown" data-popper="static">
+                        <li><a class="dropdown-item" href="/blog">Blog</a></li>
+                        <li><a class="dropdown-item" href="/submissions_and_reports">Submissions and Reports</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Events</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mb-2 mb-lg-0 nav-right justify-content-end">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="involvedDropdown" role="button"
+                       data-toggle="dropdown" aria-expanded="false">Get Involved</a>
+                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="involvedDropdown"
+                        data-popper="static">
+                        <li><a href="/volunteer" class="dropdown-item">Volunteer</a></li>
+                        <li><a href="/join" class="dropdown-item">Join</a></li>
+                        <li><a href="/donate" class="dropdown-item">Donate</a></li>
+                        <li><a href="https://www.fusionparty.org.au/discord" class="dropdown-item">Discord</a></li>
+                        <li><a href="#" class="dropdown-item">Give Feedback</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button"
+                       data-toggle="dropdown" aria-expanded="false">👤</a>
+                    <ul class="dropdown-menu dropdown-menu-right" data-popper="static"
+                        aria-labelledby="profileDropdown">
+                        <li><a href="#" class="dropdown-item">Log in</a></li>
+                        <li><a href="#" class="dropdown-item">Register</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
