@@ -8,14 +8,14 @@
             Images are served faster from Cloudfront than from NationBuilder. The NationBuilder path will be like
             https://assets.nationbuilder.com/futureparty/pages/4040/meta_images/original/hero_cloudfront_pink_library.png?1715400334
           {% endcomment %}
-          <script>console.log('We might replace page meta image URL {{ att.file_name }}');</script>
           {% assign nameParts = att.file_name | split: 'cloudfront_' %}
           {% if nameParts.size >= 2 %}
             {% assign heroImage = 'https://fusionparty.space/images/' | append: nameParts[1] %}
-            <script>console.log('The hero URL has been overwritten as {{ heroImage }}')</script>
           {% endif %}
-          {% assign altText = replace att.file_name, '_', ' ' %}
-          <script>console.log('The alt text is {{ altText }}')</script>
+          {% comment %}
+            Please use useful names for your images!
+          {% endcomment %}
+          {% assign altText = att.file_name | replace: 'hero_', '' | replace: 'cloudfront_', '' | replace: '_', ' ' | replace: '.webp', '' | replace: '.png', '' | replace '.jpg', '' %}
           {% break %}
       {% endif %}
     {% endfor %}
