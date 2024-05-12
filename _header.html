@@ -44,7 +44,15 @@
                     {% assign current_length = 0 %}
                     {% for phrase in phrases %}
                         {% assign current_length = current_length | plus: phrase.size %}
-                        {% assign current_distance = current_length | minus: midpoint | abs %}
+                        {% assign current_distance = current_length | minus: midpoint %}
+                        {% comment %}
+                        NationBuilder links to Liquid documentation at https://shopify.github.io/liquid which doesn't
+                        include a version. It turns out that `abs` is not implemented in the version of Liquid being
+                        used by NationBuilder.
+                        {% endcomment %}
+                        {% if current_distance < 0 %}
+                            {% assign current_distance = current_distance | times: -1 %}
+                        {% endif %}
                         {% if current_distance <= best_distance_to_midpoint %}
                             {% assign best_split_index = forloop.index %}
                             {% comment %}
