@@ -34,12 +34,12 @@
     </script>
 
   </head>
-  <body class="d-flex flex-column bg-transparent bg-viewport text-gray-900 relative bootstrap-theme v3-theme {%if page.is_homepage %}homepage{% endif %} {{ page.page_class_name }} page-{{ request.template | replace: '_', '-' }} js"
-         data-bs-spy="scroll" data-bs-target="#toc">
+  <body class="d-flex flex-column bg-transparent bg-viewport text-gray-900 relative bootstrap-theme v3-theme {%if page.is_homepage %}homepage{% endif %} {{ page.page_class_name }} page-{{ request.template | replace: '_', '-' }} js">
     {% unless page.type_name contains "Donation" %}
       {% include "nav" %}
       <div class="bg-charm"></div>
       <div class="w-100 pb-4">
+        <!-- Owen, see how the policy overview page has a div mx-5 here, since the sidebar is absent -->
         <div class="row d-block">
           {% include "header" %}
         </div>
@@ -51,7 +51,7 @@
             {% if page.features_count > 0 %}
               {% include "features" %}
             {% endif %}
-            <main id="content" role="main">
+            <main id="content" role="main" data-spy="scroll" data-target="#toc">
               {% include "content", sidebar: request.is_sidebar? %}
             </main>
           </div>

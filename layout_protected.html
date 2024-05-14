@@ -35,8 +35,7 @@
     </script>
 
   </head>
-  <body class="d-flex flex-column bg-transparent bg-viewport text-gray-900 relative bootstrap-theme v3-theme {%if page.is_homepage %}homepage{% endif %} {{ page.page_class_name }} page-{{ request.template | replace: '_', '-' }} js"
-         data-bs-spy="scroll" data-bs-target="#toc">
+  <body class="d-flex flex-column bg-transparent bg-viewport text-gray-900 relative bootstrap-theme v3-theme {%if page.is_homepage %}homepage{% endif %} {{ page.page_class_name }} page-{{ request.template | replace: '_', '-' }} js">
 
     {% unless page.type_name contains "Donation" %}
       {% include "nav" %}
@@ -54,7 +53,7 @@
             {% if page.features_count > 0 %}
               {% include "features" %}
             {% endif %}
-            <main role="main">
+            <main role="main" data-spy="scroll" data-target="#toc">
               {% include "content", sidebar: request.is_sidebar? %}
             </main>
           </div>
