@@ -114,7 +114,7 @@
             {% if page.headline.size >= 30 %}
                 {%  assign is_very_long = true %}
             {%  endif %}
-            <h1 class="bg-gray-transparent align-items-left h-underline h-{{ h_color }} h-underline-animate inter fw-700
+            <h1 data-toc-skip class="bg-gray-transparent align-items-left h-underline h-{{ h_color }} h-underline-animate inter fw-700
                 ml-3 ml-sm-4 ml-md-5 mt-3 mt-lg-4 p-1 {% if is_very_long %}fs-scale-3-lines{% else %}fs-scale{% endif %}">
                 {% if phrases.size >= 2 %}
                     {% if is_very_long %}
