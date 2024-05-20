@@ -1,23 +1,26 @@
-<div id="content" class="container-fluid px-3">
-  <div class="row {% unless site.has_background_image? %}justify-content-center{% endunless %}">
-    <div class="col-12 col-lg-6 bg-white p-0">
-      <div class="container py-4 px-md-5" style="max-width:740px;">
-        <div class="row">
-          <div class="col">
-            <a class="navbar-brand mb-4" href="/" style="max-width: 200px;">
-              {% if site.has_meta_image? %}
-                <img src="{{ site.meta_image_url }}" class="navbar-brand-img mw-100" alt="{{ site.name }}">
-              {% else %}
-                {{ site.name }}
-              {% endif %}
-            </a>
-            {% if page.headline.size > 0 %}
-              <h1>{{ page.headline }}</h1>
-            {% endif %}
+<!-- FB Pixel tracking action -->
+<script>fbq('track', 'InitiateCheckout');</script>
 
-            {% if page.donation_v2.content.size > 0 %}
-              {{ page.donation_v2.content }}
-            {% endif %}
+<div class="container">
+<div id="content" class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <div class="container py-3">
+        {% if page.headline.size > 0 %}
+          <h1 class="pb-2 mt-3 mb-3">{{ page.headline }}</h1>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+  <div class="row {% unless site.has_background_image? %}justify-content-center{% endunless %}">
+
+    <div class="col-12 col-lg-6 p-0">
+
+      <div class="container px-md-5" style="max-width:740px;">
+        <div class="row">
+
+          <div class="col form-wrap">
 
             {% if page.donation_v2.has_amount_goal? %}
               <div class="mb-3">
@@ -33,7 +36,7 @@
               <div class="mb-3">
                 {% include "progress"
                   percent: page.donation_v2.percent_of_donor_goal,
-                  count: page.donors_count,
+                  count: page.donations_count,
                   goal: page.donation_v2.donor_goal,
                   label: "donors"
                 %}
@@ -73,7 +76,7 @@
                   </div>
                 {% else %}
                   <fieldset>
-                    <legend>Amount</legend>
+                    <legend>1. Amount</legend>
                     <div class="form-row">
                       {% if page.donation_v2.amount_in_cents != 0 %}
                         <div class="form-group col">
@@ -112,107 +115,38 @@
                         {% endif %}
                       </div>
                     {% endif %}
+										<div><small>
+                      Donations up to <a href="https://www.ato.gov.au/Non-profit/Gifts-and-fundraising/In-detail/Fundraising/Claiming-political-contributions-and-gifts/" target="_blank">$1,500 per year are tax deductible</a>.
+                      If you are considering making a larger donation, please contact our <a href="mailto:treasurer@fusionparty.org.au">treasurer@fusionparty.org.au</a> first.</small></div>
                   </fieldset>
                 {% endif %}
 
                 <hr>
 
-                <legend>Pay With</legend>
-
-                  <!-- BEGIN EPO CODE - #payments-methods div starts the new button options for Apple/Gpay or credit card -->
-
-                <div id="payment-methods" class="row">
-                  {% if page.donation_v2.express_payment_activated? %}
-                  <div id="donation-v2-payment-request"></div>
-                  {% endif %}
-                  <div id="cc-request-button">
-                    <button type="button" class="btn btn-primary btn-lg"><i id="credit-card-icon"></i>Credit Card</button>
-                  </div>
-                  <div id="apple-pay-notice" class="padtopless">
-                    <small>If you use Apple Pay, your confirmation prompt may refer to our payment processor, "NationBuilder"</small>
-                  </div>
-                </div>
-
-                  <div id="selected-payment-method" class="row">
-                    <div class="padtop">
-                      <i id="payment-method-icon"></i><a href="#" class="change-payment-method">Change payment method</a>
-                    </div>
-                    <p>You're almost done! Submit {% if request.current_order %}payment {% else %}donation {% endif %}below.</p>
-                  </div>
-
-                  <div id="submitted-payment-method" class="row">
-                    <div class="col-sm-12">
-                      <p>Payment method information has been saved. <a href="#" class="change-submitted-payment-method">Change payment method</a></p>
-                    </div>
-                  </div>
-
-                  <div id="cc-info" class="row">
-                    <div class="col-sm-12">
-                      <div class="form-group">
-                        <label>Credit Card</label>
-                        {% payment_field 'card' %}
-                      </div>
-                      <p class="padtop text-center">
-                        <a href="#" class="change-payment-method">Change payment method</a>
-                      </p>
-                    </div>
-                  </div>
-
-                <div id="your-info">
-
                 <fieldset>
-
-                  <legend>Your information</legend>
-
-                <div class="row">
-                  <div class="col-lg-12">
-                  <p id="demographics-read-only">
-                    <span id="demographics-name"></span><a href="#" id="edit-demographics">Edit</a><br />
-                    <span id="demographics-email"></span><br />
-                    <span id="demographics-phone"></span>
-                  </p>
+                  <legend>{% if request.current_order %}1{% else %}2{% endif %}. Your information</legend>
+                  <div class="form-group">
+                    <label for="donation_email">Email</label>
+                    {% email_field "email", class:"form-control" %}
                   </div>
-                  <div id="demographics-info">
-
-                    <div class="form-row">
-                      <div class="form-group col-md-6">
-                        <label for="donation_first_name">First Name</label>
-                        {% text_field "first_name", class:"form-control" %}
-                      </div>
-                      <div class="form-group col-md-6">
-                        <label for="donation_last_name">Last Name</label>
-                        {% text_field "last_name", class:"form-control" %}
+                  {% unless page.show_consent_form? %}
+                    <div class="form-group">
+                      <div class="custom-control custom-checkbox">
+                        {% check_box "email_opt_in", class:"custom-control-input" %}
+                        <label class="custom-control-label" for="donation_email_opt_in">Send email updates</label>
                       </div>
                     </div>
-                    <div class="form-group">
-                      <label for="donation_email">Email</label>
-                      {% email_field "email", class:"form-control" %}
+                  {% endunless %}
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="donation_first_name">First Name</label>
+                      {% text_field "first_name", class:"form-control" %}
                     </div>
-                    <div class="form-group">
-                      <label for="donation_billing_address_phone_number">Phone</label>
-                      {% phone_field "billing_address.phone_number", class:"form-control" %}
+                    <div class="form-group col-md-6">
+                      <label for="donation_last_name">Last Name</label>
+                      {% text_field "last_name", class:"form-control" %}
                     </div>
-                  </div> <!-- /demographics read only hide -->
-                  <div class="row">
-                    <div class="col-sm-12">
-                      <p id="address-read-only">
-                        <span class="address-line">
-                          <span id="address-line1"></span><a href="#" id="edit-address">Edit</a>
-                        </span>
-                        <span class="address-line">
-                          <span id="address-line2"></span>
-                        </span>
-                        <span class="address-line">
-                          <span id="address-city"></span>, <span id="address-state"></span> <span id="address-zip"></span>
-                        </span>
-                        <span class="address-line">
-                          <span id="address-country"></span>
-                        </span>
-                      </p>
-	                  </div>
                   </div>
-                  <div id="address-info">
-
                   <div class="form-group">
                     <label for="donation_billing_address_country_code">Country</label>
                     {% select_field "billing_address.country_code", page.donation_v2.countries, "code", "name", class:"form-control" %}
@@ -241,7 +175,10 @@
                       {% text_field "billing_address.zip", class:"form-control" %}
                     </div>
                   </div>
-                  </div> <!-- /#address-info -->
+                  <div class="form-group">
+                    <label for="donation_billing_address_phone_number">Phone</label>
+                    {% phone_field "billing_address.phone_number", class:"form-control" %}
+                  </div>
                   {% if page.donation_v2.merchant_account.is_employer_and_occupation_required? %}
                     <div class="form-row">
                       <div class="form-group col-md-6">
@@ -347,7 +284,16 @@
 
                 </fieldset>
 
+                <hr>
+
                 <fieldset>
+                  <legend>{% if request.current_order %}2{% else %}3{% endif %}. Payment information</legend>
+
+                  <div class="form-group">
+                    <label>Credit Card</label>
+                    {% payment_field 'card' %}
+                  </div>
+
                   <div clas="form-group">
                     {% if page.donation_v2.merchant_account.has_contribution_rules? %}
                       <label for="is_confirmation_text"><strong>Contribution rules</strong></label>
@@ -357,14 +303,6 @@
                         <label for="donation_is_confirmed" class="custom-control-label checkbox">I confirm that the above statements are true and accurate.</label>
                       </div>
                     {% endif %}
-                    {% unless page.show_consent_form? %}
-                      <div class="form-group">
-                        <div class="custom-control custom-checkbox">
-                          {% check_box "email_opt_in", class:"custom-control-input" %}
-                          <label class="custom-control-label" for="donation_email_opt_in">Send email updates</label>
-                        </div>
-                      </div>
-                    {% endunless %}
                     {% if site.ask_to_publish_to_stream? %}
                       <div class="custom-control custom-checkbox">
                         {% check_box "is_private", class:"custom-control-input checkbox" %}
@@ -378,9 +316,6 @@
                     {% include "consent_form" %}
                   {% endif %}
                     <hr>
-
-                    <div id="recaptcha_checkbox"></div>
-
                     <div class="form-group">
                       <div class="submit-container">
                         <div class="donation-v2-amount d-flex align-items-center my-4 text-success">
@@ -418,28 +353,25 @@
 
                 </fieldset>
 
-                </div> <!-- /#your-info -->
-
               </div> <!--/.form -->
 
             {% endform_for %}
           </div> <!-- /.col -->
         </div> <!-- /.row -->
       </div><!-- /.container -->
-      {% if site.has_background_image? %}
-        <div class="row">
-          <div class="col">
-            {% include "footer" %}
-          </div>
-        </div>
-      {% endif %}
+
     </div> <!--/.col -->
+
+    <div class="col-12 col-lg-6">
+      <div class="container" style="max-width:740px;">
+
+        {% if page.donation_v2.content.size > 0 %}
+          {{ page.donation_v2.content }}
+        {% endif %}
+      </div>
+    </div>
   </div><!-- /.row -->
 </div><!--/.container-fluid -->
-
-{% unless site.has_background_image? %}
-  {% include "footer" %}
-{% endunless %}
 
 <script>
   NB.payments.elementOptions = {
@@ -453,3 +385,4 @@
 </script>
 
 <script src="/assets/liquid/theme_donation_v2.js"></script>
+</div>
