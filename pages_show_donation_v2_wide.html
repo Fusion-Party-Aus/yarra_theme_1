@@ -7,7 +7,8 @@
             <div class="col">
                 <div class="container py-3 m-1">
                     {% if page.headline.size > 0 %}
-                    <h1 class="pb-2 mt-3 mb-3 h-underline h-underline-animate h-pink inter fw-600">{{ page.headline }}</h1>
+                    <h1 class="pb-2 mt-3 mb-3 h-underline h-underline-animate h-pink inter fw-600">{{ page.headline
+                        }}</h1>
                     {% endif %}
                 </div>
 
@@ -392,7 +393,8 @@
                                                 {% submit_tag "Process payment", class:"btn bg-pink btn-primary btn-lg
                                                 submit-button" %}
                                                 {% else %}
-                                                {% submit_tag "Donate now", class:"btn bg-pink btn-primary btn-lg submit-button"
+                                                {% submit_tag "Donate now", class:"btn bg-pink btn-primary btn-lg
+                                                submit-button"
                                                 %}
                                                 {% endif %}
                                             </div>
@@ -431,6 +433,46 @@
                 }
             }
         };
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get the amount from the query parameter
+            var urlParams = new URLSearchParams(window.location.search);
+            var amount = urlParams.get('amount');
+
+            if (amount) {
+                // Convert the amount to a number
+                const amountValue = parseFloat(amount);
+
+                // Get all the predefined amount options
+                const predefinedAmountElements = document.querySelectorAll('.donation-v2-amounts input[name="donation[amount_option]"]');
+                const predefinedAmounts = Array.from(predefinedAmountElements).map(function (element) {
+                    return parseFloat(element.value);
+                });
+
+                const matchedOption = predefinedAmounts.find(function (option) {
+                    return option === amountValue;
+                });
+
+                let checkedRadio;
+                if (matchedOption) {
+                    // Select the corresponding radio button
+                    checkedRadio = document.querySelector('input[name="donation[amount_option]"][value="' + matchedOption + '"]');
+                    if (checkedRadio) {
+                        checkedRadio.checked = true;
+                    }
+                } if (!checkedRadio) {
+                    // Set the custom amount
+                    var customRadioButton = document.getElementById('donation_amount_other');
+                    var customAmountInput = document.getElementById('donation_amount_other_input');
+
+                    if (customRadioButton && customAmountInput) {
+                        customRadioButton.checked = true;
+                        customAmountInput.value = amountValue.toFixed(2);
+                    } else {
+                        console.warn('Unable to find the custom input section');
+                    }
+                }
+            }
+        });
     </script>
 
     <script src="/assets/liquid/theme_donation_v2.js"></script>
