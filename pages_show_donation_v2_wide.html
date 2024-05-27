@@ -2,12 +2,12 @@
 <script>fbq('track', 'InitiateCheckout');</script>
 
 <div class="container">
-    <div id="content" class="container-fluid">
+    <div id="content" class="container w-1600">
         <div class="row">
             <div class="col">
-                <div class="container py-3">
+                <div class="container py-3 m-1">
                     {% if page.headline.size > 0 %}
-                    <h1 class="pb-2 mt-3 mb-3">{{ page.headline }}</h1>
+                    <h1 class="pb-2 mt-3 mb-3 h-underline h-underline-animate h-pink inter fw-600">{{ page.headline }}</h1>
                     {% endif %}
                 </div>
 
@@ -15,10 +15,10 @@
         </div>
         <div class="row {% unless site.has_background_image? %}justify-content-center{% endunless %}">
 
-            <div class="col-12 col-lg-6 p-0">
+            <div class="col-12 col-lg-7 p-0">
 
-                <div class="container px-md-5" style="max-width:740px;">
-                    <div class="row">
+                <div class="container w-1600">
+                    <div class="row w-100">
 
                         <div class="col form-wrap">
 
@@ -44,7 +44,7 @@
                             {% endif %}
 
                             {% form_for donation %}
-                            <div class="form">
+                            <div class="form bg-aquamarine-transparent rounded px-3 py-2 mx-1">
 
                                 <div class="form-errors">{% error_messages_for donation %}</div>
 
@@ -82,7 +82,7 @@
                                 </div>
                                 {% else %}
                                 <fieldset>
-                                    <legend>1. Amount</legend>
+                                    <h2 class="h-underline h-pink transition-delay">Amount</h2>
                                     <div class="form-row">
                                         {% if page.donation_v2.amount_in_cents != 0 %}
                                         <div class="form-group col">
@@ -132,11 +132,10 @@
                                 </fieldset>
                                 {% endif %}
 
-                                <hr>
+                                <hr class="divider">
 
                                 <fieldset>
-                                    <legend>{% if request.current_order %}1{% else %}2{% endif %}. Your information
-                                    </legend>
+                                    <h2 class="h-underline h-pink transition-delay">Your information</h2>
                                     <div class="form-group">
                                         <label for="donation_email">Email</label>
                                         {% email_field "email", class:"form-control" %}
@@ -322,11 +321,10 @@
 
                                 </fieldset>
 
-                                <hr>
+                                <hr class="divider">
 
                                 <fieldset>
-                                    <legend>{% if request.current_order %}2{% else %}3{% endif %}. Payment information
-                                    </legend>
+                                    <h2 class="h-underline h-pink transition-delay">Payment information</h2>
 
                                     <div class="form-group">
                                         <label>Credit Card</label>
@@ -353,10 +351,10 @@
                                     </div>
 
                                     {% if page.show_consent_form? %}
-                                    <hr>
+                                    <hr class="divider">
                                     {% include "consent_form" %}
                                     {% endif %}
-                                    <hr>
+                                    <hr class="divider">
                                     <div class="form-group">
                                         <div class="submit-container">
                                             <div class="donation-v2-amount d-flex align-items-center my-4 text-success">
@@ -391,10 +389,10 @@
                                             </div>
                                             <div class="mt-4">
                                                 {% if request.current_order %}
-                                                {% submit_tag "Process payment", class:"btn btn-primary btn-lg
+                                                {% submit_tag "Process payment", class:"btn bg-pink btn-primary btn-lg
                                                 submit-button" %}
                                                 {% else %}
-                                                {% submit_tag "Donate now", class:"btn btn-primary btn-lg submit-button"
+                                                {% submit_tag "Donate now", class:"btn bg-pink btn-primary btn-lg submit-button"
                                                 %}
                                                 {% endif %}
                                             </div>
@@ -413,7 +411,7 @@
 
             </div> <!--/.col -->
 
-            <div class="col-12 col-lg-6">
+            <div class="col-12 col-lg-5">
                 <div class="container" style="max-width:740px;">
 
                     {% if page.donation_v2.content.size > 0 %}
