@@ -433,14 +433,14 @@ header.container-fluid {
 }
 
 @font-face {
-    font-family: 'NicoKaku';
+    font-family: 'NicoKaku_subset';
     /* This only has the glyphs we're actually using. https://stackoverflow.com/a/66238793/1495729 */
-    src: url('/fonts/nicokaku_v2_subset.ttf') format('truetype');
+    src: url('https://fusionparty.space/fonts/nicokaku_v2_subset.ttf') format('truetype');
 }
 
 .nicokaku {
     color: white;
-    font-family: 'NicoKaku', 'Dosis', sans-serif;
+    font-family: 'NicoKaku_subset', 'Dosis', sans-serif;
 }
 
 .open-sans {
