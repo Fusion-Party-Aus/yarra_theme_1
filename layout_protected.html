@@ -35,15 +35,28 @@
     </script>
 
   </head>
+  {% assign isVideoLanding = false %}
+  {% for tag in page.tags %}
+    {% if tag.name == "video-landing" %}
+        {% assign isVideoLanding = true %}
+        {% break %}
+    {% endif %}
+  {% endfor %}
   <body class="d-flex flex-column bg-transparent bg-viewport text-gray-900 relative bootstrap-theme v3-theme {%if page.is_homepage %}homepage{% endif %} {{ page.page_class_name }} page-{{ request.template | replace: '_', '-' }} js">
 
     {% unless page.type_name contains "Donation" %}
       {% include "nav" %}
       <div class="bg-charm"></div>
       <div class="w-100 pb-4">
-        <div class="row d-block">
-          {% include "header" %}
-        </div>
+        {% if isVideoLanding %}
+          <div class="container">
+              {% include "video_header" %}
+          </div>
+        {% else %}
+          <div class="row d-block">
+            {% include "header" %}
+          </div>
+        {% endif %}
         <div class="row">
           <div class="d-none d-md-block col-0 col-md-3 col-lg-2 sidebar">
               <nav id="toc" data-toggle="toc"></nav>
@@ -94,8 +107,10 @@
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script defer src="underlining.js"></script>
-    <!-- https://afeld.github.io/bootstrap-toc/ -->
-    <script defer src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js"></script>
+    {% unless isVideoLanding %}
+      <!-- https://afeld.github.io/bootstrap-toc/ -->
+      <script defer src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js"></script>
+    {% endunless %}
     <script defer src="nav.js"></script>
     <script src="https://kwesforms.com/v2/kwes-script.js" defer></script>
     <script src="bs-custom-file-input.min.js"></script>
