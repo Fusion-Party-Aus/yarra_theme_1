@@ -68,7 +68,7 @@
               {% include "features" %}
             {% endif %}
             <main role="main" data-spy="scroll" data-target="#toc">
-              {% include "content", sidebar: request.is_sidebar? %}
+              {% include "content", sidebar: request.is_sidebar?, isVideoLanding: isVideoLanding %}
             </main>
           </div>
           <div class="d-none d-lg-block col-lg-2"></div>

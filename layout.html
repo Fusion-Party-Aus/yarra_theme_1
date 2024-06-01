@@ -44,6 +44,7 @@
           * The header has a video underneath the h1
           * The table of contents is removed (it would distract from the video)
           * We will avoid creating a row and a main, instead giving more control to the page.content.
+          * The div holding the content will no longer have the `container` tag (which would constrain the width)
           * We will include a script that allows us to inject videos into the page.
         {% endcomment %}
     {% endif %}
@@ -64,7 +65,7 @@
           </div>
         {% endif %}
         {% if isVideoLanding %}
-          {% include "content", sidebar: request.is_sidebar? %}
+          {% include "content", sidebar: request.is_sidebar?, isVideoLanding: isVideoLanding %}
           <script src="video_injection.js"></script>
         {% else %}
           <div class="row">
