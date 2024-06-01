@@ -39,6 +39,13 @@
     {% if tag.name == "video-landing" %}
         {% assign isVideoLanding = true %}
         {% break %}
+        {% comment %}
+        The implications of being a video landing page are:
+          * The header has a video underneath the h1
+          * The table of contents is removed (it would distract from the video)
+          * We will avoid creating a row and a main, instead giving more control to the page.content.
+          * We will include a script that allows us to inject videos into the page.
+        {% endcomment %}
     {% endif %}
   {% endfor %}
   <body class="d-flex flex-column bg-transparent bg-viewport text-gray-900 relative bootstrap-theme v3-theme {%if page.is_homepage %}homepage{% endif %} {{ page.page_class_name }} page-{{ request.template | replace: '_', '-' }} js">
@@ -56,22 +63,27 @@
             {% include "header" %}
           </div>
         {% endif %}
-        <div class="row">
-          <div class="d-none d-md-block col-0 col-md-3 col-lg-2 sidebar">
-              <nav id="toc" data-toggle="toc"></nav>
+        {% if isVideoLanding %}
+          {% include "content", sidebar: request.is_sidebar? %}
+          <script src="video_injection.js"></script>
+        {% else %}
+          <div class="row">
+            <div class="d-none d-md-block col-0 col-md-3 col-lg-2 sidebar">
+                <nav id="toc" data-toggle="toc"></nav>
+            </div>
+            <div class="col-12 col-md-9 col-lg-8">
+              {% if page.features_count > 0 %}
+                {% include "features" %}
+              {% endif %}
+              <main id="content" role="main" data-spy="scroll" data-target="#toc">
+                {% include "content", sidebar: request.is_sidebar? %}
+              </main>
+            </div>
+            <div class="d-none d-lg-block col-lg-2">
+              <!-- If we wanted to bring back the sidebar, this is where it would go -->
+            </div>
           </div>
-          <div class="col-12 col-md-9 col-lg-8">
-            {% if page.features_count > 0 %}
-              {% include "features" %}
-            {% endif %}
-            <main id="content" role="main" data-spy="scroll" data-target="#toc">
-              {% include "content", sidebar: request.is_sidebar? %}
-            </main>
-          </div>
-          <div class="d-none d-lg-block col-lg-2">
-            <!-- If we wanted to bring back the sidebar, this is where it would go -->
-          </div>
-        </div>
+        {% endif %}
       </div>
       {% include "footer" %}
     {% else %}
