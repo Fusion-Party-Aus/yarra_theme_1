@@ -554,13 +554,13 @@ h5.h-underline {
 }
 
 .bg-plasma-top {
-    background-image: url('https://fusionparty.space/images/images/horizontal_plasma_top.webp');
+    background-image: url('https://fusionparty.space/images/horizontal_plasma_top.webp');
     background-size: cover; /* Cover the entire area of the element */
     background-position: center; /* Center the background image */
 }
 
 .bg-underwater {
-    background-image: url('https://fusionparty.space/images/images/underwater_blue.webp');
+    background-image: url('https://fusionparty.space/images/underwater_blue.webp');
     background-size: cover;
     background-position: center;
 }
