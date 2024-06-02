@@ -17,25 +17,20 @@
 
           <div class="form-errors">{% error_messages_for signup %}</div>
 
-          <div class="form-group">
-            <label for="signup_first_name">First Name</label>
-            {% text_field "first_name", class:"form-control" %}
+          <div class="form-group mb-0">
+            {% text_field "first_name", class:"form-control p-3", placeholder: "First name" %}
+            <label for="signup_first_name" class="sr-only">First Name</label>
           </div>
-          <div class="form-group">
-            <label for="signup_last_name">Last Name</label>
-            {% text_field "last_name", class:"form-control" %}
+          <div class="form-group mb-0">
+            {% text_field "last_name", class:"form-control p-3", placeholder: "Last name" %}
+            <label for="signup_last_name" class="sr-only">Last Name</label>
           </div>
 
-          <div class="form-group">
-            <label for="signup_email">Email</label>
-            {% email_field "email", class:"form-control" %}
+          <div class="form-group mb-0 bg-transparent">
+            {% email_field "email", class:"form-control p-3", placeholder:"name@example.com" %}
+            <label for="signup_email" class="sr-only">Email address</label>
           </div>
-          {% if site.ask_for_mobiles? %}
-            <div class="form-group">
-              <label for="signup_mobile_number">Mobile phone</label>
-              {% phone_field "mobile_number", class:"form-control" %}
-            </div>
-          {% endif %}
+          <input type="hidden" name="signup[tags]" value="Newsletter, Campaigns, Meeting Reminders, Policy newsletter, ColourfulTheme">
 
           {% if homepage_excerpt.signup.has_labeled_tags? %}
 
@@ -44,9 +39,7 @@
 
           {% if homepage_excerpt.show_consent_form? %}{% include "consent_form" %}{% endif %}
 
-          <div class="form-group">
-            {% submit_tag "Subscribe", class:"btn btn-primary submit-button" %}
-          </div>
+          {% submit_tag "Subscribe", class:"btn btn-primary bg-blue w-100 py-2 glowing-button submit-button" %}
           <div class="form-submit"></div>
 
         {% endform_for %}
