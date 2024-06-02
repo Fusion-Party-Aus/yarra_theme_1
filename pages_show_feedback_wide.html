@@ -1,5 +1,5 @@
 {% if page.headline.size > 0 %}
-<h2 class="headline">{{ page.headline }}</h2>
+<h2 class="h-underline h-pink fw-600 pb-3 mx-3">{{ page.headline }}</h2>
 {% endif %}
 
 <div id="content">
@@ -10,12 +10,12 @@
   </div>
   {% endif %}
 
-  <div class="form-wrap">
+  <div class="form-wrap bg-aquamarine-transparent rounded p-3">
     <div class="form">
 
       {% if request.sorta_logged_in? %}
 
-      <h4>Hi {{ request.current_signup.name_or_email }}.</h4>
+      <h4>Hi {{ request.current_signup.name_or_email }}, what's on your mind?</h4>
 
       {% if request.logged_in? == false %}
       <div class="mt-2">
@@ -26,26 +26,6 @@
 
       {% else %}
 
-      {% endif %}
-
-      {% form_for feedback %}
-
-      <div class="form-errors">{% error_messages_for feedback %}</div>
-
-      {% if page.feedback.is_content? %}
-      <div class="form-group">
-        <label for="feedback_content">{{ page.feedback.content_name }}</label>
-        {% text_area "content", class:"form-control textarea autogrow" %}
-      </div>
-
-      {% if site.ask_to_publish_to_stream? %}
-      <div class="form-group">
-        <div class="form-check">
-          {% check_box "is_private", class:"form-check-input checkbox" %}
-          <label class="form-check-label checkbox" for="feedback_is_private">Don't post this publicly</label>
-        </div>
-      </div>
-      {% endif %}
       {% endif %}
 
       {% if request.sorta_logged_in? == false or request.current_signup.has_name? == false %}
@@ -68,62 +48,32 @@
           <label for="feedback_email">Email</label>
           {% email_field "email", class:"form-control text" %}
         </div>
+      </div>
+      {% endif %}
 
-        {% if site.ask_for_mobiles? %}
-        <div class="form-group col-sm-6">
-          <label for="feedback_mobile_number">Mobile phone (optional)</label>
-          {% phone_field "mobile_number", class:"form-control text" %}
-        </div>
-        {% endif %}
+      {% form_for feedback %}
+
+      <div class="form-errors">{% error_messages_for feedback %}</div>
+
+      {% if page.feedback.is_content? %}
+      <div class="form-group">
+        <label for="feedback_content">{{ page.feedback.content_name }}</label>
+        {% text_area "content", class:"form-control textarea autogrow", placeholder: "Keep up the great work!" %}
       </div>
 
-      {% unless page.show_consent_form? %}
-        <div class="form-row">
-          <div class="form-group col-sm-6">
-            <div class="form-check">
-              {% check_box "email_opt_in", class:"form-check-input checkbox" %}
-              <label class="form-check-label checkbox" for="feedback_email_opt_in">Send me email updates</label>
-            </div>
-          </div>
-
-          {% if site.ask_for_mobiles? %}
-          <div class="form-group col-sm-6">
-            <div class="form-check">
-              {% check_box "mobile_opt_in", class:"form-check-input checkbox" %}
-              <label class="form-check-label checkbox" for="feedback_mobile_opt_in">Send me text messages</label>
-            </div>
-          </div>
-          {% endif %}
+      {% if site.ask_to_publish_to_stream? %}
+      <div class="form-group">
+        <div class="form-check">
+          {% check_box "is_private", class:"form-check-input checkbox" %}
+          <label class="form-check-label checkbox" for="feedback_is_private">Don't post this publicly</label>
         </div>
-      {% endunless %}
-      {% endif %}
-
-
-      {% if request.sorta_logged_in? == false or request.current_signup.has_full_address? == false %}
-        <div class="form-group">
-          <label for="feedback_submitted_address">Address <small class="text-muted">(Street, City, State, Postal code)</small></label>
-          {% if page.feedback.require_address? %}
-            {% text_field "submitted_address", class:"form-control text", required: "required" %}
-          {% else %}
-            {% text_field "submitted_address", class:"form-control text" %}
-          {% endif %}
-        </div>
-      {% endif %}
-
-      {% if page.feedback.is_volunteers? and site.ask_for_volunteers? %}
-      {% if request.logged_in? == false or request.current_signup.is_volunteer == false %}
-        <div class="form-group">
-          <div class="form-check">
-            {% check_box "is_volunteer", class:"form-check-input checkbox" %}
-            <label class="form-check-label checkbox" for="feedback_is_volunteer">I want to volunteer</label>
-          </div>
-        </div>
+      </div>
       {% endif %}
       {% endif %}
 
       {% if page.show_consent_form? %}{% include "consent_form" %}{% endif %}
 
-      {% submit_tag page.feedback.submit_button_name, class:"btn btn-primary submit-button" %}
+      {% submit_tag page.feedback.submit_button_name, class:"btn bg-pink btn-primary" %}
       <div class="form-submit"></div>
 
       {% endform_for %}
