@@ -5,29 +5,24 @@
   {% assign hasClimateRescueTag = false %}
   {% assign hasPoliciesTag = false %}
   {% for tag in page.tags %}
-    {% if tag.name == "video-landing" %}
+    {% case tag.name %}
+      {% when "video-landing" %}
         {% assign isVideoLanding = true %}
         {% comment %}
-        The implications of being a video landing page are:
-          * The header has a video underneath the h1
-          * The table of contents is removed (it would distract from the video)
-          * We will avoid creating a row and a main, instead giving more control to the page.content.
-          * The div holding the content will no longer have the `container` tag (which would constrain the width)
-          * We will include a script that allows us to inject videos into the page.
-        {% endcomment %}
-    {% else %}
-      {% if tag.name == "ballots" %}
-      {% assign hasBallotsTag = true %}
-      {% else %}
-        {% if tag.name == "climate-rescue" %}
-          {% assign hasClimateRescueTag = true %}
-        {% else %}
-          {% if tag.name == "policies" %}
-            {% assign hasPoliciesTag = true %}
-          {% endif %}
-        {% endif %}
-      {% endif %}
-    {% endif %}
+          The implications of being a video landing page are:
+            * The header has a video underneath the h1
+            * The table of contents is removed (it would distract from the video)
+            * We will avoid creating a row and a main, instead giving more control to the page.content.
+            * The div holding the content will no longer have the `container` tag (which would constrain the width)
+            * We will include a script that allows us to inject videos into the page.
+          {% endcomment %}
+      {% when "ballots" %}
+        {% assign hasBallotsTag = true %}
+      {% when "climate-rescue" %}
+        {% assign hasClimateRescueTag = true %}
+      {% when "policies" %}
+        {% assign hasPoliciesTag = true %}
+    {% endcase %}
   {% endfor %}
   <head>
     <meta charset="utf-8" />

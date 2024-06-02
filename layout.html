@@ -5,21 +5,16 @@
   {% assign hasClimateRescueTag = false %}
   {% assign hasPoliciesTag = false %}
   {% for tag in page.tags %}
-    {% if tag.name == "video-landing" %}
-        {% assign isVideoLanding = true %}
-    {% else %}
-      {% if tag.name == "ballots" %}
-        {% assign hasBallotsTag = true %}
-      {% else %}
-        {% if tag.name == "climate-rescue" %}
-          {% assign hasClimateRescueTag = true %}
-        {% else %}
-          {% if tag.name == "policies" %}
-            {% assign hasPoliciesTag = true %}
-          {% endif %}
-        {% endif %}
-      {% endif %}
-    {% endif %}
+    {% case tag.name %}
+    {% when "video-landing" %}
+      {% assign isVideoLanding = true %}
+    {% when "ballots" %}
+      {% assign hasBallotsTag = true %}
+    {% when "climate-rescue" %}
+      {% assign hasClimateRescueTag = true %}
+    {% when "policies" %}
+      {% assign hasPoliciesTag = true %}
+    {% endcase %}
   {% endfor %}
   <head>
     <meta charset="utf-8" />
