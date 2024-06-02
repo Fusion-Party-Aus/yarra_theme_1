@@ -5,8 +5,12 @@
     {% include "page_tags" with page %}
 
     {% if page.is_homepage? == true and site.page_tags contains "homepage" %}
-      <div class="mt-4">
+      <div class="container my-4">
+        {% comment %}
+        We do not wish to support too many options for the signup form on the homepage.
         {% tag "homepage" with "homepage_widget" %}
+        {% endcomment %}
+        {% include "homepage_excerpt_signup" %}
       </div>
     {% endif %}
 
