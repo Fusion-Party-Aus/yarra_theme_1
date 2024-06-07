@@ -68,7 +68,9 @@
                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="involvedDropdown"
                         data-popper="static">
                         <li><a href="/volunteer" class="dropdown-item">Volunteer</a></li>
+                        {% unless request.sorta_logged_in? %}
                         <li><a href="/join" class="dropdown-item">Join</a></li>
+                        {% endunless %}
                         <li><a href="/donate" class="dropdown-item">Donate</a></li>
                         <li><a href="https://www.fusionparty.org.au/discord" class="dropdown-item">Discord</a></li>
                         <li><a href="/feedback" class="dropdown-item">Give Feedback</a></li>
@@ -79,8 +81,14 @@
                        data-toggle="dropdown" aria-expanded="false">👤</a>
                     <ul class="dropdown-menu dropdown-menu-right" data-popper="static"
                         aria-labelledby="profileDropdown">
+                        {% if request.sorta_logged_in? %}
+                        <li><a href="/enrollment_details" class="dropdown-item">Enrollment Details</a></li>
+                        <li><a href="/supporter_portal/memberships" class="dropdown-item">Membership</a></li>
+                        <li><a href="{{ request.current_signup.logout_url }}" class="dropdown-item">Membership</a></li>
+                        {% else %}
                         <li><a href="/login" class="dropdown-item">Log in</a></li>
                         <li><a href="/join" class="dropdown-item">Register</a></li>
+                        {% endif %}
                     </ul>
                 </li>
             </ul>
