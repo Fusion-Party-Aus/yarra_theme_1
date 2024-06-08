@@ -4,6 +4,9 @@
   {% assign hasBallotsTag = false %}
   {% assign hasClimateRescueTag = false %}
   {% assign hasPoliciesTag = false %}
+  {% assign omitContents = false %}
+  {% assign stripes = false %}
+  {% assign wide = true %}
   {% for tag in page.tags %}
     {% case tag.name %}
       {% when "video-landing" %}
@@ -21,6 +24,12 @@
         {% assign hasClimateRescueTag = true %}
       {% when "policies" %}
         {% assign hasPoliciesTag = true %}
+      {% when "omit-contents" %}
+        {% assign omitContents = true %}
+      {% when "stripes" %}
+        {% assign stripes = true %}
+      {% when "wide" %}
+        {% assign wide = true %}
     {% endcase %}
   {% endfor %}
   <head>
@@ -80,9 +89,15 @@
             <script src="scripts/video_injection.js"></script>
           </div>
         {% else %}
-          <div class="row d-block">
-            {% include "header" %}
-          </div>
+          {% if page.tags contains "wide" %}
+            <div class="container w-1600 mb-2">
+              {% include "header" %}
+            </div>
+          {% else %}
+            <div class="row d-block">
+              {% include "header" %}
+            </div>
+          {% endif %}
         {% endif %}
         <div class="row">
           <div class="d-none d-md-block col-0 col-md-3 col-lg-2 sidebar">
@@ -134,10 +149,10 @@
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script defer src="underlining.js"></script>
-    {% if page.tags contains "omit-contents" %}
+    {% unless omitContents %}
       <!-- https://afeld.github.io/bootstrap-toc/ -->
       <script defer src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js"></script>
-    {% endif %}
+    {% endunless %}
     {% if hasBallotsTag %}
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"
         integrity="sha512-u1L7Dp3BKUP3gijgSRoMTNxmDl/5o+XOHupwwa7jsI1rMzHrllSLKsGOfqjYl8vrEG+8ghnRPNA/SCltmJCZpQ=="
