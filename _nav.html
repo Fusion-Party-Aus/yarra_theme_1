@@ -46,7 +46,7 @@
                         <li><a class="dropdown-item" href="/live">Livestreams</a></li>
                         <li><a class="dropdown-item" href="/contact">Contact</a></li>
                         <li><a class="dropdown-item" href="/faqs">FAQs</a></li>
-                        <li><a class="dropdown-item" href="/store">store</a></li>
+                        <li><a class="dropdown-item" href="/store">Merch</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -84,7 +84,7 @@
                         {% if request.sorta_logged_in? %}
                         <li><a href="/enrollment_details" class="dropdown-item">Enrollment Details</a></li>
                         <li><a href="/supporter_portal/memberships" class="dropdown-item">Membership</a></li>
-                        <li><a href="{{ request.current_signup.logout_url }}" class="dropdown-item">Membership</a></li>
+                        <li><a href="{{ request.current_signup.logout_url }}" class="dropdown-item">Log Out</a></li>
                         {% else %}
                         <li><a href="/login" class="dropdown-item">Log in</a></li>
                         <li><a href="/join" class="dropdown-item">Register</a></li>
