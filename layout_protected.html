@@ -11,7 +11,6 @@
         {% comment %}
           The implications of being a video landing page are:
             * The header has a video underneath the h1
-            * The table of contents is removed (it would distract from the video)
             * We will avoid creating a row and a main, instead giving more control to the page.content.
             * The div holding the content will no longer have the `container` tag (which would constrain the width)
             * We will include a script that allows us to inject videos into the page.
@@ -135,10 +134,10 @@
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script defer src="underlining.js"></script>
-    {% unless isVideoLanding %}
+    {% if page.tags contains "omit-contents" %}
       <!-- https://afeld.github.io/bootstrap-toc/ -->
       <script defer src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js"></script>
-    {% endunless %}
+    {% endif %}
     {% if hasBallotsTag %}
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"
         integrity="sha512-u1L7Dp3BKUP3gijgSRoMTNxmDl/5o+XOHupwwa7jsI1rMzHrllSLKsGOfqjYl8vrEG+8ghnRPNA/SCltmJCZpQ=="
