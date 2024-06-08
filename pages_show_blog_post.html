@@ -13,14 +13,6 @@
     </div>
   </div>
 
-  {% if page.tags_count > 0 %}
-  <div class="page-tags mt-4">
-    {% include "page_tags" with page %}
-  </div>
-  {% endif %}
-
-  {% include "like_page" %}
-
   {% if page.show_stream? %}
     {% include "page_stream" %}
   {% endif %}
