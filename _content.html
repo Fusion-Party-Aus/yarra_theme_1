@@ -1,4 +1,4 @@
-<div class="{% unless isVideoLanding %}container {% endunless %}content-{{ request.template  | replace: '_', '-' }}">
+<div class="{% unless isVideoLanding %}container {% if wide %}w-1600{% endif %} {% endunless %}content-{{ request.template  | replace: '_', '-' }}">
   {% yield %}
 </div>
 {% if hasBallotsTag %}
