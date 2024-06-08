@@ -1,5 +1,4 @@
-{% assign isLanding = false %}
-{% assign isNicokaku = true %}
+{% assign isNicokaku = false %}
 {% for tag in page.tags %}
     {%  if tag.name == "nicokaku" %}
         {%  assign isNicokaku = true %}
@@ -10,9 +9,15 @@
 <header id="header" class="m-0 w-100 position-relative" style="padding-top: 60px">
   <div class="header-container">
     {% assign heroImage = '' %}
+    {% assign splashImage = '' %}
+    {% assign hasBackground = false %}
+    {%  comment %}
+    Splash is the old term
+    {% endcomment %}
     {% assign altText = 'Forest portal' %}
     {% for att in page.attachments %}
       {% if att.file_name contains "hero_" %}
+          {% assign hasBackground = true %}
           {% comment %}
             Images are served faster from Cloudfront than from NationBuilder. The NationBuilder path will be like
             https://assets.nationbuilder.com/futureparty/pages/4040/meta_images/original/hero_cloudfront_pink_library.png?1715400334
@@ -26,10 +31,19 @@
           {% endcomment %}
           {% assign altText = att.file_name | replace: 'hero_', '' | replace: 'cloudfront_', '' | replace: '_', ' ' | replace: '.webp', '' | replace: '.png', '' | replace: '.jpg', '' %}
           {% break %}
+      {%  else %}
+          {% if att.file_name contains "splash" %}
+              {% assign splashImage = att.file_name %}
+              {% assign hasBackground = true %}
+          {%  endif %}
       {% endif %}
     {% endfor %}
     {% if heroImage.size > 0 %}
       <img class="mt-0 mt-lg-2" src="{{ heroImage }}" alt="{{ altText }}"/>
+    {%  else %}
+        {%  if splashImage.size > 0 %}
+        <img class="mt-0 mt-lg-2" src="{{ heroImage }}" alt="{{ altText }}"/>
+        {%  endif %}
     {% endif %}
     {% if page.headline.size > 0 %}
         <div class="header-content d-flex align-items-center">
@@ -123,8 +137,8 @@
                 {% if page.headline.size >= 30 %}
                     {%  assign is_very_long = true %}
                 {%  endif %}
-                <h1 data-toc-skip class="bg-gray-transparent align-items-left h-underline h-{{ h_color }} h-underline-animate {% if isNicokaku %}nicokaku{% else %}inter{% endif %} fw-700
-                    ml-3 ml-sm-4 ml-md-5 mt-3 mt-lg-4 p-1 {% if is_very_long %}fs-scale-3-lines{% else %}fs-scale{% endif %}">
+                <h1 data-toc-skip class="{% if hasBackground %}bg-gray-transparent{% endif %} align-items-left h-underline h-{{ h_color }} h-underline-animate {% if isNicokaku %}nicokaku{% else %}inter{% endif %} {% if hasBackground %}fw-700{% else %}fw-600{% endif %}
+                    ml-3 ml-sm-4 ml-md-5 mt-3 mt-lg-4 p-1 {% if is_very_long %}fs-scale-3-lines{% else %}{% unless wide %}fs-scale{% endunless %}{% endif %}">
                     {% if phrases.size >= 2 %}
                         {% if is_very_long %}
                             <span class="d-none d-xl-block fs-scale">{{  page.headline }}</span>
