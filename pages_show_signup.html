@@ -94,10 +94,6 @@
             {% endif %}
           {% endif %}
 
-            {% if page.signup.has_labeled_tags? %}
-              {% include "labeled_tags" %}
-            {% endif %}
-
           {% if page.signup.is_volunteers? and site.ask_for_volunteers? %}
             {% if request.sorta_logged_in? == false or request.current_signup.is_volunteer == false %}
               <div class="form-group custom-control custom-checkbox">
@@ -146,15 +142,6 @@
   </div>
   {% endif %}
 </div>
-
-{% if page.tags_count > 0 %}
-  <hr class="my-4">
-  <div id="page-tags" class="page-tags">
-    {% include "page_tags" with page %}
-  </div>
-{% endif %}
-
-{% include "like_page" heading: "Like us to spread the word" %}
 
 {% if page.show_stream? %}
   {% include "page_stream" %}

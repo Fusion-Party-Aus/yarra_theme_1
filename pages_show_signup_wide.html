@@ -132,15 +132,6 @@
       {% endif %}
     </div>
 
-    {% if page.tags_count > 0 %}
-      <hr class="my-4">
-      <div id="page-tags" class="page-tags">
-        {% include "page_tags" with page %}
-      </div>
-    {% endif %}
-
-    {% include "like_page" heading: "Like us to spread the word" %}
-
     {% if page.show_stream? %}
       {% include "page_stream" %}
     {% endif %}
