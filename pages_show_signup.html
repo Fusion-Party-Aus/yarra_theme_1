@@ -36,7 +36,7 @@
             <div class="form-errors">{% error_messages_for signup %}</div>
 
               {% if request.sorta_logged_in? == false or request.current_signup.has_name? == false %}
-                <div class="form-row">
+                <div class="{% unless hasHomepageTag %}form-row{% endunless %}">
 
                   <div class="form-group mb-0 {% unless hasHomepageTag %}col-sm-6{% endunless %}">
                     {% text_field "first_name", class:"form-control text p-3", placeholder: "First name" %}
@@ -50,7 +50,7 @@
               {% endif %}
 
               {% if request.sorta_logged_in? == false or request.current_signup.has_mobile? == false %}
-                <div class="form-row">
+                <div class="{% unless hasHomepageTag %}form-row{% endunless %}">
                   <div class="form-group {% if hasHomepageTag %}mb-0{% else %}col-sm-6{% endif %} bg-transparent">
                     {% email_field "email", class:"form-control text p-3", placeholder:"name@example.com" %}
                     <label for="signup_email" class="sr-only">Email address</label>
@@ -66,7 +66,7 @@
                 </div>
                   {% unless site.page_tags contains "no-consent" %}
                     {% unless page.show_consent_form? %}
-                    <div class="form-row">
+                    <div class="{% unless hasHomepageTag %}form-row{% endunless %}">
                       <div class="form-group col-sm-6">
                         <div class="custom-control custom-checkbox custom-control-inline">
                           {% check_box "email_opt_in", class:"custom-control-input" %}
@@ -163,14 +163,13 @@
         <p class="align-items-start py-2 py-sm-4">We will only use this information to send you newsletters and campaign
                         updates.</p>
     </div>
-    {% if hasHomepageTag %}
-    <div class="col-12 col-md-6">
-        <img src="https://fusionparty.space/images/couple_looking_out_window.webp"
-             alt="Teenagers looking through the glass ominously" class="rounded w-100">
-    </div>
-    {% endif %}
   </div>
-
+  {% if hasHomepageTag %}
+  <div class="col-12 col-md-6">
+      <img src="https://fusionparty.space/images/couple_looking_out_window.webp"
+           alt="Teenagers looking through the glass ominously" class="rounded w-100">
+  </div>
+  {% endif %}
   {% if page.show_stream? %}
     {% include "page_stream" %}
   {% endif %}
