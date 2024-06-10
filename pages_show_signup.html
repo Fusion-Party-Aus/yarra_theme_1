@@ -19,7 +19,7 @@
   {% else %}
     <h2 class="h2-style h-blue h-underline h-underline-animate">Sign up</h2>
   {% endif %}
-  <div class="row text-center">
+  <div class="row">
     <div class="col-12 {% if hasHomepageTag %}col-md-6{% endif %}">
       <div class="bg-transparent">
         <div class="form">
@@ -27,7 +27,16 @@
           {% form_for signup %}
 
             {% if request.sorta_logged_in? %}
-              <h4>Hi {{ request.current_signup.name_or_email }}, thanks for joining!</h4>
+              {% if hasHomepageTag %}
+                {% comment %}
+                Here we assume that the form on the homepage is only to join the newsletter, not the party.
+                {% endcomment %}
+                <h4>Thanks for signing up!</h4>
+                <p>The newsletters will be sent to <a href="mailto:{{ request.current_signup.email }}">{{ request.current_signup.email }}</a> to keep you in the loop.</p>
+                <p>If you'd like to unsubscribe, <a href="{{ settings.site.unsubscribe_url }}">click here</a>.</p>
+              {% else %}
+                <h4>Hi {{ request.current_signup.name_or_email }}, thanks for joining!</h4>
+              {% endif %}
               {% if request.logged_in? == false %}
                 <small>If you're not {{ request.current_signup.name_or_email }}, <a href="{{ request.current_signup.logout_url }}">click here to signup</a>.</small>
               {% endif %}
@@ -160,8 +169,10 @@
             </div>
           {% endif %}
         </div>
-        <p class="align-items-start py-2 py-sm-4">We will only use this information to send you newsletters and campaign
+        {% unless request.sorta_logged_in? %}
+        <p class="align-items-start text-center py-2 py-sm-4">We will only use this information to send you newsletters and campaign
                         updates.</p>
+        {% endunless %}
     </div>
   </div>
   {% if hasHomepageTag %}
