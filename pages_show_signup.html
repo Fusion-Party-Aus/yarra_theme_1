@@ -5,9 +5,12 @@
 {% endif %}
 
 {% assign hasHomepageTag = false %}
-{% if site.page_tags contains "homepage" %}
-  {% assign hasHomepageTag = true %}
-{% endif %}
+{% for tag in page.tags %}
+    {% if tag.name == "homepage" %}
+      {% assign hasHomepageTag = true %}
+      {% break %}
+    {% endif %}
+{% endfor %}
 
 {% if page.show_social_slider? and page.public_activities_count > 0 %}
   {% include "social_slider" %}

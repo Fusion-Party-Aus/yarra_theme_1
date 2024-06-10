@@ -1,5 +1,12 @@
+{% assign hasHomepageTag = false %}
+{% for tag in page.tags %}
+    {% if tag.name == "homepage" %}
+      {% assign hasHomepageTag = true %}
+      {% break %}
+    {% endif %}
+{% endfor %}
 <div class="container my-4">
-  {% if site.page_tags contains "homepage" %}
+  {% if page.tags contains "homepage" %}
     <h2 class="h2-style h-blue h-underline h-underline-animate">Stay in the Loop</h2>
   {% else %}
     <h2 class="h2-style h-blue h-underline h-underline-animate">Sign up</h2>
