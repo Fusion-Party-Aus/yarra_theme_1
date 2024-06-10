@@ -79,21 +79,21 @@
 
 <h4 class="h-underline h-underline-animate h-pink py-3">Address</h4>
 <div class="form-row">
-  <div class="form-row col-sm-4">
-    <div class="form-group col-sm-12">
+  <div class="form-row col-sm-12">
+    <div class="form-group col-sm-7">
       <label for="signup_home_address_address1">Street Address <span class="text-danger">*</span></label>
       {% text_field "home_address.address1", class:"form-control text", required:"required", placeholder:"" %}
     </div>
-    <div class="form-group col-sm-12">
-      <label for="signup_home_address_address2"><small>Unit / Apartment Number <em>(if applicable)</em></small></label>
+    <div class="form-group col-sm-5">
+      <label for="signup_home_address_address2"><small>Unit / Apartment Number</small></label>
       {% text_field "home_address.address2", class:"form-control text" %}
     </div>
   </div>
-  <div class="form-group col-sm-3">
+  <div class="form-group col-sm-5">
     <label for="signup_home_address_city">Suburb <span class="text-danger">*</span></label>
     {% text_field "home_address.city", class:"form-control text", required:"required" %}
   </div>
-  <div class="form-group col-sm-2">
+  <div class="form-group col-sm-4">
     <label for="signup_home_address_zip">Postcode <span class="text-danger">*</span></label>
     {% number_field "home_address.zip", class:"form-control text", required:"required" %}
   </div>
@@ -174,9 +174,9 @@ the website theme: https://nationbuilder.com/xdjc/making_nationbuilder_api_reque
 </ul>
 
 {% if request.sorta_logged_in? %}
-{% submit_tag "Update info", class:"btn btn-primary btn-lg submit-button" %}
+{% submit_tag "Update info", class:"btn btn-primary bg-pink btn-lg submit-button" %}
 {% else %}
-{% submit_tag "Sign up", class:"btn btn-primary btn-lg submit-button" %}
+{% submit_tag "Sign up", class:"btn btn-primary btn-lg bg-pink submit-button" %}
 {% endif %}
 
 <script>
