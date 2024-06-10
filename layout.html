@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" id="bg-canvas" class="bg-gray-mist">
-  {% assign isVideoLanding = false %}
   {% assign hasBallotsTag = false %}
   {% assign hasClimateRescueTag = false %}
-  {% assign hasPoliciesTag = false %}
   {% assign omitContents = false %}
+  {% assign hasPoliciesTag = false %}
   {% assign stripes = false %}
+  {% assign hasRingsTag = false %}
+  {% assign isVideoLanding = false %}
   {% assign wide = false %}
   {% for tag in page.tags %}
     {% case tag.name %}
-      {% when "video-landing" %}
-        {% assign isVideoLanding = true %}
       {% when "ballots" %}
         {% assign hasBallotsTag = true %}
       {% when "climate-rescue" %}
         {% assign hasClimateRescueTag = true %}
-      {% when "policies" %}
-        {% assign hasPoliciesTag = true %}
       {% when "omit-contents" %}
         {% assign omitContents = true %}
+      {% when "policies" %}
+        {% assign hasPoliciesTag = true %}
+      {% when "rings" %}
+        {% assign hasRingsTag = true %}
       {% when "stripes" %}
         {% assign stripes = true %}
+      {% when "video-landing" %}
+        {% assign isVideoLanding = true %}
       {% when "wide" %}
         {% assign wide = true %}
     {% endcase %}
@@ -39,6 +42,11 @@
     <link rel="stylesheet" href="https://fusionparty.space/styles/minified/glowing-button.4b8629d4.min.css"
           crossorigin="anonymous"
           referrerpolicy="no-referrer">
+    {% if hasRingsTag %}
+    <link rel="stylesheet" href="https://fusionparty.space/styles/minified/rings.f73479bf.min.css"
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer">
+    {% endif %}
     {% if hasPoliciesTag %}
     <link rel="stylesheet" href="https://fusionparty.space/styles/minified/scrolling.9c622ecb.min.css"
           crossorigin="anonymous"
@@ -71,6 +79,16 @@
   </head>
   <body class="d-flex flex-column bg-transparent bg-viewport text-gray-900 relative bootstrap-theme v3-theme {%if page.is_homepage %}homepage{% endif %} {{ page.page_class_name }} page-{{ request.template | replace: '_', '-' }} js">
     {% unless page.type_name contains "Donation" %}
+      {% if hasRingsTag %}
+        <!-- SVG Circle -->
+        <div class="circle">
+            <i style="--ring-color:#949494ff;"></i>
+            <i style="--ring-color:#5facffff;"></i>
+            <i style="--ring-color:#c34df1ff;"></i>
+            <i style="--ring-color:#ff7fffff;"></i>
+            <i style="--ring-color:#5effd8ff;"></i>
+        </div>
+      {% endif %}
       {% include "nav" %}
       <div class="bg-charm"></div>
       <div class="w-100 pb-4">
