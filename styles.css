@@ -320,7 +320,7 @@ header {
 
 .header-container img {
     /* Our header images are chosen to be 4:1, and we wish for it to be 2.25 × the line height used later. */
-    height: calc(1.125 * 0.25 * 100vw);
+    height: max(200px, calc(1.125 * 0.25 * 100vw));
     max-height: 240px;
     width: 100%;
     object-fit: cover;
