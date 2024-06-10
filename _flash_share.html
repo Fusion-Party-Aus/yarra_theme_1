@@ -2,7 +2,14 @@
   <div class="row justify-content-center text-left">
     <div class="col-11 col-md-10 col-lg-7">
       <div class="flash-share alert alert-info fade show">
-        <h4 class="alert-heading">{{ flash.message }}</h4>
+        <div class="row align-items-center">
+          <div class="col">
+              <h4 class="alert-heading">{{ flash.message }}</h4>
+          </div>
+          <div class="col-auto">
+            <a href="#" class="text-info flash-close">✖</a>
+          </div>
+        </div>
         <p>
           If you would like to become a member, please continue to our <a href="/join">membership signup page</a> 🙋
         </p>
