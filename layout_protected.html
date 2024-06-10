@@ -2,6 +2,7 @@
 <html lang="en" id="bg-canvas" class="bg-gray-mist">
   {% assign hasBallotsTag = false %}
   {% assign hasClimateRescueTag = false %}
+  {% assign hasConversionTag = false %}
   {% assign omitContents = false %}
   {% assign hasKwesTag = false %}
   {% assign hasPoliciesTag = false %}
@@ -15,6 +16,8 @@
         {% assign hasBallotsTag = true %}
       {% when "climate-rescue" %}
         {% assign hasClimateRescueTag = true %}
+      {% when "conversion" %}
+        {% assign hasConversionTag = true %}
       {% when "omit-contents" %}
         {% assign omitContents = true %}
       {% when "kwes" %}
@@ -93,15 +96,21 @@
     <!-- start of content for header -->
     {{ content_for_header }}
     <!-- end of content for header -->
+    <!-- Google tag (gtag.js), managed by Drew -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-1049050912">
+    </script>
+    {% if conversion %}
+      <!-- Event snippet for Website traffic conversion page -->
+      <script>
+        gtag('event', 'conversion', {'send_to': 'AW-1049050912/JkcZCO6rn70DEKD-nPQD'});
+      </script>
+    {% endif %}
 
     <script type="text/javascript">
       NB.appConfig.userIsLoggedIn = {{ request.logged_in? }};
     </script>
 
   </head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16598463992">
-  </script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
