@@ -328,12 +328,6 @@
       </div><!-- /.form -->
     {% endform_for %}
 
-    {% if page.tags_count > 0 %}
-      <div class="page-tags">
-        {% include "page_tags" with page %}
-      </div>
-    {% endif %}
-
     {% if page.show_stream? %}
       {% include "page_stream" %}
     {% endif %}

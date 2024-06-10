@@ -205,15 +205,6 @@
   {% endif %}
 </div>
 
-{% if page.tags_count > 0 %}
-<div class="mt-4">
-  {% include "page_tags" with page %}
-</div>
-{% endif %}
-
-
-{% include "like_page" %}
-
 {% if page.show_stream? %}
   <div class="mt-4">
     {% include "page_stream" %}

@@ -2,8 +2,6 @@
 
   {{ page.basic.content }}
 
-  {% include "page_tags" with page %}
-
   {% if page.show_stream? %}
     <div class="my-4">
       {% include "page_stream" %}

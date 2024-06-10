@@ -203,14 +203,6 @@
 
   {% endif %}
 
-  {% if page.tags_count > 0 %}
-  <div class="mt-4">
-    {% include "page_tags" with page %}
-  </div>
-  {% endif %}
-
-  {% include "like_page" heading: "Like this to spread the word"%}
-
 </div>
 
 {% if page.show_stream? %}
