@@ -35,10 +35,14 @@
   <ul class="list-unstyled mb-4" id="blog-page-{{ page.id }}">
     {% for post in page.blog.most_recent_blog_posts %}
       <li class="{% unless forloop.last == true %}mb-4 pb-4 border-bottom{% endunless %}" id="blog-post-page-{{ post.id }}">
-        {% assign h_color = 'pink' %}
+        {% assign h_color = 'aquamarine' %}
+        {% assign h_aquamarine = true %}
         {% for tag in post.tags %}
             {% if tag.name contains "_h-" %}
                 {% assign h_color = tag.name | replace: '_h-', '' %}
+                {% unless tag.name contains "aquamarine" %}
+                  {% assign h_aquamarine = false %}
+                {% endunless %}
                 {% break %}
             {% endif %}
         {% endfor %}
@@ -61,7 +65,7 @@
           {{ post.blog_post.content }}
           {% if post.blog_post.is_extended? %}
             <p class="mt-2">
-              <a href="{{ post.url }}" class="btn btn-info rounded bg-{{ h_color }} p-2">Read more</a>
+              <p class="mt-2"><a href="{{ post.url }}" class="btn btn-info rounded bg-{% if h_aquamarine %}opal{% else %}{{ h_color }}{% endif %} p-2">Read more</a></p>
             </p>
           {% endif %}
         </div>
