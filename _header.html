@@ -128,6 +128,7 @@
                 {% assign second_third = phrases | slice: best_split_one_third + 1, best_split_two_third | join: ' ' %}
                 {% assign third_third = phrases | slice: best_split_two_third + 1, phrases.size | join: ' ' %}
                 {%  assign is_very_long = false %}
+                {%  assign is_extra_long = false %}
                 {% if first_half.size >= 18 %}
                     {%  assign is_very_long = true %}
                 {%  endif %}
@@ -136,35 +137,45 @@
                 {%  endif %}
                 {% if page.headline.size >= 30 %}
                     {%  assign is_very_long = true %}
+                    {%  if page.headline.size >= 49 %}
+                        {%  assign is_extra_long = true %}
+                        {%  comment %}
+                        The title will just be shown as one heading; we'll abandon attempts to split it up.
+                        {% endcomment %}
+                    {%  endif %}
                 {%  endif %}
                 <h1 data-toc-skip class="{% if hasBackground %}bg-gray-transparent{% endif %} align-items-left h-underline h-{{ h_color }} h-underline-animate {% if isNicokaku %}nicokaku{% else %}inter{% endif %} {% if hasBackground %}fw-700{% else %}fw-600{% endif %}
-                    ml-3 ml-sm-4 ml-md-5 mt-3 mt-lg-4 p-1 {% if is_very_long %}fs-scale-3-lines{% else %}{% unless wide %}fs-scale{% endunless %}{% endif %}">
-                    {% if phrases.size >= 2 %}
-                        {% if is_very_long %}
-                            <span class="d-none d-xl-block fs-scale">{{  page.headline }}</span>
-                        {% else %}
-                            <span class="d-none d-md-block fs-scale">{{ page.headline }}</span>
-                        {% endif %}
-                        {% if is_very_long %}
-                            <span class="d-none d-lg-block d-xl-none fs-scale">{{ first_half }}</span>
-                            <span class="d-none d-lg-block d-xl-none fs-scale">{{ second_half }}</span>
-                            <span class="d-none d-sm-block d-lg-none">{{ first_half }}</span>
-                            <span class="d-none d-sm-block d-lg-none">{{ second_half }}</span>
-                            {% if first_third.size > 0 %}
-                                <span class="d-block d-sm-none">{{ first_third }}</span>
-                            {% endif %}
-                            {% if second_third.size > 0 %}
-                                <span class="d-block d-sm-none">{{ second_third }}</span>
-                            {% endif %}
-                            {% if third_third.size > 0 %}
-                                <span class="d-block d-sm-none">{{ third_third }}</span>
-                            {% endif %}
-                        {% else %}
-                            <span class="d-block d-md-none fs-scale">{{ first_half }}</span>
-                            <span class="d-block d-md-none fs-scale">{{ second_half }}</span>
-                        {%  endif %}
-                    {% else %}
+                    ml-3 ml-sm-4 ml-md-5 mt-3 mt-lg-4 p-1 {% if is_very_long %}{% if is_extra_long %}fs-scale-extra-long{% else %}fs-scale-3-lines{% endif %}{% else %}{% unless wide %}fs-scale{% endunless %}{% endif %}">
+                    {% if is_extra_long %}
                         {{ page.headline }}
+                    {% else %}
+                        {% if phrases.size >= 2 %}
+                            {% if is_very_long %}
+                                <span class="d-none d-xl-block fs-scale">{{  page.headline }}</span>
+                            {% else %}
+                                <span class="d-none d-md-block fs-scale">{{ page.headline }}</span>
+                            {% endif %}
+                            {% if is_very_long %}
+                                <span class="d-none d-lg-block d-xl-none fs-scale">{{ first_half }}</span>
+                                <span class="d-none d-lg-block d-xl-none fs-scale">{{ second_half }}</span>
+                                <span class="d-none d-sm-block d-lg-none">{{ first_half }}</span>
+                                <span class="d-none d-sm-block d-lg-none">{{ second_half }}</span>
+                                {% if first_third.size > 0 %}
+                                    <span class="d-block d-sm-none">{{ first_third }}</span>
+                                {% endif %}
+                                {% if second_third.size > 0 %}
+                                    <span class="d-block d-sm-none">{{ second_third }}</span>
+                                {% endif %}
+                                {% if third_third.size > 0 %}
+                                    <span class="d-block d-sm-none">{{ third_third }}</span>
+                                {% endif %}
+                            {% else %}
+                                <span class="d-block d-md-none fs-scale">{{ first_half }}</span>
+                                <span class="d-block d-md-none fs-scale">{{ second_half }}</span>
+                            {%  endif %}
+                        {% else %}
+                            {{ page.headline }}
+                        {% endif %}
                     {% endif %}
                 </h1>
             </div>
