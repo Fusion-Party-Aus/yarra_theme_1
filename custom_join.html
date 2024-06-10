@@ -9,7 +9,7 @@
   </div>
 
 
-  <div class="form" style="background-color: #eee; border: 10px solid #eee">
+  <div class="form">
     {% form_for signup %}
     <!-- We can ask for these fields: https://support.nationbuilder.com/en/articles/2895987-fields-available-for-import -->
 
@@ -127,8 +127,8 @@
     <!-- signup_recruiter_email is not valid either -->
     <!-- signup_recruiter_id is not valid -->
     <!-- recruiter_id works. I would want to fetch this person and present their email address, after checking that they're indeed
-a public recruiter, but API tokens apparently don't work, when used within 
-the website theme: https://nationbuilder.com/xdjc/making_nationbuilder_api_requests_inside_of_a_nationbuilder_theme --> 
+a public recruiter, but API tokens apparently don't work, when used within
+the website theme: https://nationbuilder.com/xdjc/making_nationbuilder_api_requests_inside_of_a_nationbuilder_theme -->
     <small><label for="recruiter_id">Recruiter ID</label></small>
     {% text_field "recruiter_id", class:"form-control text" %}
   </div>
@@ -150,7 +150,7 @@ the website theme: https://nationbuilder.com/xdjc/making_nationbuilder_api_reque
 </div>
 
 
-<div style="display:block">
+<div>
   {% if page.signup.has_labeled_tags? %}
   <h3>Choose your movement:</h3>
   {% include "labeled_tags_dropdown" %}
@@ -160,7 +160,7 @@ the website theme: https://nationbuilder.com/xdjc/making_nationbuilder_api_reque
 
 <hr/>
 
-<div style="font-size: 14px; line-height: 24px;">(<span class="text-danger">*</span> Required)</div>
+<div>(<span class="text-danger">*</span> Required)</div>
 
 <input name="signup[activity_is_private]" type="hidden" value="1" />
 <input name="signup[is_profile_private]" type="hidden" value="1">
@@ -170,7 +170,7 @@ the website theme: https://nationbuilder.com/xdjc/making_nationbuilder_api_reque
 <input type="hidden" id="signup_home_address_country_code" name="signup[home_address_attributes][country_code]" value="AU" />
 <input type="hidden" id="signup_born_at_chronic" name="signup[born_at_chronic]">
 
-<ul style="font-size: 17px; line-height: 24px;">
+<ul>
   <li>I confirm that my details match <a href="https://check.aec.gov.au/" target="_blank">those on the electoral roll</a>.</li>
   <li>I declare that I will abide by the terms of the party's <a href="/code_of_conduct">Code of Conduct</a>.</li>
   <li>I declare that I am not a current member of any registered Australian political party.</li>
