@@ -148,18 +148,18 @@
             {% hidden_field_tag "signup[recruiter_id]" %}
             {% hidden_field_tag "signup[author_id]" %}
 
-            {% if page.signup.is_all_info_collected? == false %}
-              {% if request.sorta_logged_in? %}
-                {% submit_tag "Update info", class:"btn btn-primary submit-button" %}
-              {% else %}
-                {% if hasHomepageTag %}
-                  {% comment %}
-                  Signing up to the newsletter, not the party.
-                  {% endcomment %}
+            {% if hasHomepageTag %}
+                {% comment %}
+                Signing up to the newsletter, not the party.
+                {% endcomment %}
+                {% unless request.sorta_logged_in? %}
                   {% submit_tag "Subscribe", class:"btn btn-primary bg-blue w-100 py-2 glowing-button submit-button" %}
-                {% else %}
-                  {% submit_tag "Signup", class:"btn btn-primary bg-blue w-100 py-2 submit-button" %}
-                {% endif %}
+                {% endunless %}
+            {% else %}
+              {% if request.sorta_logged_in? %}
+                {% submit_tag "Update info", class:"btn btn-primary bg-pink btn-lg w-100 py-2 submit-button" %}
+              {% else %}
+                {% submit_tag "Sign up", class:"btn btn-primary bg-pink btn-lg w-100 py-2 submit-button" %}
               {% endif %}
             {% endif %}
             <div class="form-submit"></div>
