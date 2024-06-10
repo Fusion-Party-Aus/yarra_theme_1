@@ -3,6 +3,7 @@
   {% assign hasBallotsTag = false %}
   {% assign hasClimateRescueTag = false %}
   {% assign omitContents = false %}
+  {% assign hasKwesTag = false %}
   {% assign hasPoliciesTag = false %}
   {% assign stripes = false %}
   {% assign hasRingsTag = false %}
@@ -16,6 +17,8 @@
         {% assign hasClimateRescueTag = true %}
       {% when "omit-contents" %}
         {% assign omitContents = true %}
+      {% when "kwes" %}
+        {% assign hasKwesTag = true %}
       {% when "policies" %}
         {% assign hasPoliciesTag = true %}
       {% when "rings" %}
@@ -136,7 +139,7 @@
           {% endif %}
         {% endif %}
         {% if isVideoLanding %}
-          {% include "content", sidebar: request.is_sidebar?, isVideoLanding: isVideoLanding, hasBallotsTag: hasBallotsTag, hasClimateRescueTag: hasClimateRescueTag, hasPoliciesTag: hasPoliciesTag %}
+          {% include "content", sidebar: request.is_sidebar?, isVideoLanding: isVideoLanding, hasBallotsTag: hasBallotsTag, hasClimateRescueTag: hasClimateRescueTag, hasPoliciesTag: hasPoliciesTag, hasKwesTag: hasKwesTag %}
           <script src="video_injection.js"></script>
         {% else %}
           <div class="row">
@@ -207,7 +210,9 @@
       <script defer src="climateVideoInjection.js"></script>
     {% endif %}
     <script defer src="nav.js"></script>
-    <script src="https://kwesforms.com/v2/kwes-script.js" defer></script>
+    {% if hasKwesTag %}
+      <script src="https://kwesforms.com/v2/kwes-script.js" defer></script>
+    {% endif %}
     <script src="bs-custom-file-input.min.js"></script>
     <script src="theme.js"></script>
   </body>
