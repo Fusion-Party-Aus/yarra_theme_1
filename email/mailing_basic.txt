@@ -5,4 +5,3 @@
 This email was sent to {{ recipient.email }}.  To stop receiving emails: {{ settings.site.unsubscribe_url }}
 -=-=-
 
-Created with NationBuilder - http://nationbuilder.com/
