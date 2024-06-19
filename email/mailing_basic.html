@@ -65,9 +65,17 @@
     border-width: 1px;
     border-top-width: 0;
     border-color: rgba(224, 224, 224, 0.5); /* Light border for the glass edges */
-    box-shadow: inset 0 4px 4px rgba(176, 175, 175, 0.6), /* Inner top light */
-                inset 0 -4px 4px rgba(0, 0, 0, 0.1), /* Inner bottom shadow */
-                0 8px 16px rgba(0, 0, 0, 0.1); /* Drop shadow for depth */
+    box-shadow: inset 0 4px 4px rgba(176, 175, 175, 0.6), /* Inner top light */ inset 0 -4px 4px rgba(0, 0, 0, 0.1), /* Inner bottom shadow */ 0 8px 16px rgba(0, 0, 0, 0.1); /* Drop shadow for depth */
+}
+
+@keyframes jumbo {
+    from {
+        background-position: 50% 50%, 50% 50%;
+    }
+    to {
+        background-position: 350% 50%, 350% 50%;
+    }
+}
 
 .bg-charm {
     --stripes: repeating-linear-gradient(
@@ -77,6 +85,14 @@
         transparent 10%,
         transparent 12%,
         #fff 16%
+    );
+    --stripesDark: repeating-linear-gradient(
+        100deg,
+        #000 0%,
+        #000 7%,
+        transparent 10%,
+        transparent 12%,
+        #000 16%
     );
     --rainbow: repeating-linear-gradient(
         100deg,
@@ -98,8 +114,8 @@
     display: block;
     pointer-events: none;
 	width: 100%;
-	height: 30vh;
-	z-index: 2;
+	height: calc(min(30vh, 150px));
+	z-index: var(--z-body) -1;
 }
 
 .bg-charm::after {
@@ -112,15 +128,6 @@
     background-attachment: fixed;
     mix-blend-mode: difference;
 }
-
-  /*h3 {
-    line-height: 34px;
-    margin-top: 15px;
-    margin-bottom: 10px;
-    font-weight: 700;
-    font-size: 24.5px;
-  }*/
-
 	/* MOBILE STYLES */
   @media only screen and (max-width: 480px){
     .emailImage{
@@ -155,9 +162,9 @@
   div[style*="margin: 16px 0;"] { margin: 0 !important; }
 </style>
 </head>
-<div class="bg-charm"></div>
 <body style="margin: 0 !important; padding: 0; !important background-color: #d6f0f7;" bgcolor="#d6f0f7">
 {{ preview_text }}
+<div class="bg-charm"></div>
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
     <tr class="bg-glass">
         <td align="center" valign="top" width="100%" style="width:100%; padding: 25px 15px;" class="mobile-padding">
@@ -204,28 +211,38 @@
                                     <table cellspacing="15" cellpadding="15" border="0" width="200" align="center">
                                         <tr>
                                             <td align="center">
-                                              	<a href="https://www.facebook.com/FusionPartyAus"><img width="25" height="25" src="facebook.png" alt="Facebook" title="Facebook logo" v /></a>
+                                                {% comment %}https://about.meta.com/brand/resources/facebook/logo/ lacked an SVG, so I had to use
+                                                https://www.logo.wine/logo/Facebook?logo=f_Logo-Blue{% endcomment %}
+                                              	<a href="https://www.facebook.com/FusionPartyAus"><img width="25" height="25" src="Facebook-logo.svg" alt="Facebook" title="Facebook logo" v /></a>
                                           	</td>
                                             <td align="center">
-																								<a href="https://www.twitter.com/FusionPartyAus"><img width="25" height="25" src="twitter.png" alt="Twitter" title="Twitter logo" /></a>
+                                                {% comment %}https://about.x.com/en/who-we-are/brand-toolkit{% endcomment %}
+																								<a href="https://www.twitter.com/FusionPartyAus"><img width="25" height="25" src="x-logo.svg" alt="Twitter" title="Twitter logo" /></a>
                                           	</td>
                                             <td align="center">
-                                                <a href="https://www.youtube.com/channel/UCTn5Sxlau1RpT8eA-fEmfig/videos"><img width="25" height="25" src="youtube.png" alt="YouTube" title="YouTube logo" /></a>
+                                                {% comment %}https://www.youtube.com/howyoutubeworks/resources/brand-resources/#logos-icons-and-colors has no SVG with the rounded corners,
+                                                so I've used https://seeklogo.com/vector-logo/316067/youtube-2017-icon{% endcomment %}
+                                                <a href="https://www.youtube.com/channel/UCTn5Sxlau1RpT8eA-fEmfig/videos"><img width="25" height="25" src="youtube-logo.svg" alt="YouTube" title="YouTube logo" /></a>
                                           	</td>
                                             <td align="center">
-                                                <a href="https://instagram.com/FusionPartyAus"><img width="25" height="25" src="instagram.png" alt="Instagram" title="instagram logo" /></a>
+                                                {% comment %}https://about.meta.com/brand/resources/instagram/instagram-brand/ had an SVG which was invalid, so I've used
+                                                https://seeklogo.com/vector-logo/438567/instagram-new-2022{% endcomment %}
+                                                <a href="https://instagram.com/FusionPartyAus"><img width="25" height="25" src="instagram-logo.svg" alt="Instagram" title="instagram logo" /></a>
                                             </td>
                                             <td align="center">
-                                                <a href="https://www.tiktok.com/@fusionpartyaus"><img width="25" height="25" src="tiktok-app-icon-logo.png" alt="TikTok" title="tiktok logo" /></a>
+                                                {% comment %}https://developers.tiktok.com/doc/getting-started-design-guidelines?enter_method=left_navigation lacked an svg, so
+                                                I had to use https://www.logo.wine/logo/TikTok?logo=Icon{% endcomment %}
+                                                <a href="https://www.tiktok.com/@fusionpartyaus"><img width="25" height="25" src="tiktok-logo.svg" alt="TikTok" title="tiktok logo" /></a>
                                             </td>
                                             <td align="center">
-                                                <a href="https://mastodon.au/@FusionPartyAus"><img width="25" height="25" src="Mastodon_Logotype_(Simple).png" alt="Fusion Party on Mastodon" title="Fusion Party on Mastodon" /></a>
+                                                <a href="https://mastodon.au/@FusionPartyAus"><img width="25" height="25" src="mastodon-logo.svg" alt="Fusion Party on Mastodon" title="Fusion Party on Mastodon" /></a>
                                             </td>
                                             <td align="center">
-                                                <a href="https://www.fusionparty.org.au/discord"><img width="25" height="25" src="Discord-Logo-Circle-1024x1024.png" alt="Discord Server" title="Discord Server" /></a>
+                                                {% comment %}https://discord.com/branding{% endcomment %}
+                                                <a href="https://www.fusionparty.org.au/discord"><img width="25" height="25" src="discord-mark-blue.svg" alt="Discord Server" title="Discord Server" /></a>
                                             </td> </td>
                                             <td align="center">
-                                                <a href="https://www.redbubble.com/people/fusionpartyaus/shop"><img width="25" height="25" src="redbubble.png" alt="Red Bubble Shop" title="Red Bubble logo" /></a>
+                                                <a href="https://www.fusionparty.org.au/store"><img width="25" height="25" src="bag.svg" alt="Shopping bag icon" title="Fusion merchandise" /></a>
                                             </td>
                                         </tr>
                                     </table>
