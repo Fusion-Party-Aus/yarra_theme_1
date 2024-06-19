@@ -265,35 +265,12 @@
             <![endif]-->
             <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
                 <tr>
-                    <td align="center" valign="top" style="padding: 0; font-family: Open Sans, Helvetica, Arial, sans-serif; color: #666666;">
-                      <p>
-                        <small>
-                        	We are proud to be a grassroots organisation, funded by small donations from thousands of supporters like you.
-													Will you be one of our generous donors?
-                        <a href="https://www.fusionparty.org.au/donate">You can help us promote good government out by donating
-                        {% if recipient.donations_amount_in_cents >= 100000 %}$50
-                        {% elsif recipient.donations_amount_in_cents >= 50000 %}$40
-                        {% elsif recipient.donations_amount_in_cents >= 20000 %}$30
-                        {% elsif recipient.donations_amount_in_cents >= 20000 %}$25
-                        {% elsif recipient.donations_amount_in_cents >= 10000 %}$20
-                        {% elsif recipient.donations_amount_in_cents >= 5000 %}$15
-                        {% elsif recipient.donations_amount_in_cents >= 1000 %}$10
-                        {% else %}$5
-                        {% endif %}
-                        today.</a>
-                        </small>
-                      </p>
-                    </td>
-                </tr>
-                <tr>
                     <td align="center" valign="top" style="padding: 0 0 0 0; font-size: 12px; line-height: 16px; font-family: Helvetica, Arial, sans-serif; color: #999999;" class="padding-copy">
                      <p>
-                        <small>
                           This email was sent to <a style="color:#1488b9;" href="{{ recipient.email }}">{{ recipient.email }}</a>.
                           <br>You can <a style="color:#1488b9;" href="{{ settings.site.unsubscribe_url }}" alt="unsubscribe">unsubscribe here</a>.
 													<br>Update or cancel party membership <a style="color:#1488b9;" href="https://www.fusionparty.org.au/supporter_portal/memberships" alt="membership portal">here</a>.
 													<br>Authorised by S. Khalili, Fusion, NSW.
-                        </small>
                       </p>
                     </td>
                 </tr>
