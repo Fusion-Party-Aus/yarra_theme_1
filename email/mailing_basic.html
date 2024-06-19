@@ -59,6 +59,60 @@
     margin-bottom: 0.5em;
   }
 
+.bg-glass {
+    background-color: rgba(190, 190, 190, 0.3); /* Semi-transparent white for glass effect */
+    backdrop-filter: blur(5px); /* Blur effect for the background */
+    border-width: 1px;
+    border-top-width: 0;
+    border-color: rgba(224, 224, 224, 0.5); /* Light border for the glass edges */
+    box-shadow: inset 0 4px 4px rgba(176, 175, 175, 0.6), /* Inner top light */
+                inset 0 -4px 4px rgba(0, 0, 0, 0.1), /* Inner bottom shadow */
+                0 8px 16px rgba(0, 0, 0, 0.1); /* Drop shadow for depth */
+
+.bg-charm {
+    --stripes: repeating-linear-gradient(
+        100deg,
+        #fff 0%,
+        #fff 7%,
+        transparent 10%,
+        transparent 12%,
+        #fff 16%
+    );
+    --rainbow: repeating-linear-gradient(
+        100deg,
+		#c8dcf6 10%,
+		#efd1ff 15%,
+		#a9c6ec 20%,
+		#85e3ee 25%,
+		#bfddff 30%
+    );
+    background-image: var(--stripes), var(--rainbow);
+    background-size: 300%, 200%;
+    background-position: 50% 50%, 50% 50%;
+
+    filter: blur(10px) invert(100%);
+
+    mask-image: radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
+
+    position: absolute;
+    display: block;
+    pointer-events: none;
+	width: 100%;
+	height: 30vh;
+	z-index: 2;
+}
+
+.bg-charm::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--stripes), var(--rainbow);
+    background-size: 200%, 100%;
+    animation: jumbo 100s linear infinite;
+    background-attachment: fixed;
+    mix-blend-mode: difference;
+}
+
   /*h3 {
     line-height: 34px;
     margin-top: 15px;
@@ -101,11 +155,12 @@
   div[style*="margin: 16px 0;"] { margin: 0 !important; }
 </style>
 </head>
-<body style="margin: 0 !important; padding: 0; !important background-color: #ffffff;" bgcolor="#ffffff">
+<body style="margin: 0 !important; padding: 0; !important background-color: #D1FFFD;" bgcolor="#D1FFFD">
+<div class="bg-charm"></div>
 {{ preview_text }}
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
-    <tr>
-        <td align="center" valign="top" width="100%" bgcolor="#373a3c" style="background: #373a3c; background-size: cover; padding: 25px 15px;" class="mobile-padding">
+    <tr class="bg-glass">
+        <td align="center" valign="top" width="100%" style="width:100%; padding: 25px 15px;" class="mobile-padding">
             <!--[if (gte mso 9)|(IE)]>
             <table align="center" border="0" cellspacing="0" cellpadding="0" width="600">
             <tr>
@@ -114,7 +169,7 @@
             <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
                 <tr>
                     <td align="center" valign="top" style="padding: 0 0 0 0;">
-                      <a href="https://www.fusionparty.org.au"><img src="fullname-white-landscape.png" width="300" alt="Fusion Party" border="0" style="display: block;" /></a>
+                      <a href="https://www.fusionparty.org.au"><img src="landscape-white-border-paths.svg" width="300" alt="Fusion Party" border="0" style="display: block;" /></a>
                     </td>
                 </tr>
             </table>
