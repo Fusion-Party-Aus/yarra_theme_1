@@ -96,10 +96,19 @@
     {{ content_for_header }}
     <!-- end of content for header -->
     <!-- Google tag (gtag.js), managed by Drew -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-1049050912">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-1049050912"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'AW-1049050912');
     </script>
     {% if hasConversionTag %}
       <!-- Event snippet for Website traffic conversion page -->
+      <script>
+        console.log('Conversion tag is present');
+      </script>
       <script>
         gtag('event', 'conversion', {'send_to': 'AW-1049050912/JkcZCO6rn70DEKD-nPQD'});
       </script>
