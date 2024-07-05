@@ -10,9 +10,11 @@
             <a href="#" class="text-info flash-close">✖</a>
           </div>
         </div>
+        {% unless request.sorta_logged_in? %}
         <p>
           If you would like to become a member, please continue to our <a href="/join">membership signup page</a> 🙋
         </p>
+        {% endunless %}
         <p>
           For any questions, please email <a href="mailto:contact@fusionparty.org.au">contact@fusionparty.org.au</a>.
         </p>
