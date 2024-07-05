@@ -1,16 +1,5 @@
 <div class="row">
-  {% assign omitContents = false %}
-  {% comment %}
-  It didn't end up being feasible trying to pass this variable from its parents.
-  {% endcomment %}
-  {% for tag in page.tags %}
-    {% case tag.name %}
-    {% when "omit-contents" %}
-        {% assign omitContents = true %}
-        {% break %}
-    {% endcase %}
-  {% endfor %}
-  <div class="{% if page.is_homepage? %}col{% else %}col-12 {% if omitContents %}col-lg-9 {% endif %}mx-auto{% endif %}">
+  <div class="{% if page.is_homepage? %}col{% else %}col-12 mx-auto{% endif %}">
     {{ page.basic.content }}
 
     {% if page.show_stream? %}

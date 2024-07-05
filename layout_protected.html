@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" id="bg-canvas" class="bg-gray-mist">
   {% assign hasBallotsTag = false %}
+  {% assign h_color = 'pink' %}
   {% assign hasClimateRescueTag = false %}
   {% assign hasConversionTag = false %}
   {% assign omitContents = false %}
   {% assign hasKwesTag = false %}
+  {% assign hasPhoneTag = false %}
   {% assign hasPoliciesTag = false %}
   {% assign stripes = false %}
   {% assign hasRingsTag = false %}
   {% assign isVideoLanding = false %}
   {% assign wide = false %}
   {% for tag in page.tags %}
+    {% if tag.name contains "_h-" %}
+      {% assign h_color = tag.name | replace: '_h-', '' %}
+    {% endif %}
     {% case tag.name %}
       {% when "ballots" %}
         {% assign hasBallotsTag = true %}
@@ -22,6 +27,8 @@
         {% assign omitContents = true %}
       {% when "kwes" %}
         {% assign hasKwesTag = true %}
+      {% when "phone" %}
+        {% assign hasPhoneTag = true %}
       {% when "policies" %}
         {% assign hasPoliciesTag = true %}
       {% when "rings" %}
@@ -159,7 +166,10 @@
             </div>
           {% endif %}
         {% endif %}
-        <div class="row">
+        <div class="row {% if omitContents %}ml-3 ml-md-4 mt-3 mt-lg-4{% endif %}">
+            {% comment %}
+            If we're omitting the table of contents, we need a bit more horizontal margin to avoid the edge of the page.
+            {% endcomment %}
           {% unless omitContents %}
           <div class="d-none d-md-block col-0 col-md-3 col-lg-2 sidebar">
               <nav id="toc" data-toggle="toc"></nav>
@@ -170,7 +180,7 @@
               {% include "features" %}
             {% endif %}
             <main role="main" data-spy="scroll" data-target="#toc">
-              {% include "content", sidebar: request.is_sidebar?, isVideoLanding: isVideoLanding, hasBallotsTag: hasBallotsTag, hasClimateRescueTag: hasClimateRescueTag, hasPoliciesTag: hasPoliciesTag, hasKwesTag: hasKwesTag %}
+              {% include "content", sidebar: request.is_sidebar?, isVideoLanding: isVideoLanding, hasBallotsTag: hasBallotsTag, hasClimateRescueTag: hasClimateRescueTag, hasPoliciesTag: hasPoliciesTag, hasKwesTag: hasKwesTag, omitContents: omitContents, hasPhoneTag: hasPhoneTag %}
             </main>
           </div>
           <div class="d-none d-lg-block col-lg-2"></div>
