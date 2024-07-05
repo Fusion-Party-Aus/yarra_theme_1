@@ -63,11 +63,11 @@
             {% assign midpoint_chosen = false %}
             {% assign one_third_chosen = false %}
             {% assign two_third_chosen = false %}
-            {% assign current_length = 0 %}
+            {% assign cumulative_length = 0 %}
             {% for phrase in phrases %}
                 {% unless midpoint_chosen %}
-                    {% assign current_length = current_length | plus: phrase.size %}
-                    {% assign current_distance = current_length | minus: midpoint %}
+                    {% assign cumulative_length = cumulative_length | plus: phrase.size %}
+                    {% assign current_distance = cumulative_length | minus: midpoint %}
                     {% comment %}
                     NationBuilder links to Liquid documentation at https://shopify.github.io/liquid which doesn't
                     include a version. It turns out that `abs` is not implemented in the version of Liquid being
@@ -85,7 +85,7 @@
                 {% endunless %}
 
                 {% unless one_third_chosen %}
-                    {% assign current_distance = current_length | minus: one_third_point %}
+                    {% assign current_distance = cumulative_length | minus: one_third_point %}
                     {% if current_distance < 0 %}
                         {% assign current_distance = current_distance | times: -1 %}
                     {% endif %}
@@ -99,7 +99,7 @@
 
                 {% unless two_third_chosen %}
                     {% unless forloop.index == best_split_one_third %}
-                        {% assign current_distance = current_length | minus: two_third_point %}
+                        {% assign current_distance = cumulative_length | minus: two_third_point %}
                         {% if current_distance < 0 %}
                             {% assign current_distance = current_distance | times: -1 %}
                         {% endif %}
@@ -112,14 +112,24 @@
                     {% endunless %}
                 {% endunless %}
 
-                {% assign current_length = current_length | plus: 1 %}
+                {% assign cumulative_length = cumulative_length | plus: 1 %}
             {% endfor %}
 
+            {% comment %}
+            Slice expects the starting point and the length, not the finishing point. It's just a coincidence that it
+            happens to work either way for halves.
+            {% endcomment %}
             {% assign first_half = phrases | slice: 0, best_split_midpoint | join: ' ' %}
-            {% assign second_half = phrases | slice: best_split_midpoint + 1, phrases.size | join: ' ' %}
+            {% assign second_half = phrases | slice: best_split_midpoint, phrases.size | join: ' ' %}
             {% assign first_third = phrases | slice: 0, best_split_one_third | join: ' ' %}
-            {% assign second_third = phrases | slice: best_split_one_third + 1, best_split_two_third | join: ' ' %}
-            {% assign third_third = phrases | slice: best_split_two_third + 1, phrases.size | join: ' ' %}
+            {% assign second_third_length = best_split_two_third |  minus: best_split_one_third %}
+            {% assign second_third = phrases | slice: best_split_one_third, second_third_length | join: ' ' %}
+            {% assign third_third = phrases | slice: best_split_two_third, phrases.size | join: ' ' %}
+            <script>
+                console.log(`First third: {{ first_third }}`);
+                console.log(`Second third: {{ second_third }} ({{ best_split_one_third }} : {{ best_split_two_third }})`);
+                console.log(`Third third: {{ third_third }}`);
+            </script>
             {%  assign is_very_long = false %}
             {%  assign is_extra_long = false %}
             {% if first_half.size >= 18 %}
