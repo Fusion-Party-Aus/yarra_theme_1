@@ -7,7 +7,7 @@
     {% endif %}
 {% endfor %}
 <header id="header" class="m-0 w-100 position-relative" style="padding-top: 60px">
-  <div class="header-container">
+    <div class="header-container">
     {% assign heroImage = '' %}
     {% assign splashImage = '' %}
     {% assign hasBackground = false %}
@@ -84,94 +84,94 @@
                     {% endif %}
                 {% endunless %}
 
-                    {% unless one_third_chosen %}
-                        {% assign current_distance = current_length | minus: one_third_point %}
+                {% unless one_third_chosen %}
+                    {% assign current_distance = current_length | minus: one_third_point %}
+                    {% if current_distance < 0 %}
+                        {% assign current_distance = current_distance | times: -1 %}
+                    {% endif %}
+                    {% if current_distance <= best_distance_one_third %}
+                        {% assign best_split_one_third = forloop.index %}
+                        {% assign best_distance_one_third = current_distance %}
+                    {% else %}
+                        {% assign one_third_chosen = true %}
+                    {% endif %}
+                {% endunless %}
+
+                {% unless two_third_chosen %}
+                    {% unless forloop.index == best_split_one_third %}
+                        {% assign current_distance = current_length | minus: two_third_point %}
                         {% if current_distance < 0 %}
                             {% assign current_distance = current_distance | times: -1 %}
                         {% endif %}
-                        {% if current_distance <= best_distance_one_third %}
-                            {% assign best_split_one_third = forloop.index %}
-                            {% assign best_distance_one_third = current_distance %}
+                        {% if current_distance <= best_distance_two_third %}
+                            {% assign best_split_two_third = forloop.index %}
+                            {% assign best_distance_two_third = current_distance %}
                         {% else %}
-                            {% assign one_third_chosen = true %}
+                            {% assign two_third_chosen = true %}
                         {% endif %}
                     {% endunless %}
+                {% endunless %}
 
-                    {% unless two_third_chosen %}
-                        {% unless forloop.index == best_split_one_third %}
-                            {% assign current_distance = current_length | minus: two_third_point %}
-                            {% if current_distance < 0 %}
-                                {% assign current_distance = current_distance | times: -1 %}
+                {% assign current_length = current_length | plus: 1 %}
+            {% endfor %}
+
+            {% assign first_half = phrases | slice: 0, best_split_midpoint | join: ' ' %}
+            {% assign second_half = phrases | slice: best_split_midpoint + 1, phrases.size | join: ' ' %}
+            {% assign first_third = phrases | slice: 0, best_split_one_third | join: ' ' %}
+            {% assign second_third = phrases | slice: best_split_one_third + 1, best_split_two_third | join: ' ' %}
+            {% assign third_third = phrases | slice: best_split_two_third + 1, phrases.size | join: ' ' %}
+            {%  assign is_very_long = false %}
+            {%  assign is_extra_long = false %}
+            {% if first_half.size >= 18 %}
+                {%  assign is_very_long = true %}
+            {%  endif %}
+            {% if second_half.size >= 18 %}
+                {%  assign is_very_long = true %}
+            {%  endif %}
+            {% if page.headline.size >= 27 %}
+                {%  assign is_very_long = true %}
+                {%  if page.headline.size >= 49 %}
+                    {%  assign is_extra_long = true %}
+                    {%  comment %}
+                    The title will just be shown as one heading; we'll abandon attempts to split it up.
+                    {% endcomment %}
+                {%  endif %}
+            {%  endif %}
+            <h1 data-toc-skip class="{% if hasBackground %}bg-gray-transparent{% endif %} align-items-left h-underline h-{{ h_color }} h-underline-animate {% if isNicokaku %}nicokaku{% else %}inter{% endif %} {% if hasBackground %}fw-700{% else %}fw-600{% endif %}
+                ml-3 ml-sm-4 ml-md-5 mt-3 mt-lg-4 p-1 {% if is_very_long %}{% if is_extra_long %}fs-scale-extra-long{% else %}fs-scale-3-lines{% endif %}{% else %}{% unless wide %}fs-scale{% endunless %}{% endif %}">
+                {% if is_extra_long %}
+                    {{ page.headline }}
+                {% else %}
+                    {% if phrases.size >= 2 %}
+                        {% if is_very_long %}
+                            <span class="d-none d-xl-block fs-scale">{{  page.headline }}</span>
+                        {% else %}
+                            <span class="d-none d-md-block fs-scale">{{ page.headline }}</span>
+                        {% endif %}
+                        {% if is_very_long %}
+                            <span class="d-none d-lg-block d-xl-none fs-scale">{{ first_half }}</span>
+                            <span class="d-none d-lg-block d-xl-none fs-scale">{{ second_half }}</span>
+                            <span class="d-none d-sm-block d-lg-none">{{ first_half }}</span>
+                            <span class="d-none d-sm-block d-lg-none">{{ second_half }}</span>
+                            {% if first_third.size > 0 %}
+                                <span class="d-block d-sm-none">{{ first_third }}</span>
                             {% endif %}
-                            {% if current_distance <= best_distance_two_third %}
-                                {% assign best_split_two_third = forloop.index %}
-                                {% assign best_distance_two_third = current_distance %}
-                            {% else %}
-                                {% assign two_third_chosen = true %}
+                            {% if second_third.size > 0 %}
+                                <span class="d-block d-sm-none">{{ second_third }}</span>
                             {% endif %}
-                        {% endunless %}
-                    {% endunless %}
-
-                    {% assign current_length = current_length | plus: 1 %}
-                {% endfor %}
-
-                {% assign first_half = phrases | slice: 0, best_split_midpoint | join: ' ' %}
-                {% assign second_half = phrases | slice: best_split_midpoint + 1, phrases.size | join: ' ' %}
-                {% assign first_third = phrases | slice: 0, best_split_one_third | join: ' ' %}
-                {% assign second_third = phrases | slice: best_split_one_third + 1, best_split_two_third | join: ' ' %}
-                {% assign third_third = phrases | slice: best_split_two_third + 1, phrases.size | join: ' ' %}
-                {%  assign is_very_long = false %}
-                {%  assign is_extra_long = false %}
-                {% if first_half.size >= 18 %}
-                    {%  assign is_very_long = true %}
-                {%  endif %}
-                {% if second_half.size >= 18 %}
-                    {%  assign is_very_long = true %}
-                {%  endif %}
-                {% if page.headline.size >= 27 %}
-                    {%  assign is_very_long = true %}
-                    {%  if page.headline.size >= 49 %}
-                        {%  assign is_extra_long = true %}
-                        {%  comment %}
-                        The title will just be shown as one heading; we'll abandon attempts to split it up.
-                        {% endcomment %}
-                    {%  endif %}
-                {%  endif %}
-                <h1 data-toc-skip class="{% if hasBackground %}bg-gray-transparent{% endif %} align-items-left h-underline h-{{ h_color }} h-underline-animate {% if isNicokaku %}nicokaku{% else %}inter{% endif %} {% if hasBackground %}fw-700{% else %}fw-600{% endif %}
-                    ml-3 ml-sm-4 ml-md-5 mt-3 mt-lg-4 p-1 {% if is_very_long %}{% if is_extra_long %}fs-scale-extra-long{% else %}fs-scale-3-lines{% endif %}{% else %}{% unless wide %}fs-scale{% endunless %}{% endif %}">
-                    {% if is_extra_long %}
-                        {{ page.headline }}
+                            {% if third_third.size > 0 %}
+                                <span class="d-block d-sm-none">{{ third_third }}</span>
+                            {% endif %}
+                        {% else %}
+                            <span class="d-block d-md-none fs-scale">{{ first_half }}</span>
+                            <span class="d-block d-md-none fs-scale">{{ second_half }}</span>
+                        {%  endif %}
                     {% else %}
-                        {% if phrases.size >= 2 %}
-                            {% if is_very_long %}
-                                <span class="d-none d-xl-block fs-scale">{{  page.headline }}</span>
-                            {% else %}
-                                <span class="d-none d-md-block fs-scale">{{ page.headline }}</span>
-                            {% endif %}
-                            {% if is_very_long %}
-                                <span class="d-none d-lg-block d-xl-none fs-scale">{{ first_half }}</span>
-                                <span class="d-none d-lg-block d-xl-none fs-scale">{{ second_half }}</span>
-                                <span class="d-none d-sm-block d-lg-none">{{ first_half }}</span>
-                                <span class="d-none d-sm-block d-lg-none">{{ second_half }}</span>
-                                {% if first_third.size > 0 %}
-                                    <span class="d-block d-sm-none">{{ first_third }}</span>
-                                {% endif %}
-                                {% if second_third.size > 0 %}
-                                    <span class="d-block d-sm-none">{{ second_third }}</span>
-                                {% endif %}
-                                {% if third_third.size > 0 %}
-                                    <span class="d-block d-sm-none">{{ third_third }}</span>
-                                {% endif %}
-                            {% else %}
-                                <span class="d-block d-md-none fs-scale">{{ first_half }}</span>
-                                <span class="d-block d-md-none fs-scale">{{ second_half }}</span>
-                            {%  endif %}
-                        {% else %}
-                            {{ page.headline }}
-                        {% endif %}
+                        {{ page.headline }}
                     {% endif %}
-                </h1>
-            </div>
-        {% endif %}
-      </div>
+                {% endif %}
+            </h1>
+        </div>
+    {% endif %}
+    </div>
 </header>
