@@ -346,7 +346,7 @@ header .fs-scale {
 
 /* These media sizes are based on https://getbootstrap.com/docs/5.0/layout/breakpoints/ */
 @media (min-width: 576px) {
-    header h1 {
+    header .fs-scale {
         font-size: 4rem;
     }
 }
