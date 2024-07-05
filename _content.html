@@ -13,3 +13,6 @@
 {% if hasKwesTag %}
   {% include "kwes" %}
 {% endif %}
+{% if hasPhoneTag %}
+  {% include "phone", h_color: h_color, omitContents: omitContents %}
+{% endif %}
