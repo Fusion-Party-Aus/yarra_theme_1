@@ -125,11 +125,6 @@
             {% assign second_third_length = best_split_two_third |  minus: best_split_one_third %}
             {% assign second_third = phrases | slice: best_split_one_third, second_third_length | join: ' ' %}
             {% assign third_third = phrases | slice: best_split_two_third, phrases.size | join: ' ' %}
-            <script>
-                console.log(`First third: {{ first_third }}`);
-                console.log(`Second third: {{ second_third }} ({{ best_split_one_third }} : {{ best_split_two_third }})`);
-                console.log(`Third third: {{ third_third }}`);
-            </script>
             {%  assign is_very_long = false %}
             {%  assign is_extra_long = false %}
             {% if first_half.size >= 18 %}
