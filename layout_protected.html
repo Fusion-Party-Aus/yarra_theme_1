@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" id="bg-canvas" class="bg-gray-mist">
+<html lang="en" id="bg-canvas" class="bg-gray-mist h-100">
   {% assign hasBallotsTag = false %}
   {% assign h_color = 'pink' %}
   {% assign hasClimateRescueTag = false %}
@@ -134,7 +134,7 @@
 
     gtag('config', 'AW-16598463992');
   </script>
-  <body class="d-flex flex-column bg-transparent bg-viewport text-gray-900 relative bootstrap-theme v3-theme {%if page.is_homepage %}homepage{% endif %} {{ page.page_class_name }} page-{{ request.template | replace: '_', '-' }} js">
+  <body class="d-flex flex-column h-100 bg-transparent bg-viewport text-gray-900 relative bootstrap-theme v3-theme {%if page.is_homepage %}homepage{% endif %} {{ page.page_class_name }} page-{{ request.template | replace: '_', '-' }} js">
 
     {% unless page.type_name contains "Donation" %}
       {% if hasRingsTag %}
