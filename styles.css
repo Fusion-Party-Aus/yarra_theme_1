@@ -16,6 +16,10 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
+html, body {
+    overflow-x: clip;
+}
+
 h1, h2, h3, h4, h5, p {
     /* Avoid things accidentally covering up our text */
     z-index: var(--z-body) + 2;
