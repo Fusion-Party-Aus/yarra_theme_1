@@ -30,7 +30,7 @@
     border-left: 10px solid #9A94E7;
     margin: 1em;
     padding: 0.5em 10px;
-	}
+  }
 
   blockquote p {
     color: #535456;
@@ -39,10 +39,10 @@
     font-style: italic;
     line-height: 1.5em;
     display: inline;
-	}
+  }
 
   h1, h2, h3 {
-  	color: #373a3c;
+    color: #373a3c;
     font-weight: 700;
   }
 
@@ -57,76 +57,12 @@
     margin-bottom: 0.5em;
   }
 
-.bg-glass {
-    background-color: rgba(157, 184, 168, 0.1); /* Semi-transparent white for glass effect */
-    backdrop-filter: blur(5px); /* Blur effect for the background */
-    border-width: 1px;
-    border-top-width: 0;
-    border-color: rgba(224, 224, 224, 0.5); /* Light border for the glass edges */
-    box-shadow: inset 0 4px 4px rgba(176, 175, 175, 0.6), /* Inner top light */ inset 0 -4px 4px rgba(0, 0, 0, 0.1), /* Inner bottom shadow */ 0 8px 16px rgba(0, 0, 0, 0.1); /* Drop shadow for depth */
-}
+  .bg-gradient {
+    background: linear-gradient(90deg, #c8dcf6, #efd1ff, #a9c6ec, #85e3ee, #bfddff);
+    padding: 20px;
+  }
 
-@keyframes jumbo {
-    from {
-        background-position: 50% 50%, 50% 50%;
-    }
-    to {
-        background-position: 350% 50%, 350% 50%;
-    }
-}
-
-.bg-charm {
-    --stripes: repeating-linear-gradient(
-        100deg,
-        #fff 0%,
-        #fff 7%,
-        transparent 10%,
-        transparent 12%,
-        #fff 16%
-    );
-    --stripesDark: repeating-linear-gradient(
-        100deg,
-        #000 0%,
-        #000 7%,
-        transparent 10%,
-        transparent 12%,
-        #000 16%
-    );
-    --rainbow: repeating-linear-gradient(
-        100deg,
-		#c8dcf6 10%,
-		#efd1ff 15%,
-		#a9c6ec 20%,
-		#85e3ee 25%,
-		#bfddff 30%
-    );
-    background-image: var(--stripes), var(--rainbow);
-    background-size: 300%, 200%;
-    background-position: 50% 50%, 50% 50%;
-
-    filter: blur(10px) invert(100%);
-
-    mask-image: radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
-
-    position: absolute;
-    display: block;
-    pointer-events: none;
-	width: 100%;
-	height: calc(min(30vh, 150px));
-	z-index: var(--z-body) -1;
-}
-
-.bg-charm::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: var(--stripes), var(--rainbow);
-    background-size: 200%, 100%;
-    animation: jumbo 100s linear infinite;
-    background-attachment: fixed;
-    mix-blend-mode: difference;
-}
-	/* MOBILE STYLES */
+  /* MOBILE STYLES */
   @media only screen and (max-width: 480px){
     .emailImage{
       height:auto !important;
@@ -160,12 +96,11 @@
   div[style*="margin: 16px 0;"] { margin: 0 !important; }
 </style>
 </head>
-<body style="margin: 0 !important; padding: 0; !important background-color: #E4F3F2;" bgcolor="#E4F3F2">
+<body style="margin: 0 !important; padding: 0; !important background-color: #f5f1ff;" bgcolor="#f5f1ff">
 {{ preview_text }}
-<div class="bg-charm"></div>
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
-    <tr class="bg-glass">
-        <td align="center" valign="top" width="100%" style="width:100%; padding: 25px 15px;" bgcolor="#E4F3F2" class="mobile-padding">
+    <tr class="bg-gradient">
+        <td align="center" valign="top" width="100%" style="width:100%; padding: 25px 15px;" class="mobile-padding">
             <!--[if (gte mso 9)|(IE)]>
             <table align="center" border="0" cellspacing="0" cellpadding="0" width="600">
             <tr>
@@ -186,13 +121,13 @@
         </td>
     </tr>
     <tr>
-        <td align="center" height="100%" valign="top" width="100%" bgcolor="#E4F3F2" style="padding: 0 15px;" class="mobile-padding">
+        <td align="center" height="100%" valign="top" width="100%" bgcolor="#f5f1ff" style="padding: 0 15px;" class="mobile-padding">
             <!--[if (gte mso 9)|(IE)]>
             <table align="center" border="0" cellspacing="0" cellpadding="0" width="600">
             <tr>
             <td align="center" valign="top" width="600">
             <![endif]-->
-            <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px; border-color:#E4F3F2;">
+            <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px; border-color:#f5f1ff;">
                 <tr>
                     <td align="center" valign="top" style="padding: 0 0 0 0; font-family: Open Sans, Helvetica, Arial, sans-serif;">
                         <table cellspacing="0" cellpadding="0" border="0" width="100%">
@@ -209,19 +144,19 @@
                                     <table cellspacing="15" cellpadding="15" border="0" width="200" align="center">
                                         <tr>
                                             <td align="center">
-                                                {% comment %}https://about.meta.com/brand/resources/facebook/logo/ lacked an.png, so I had to use
+                                                {% comment %}https://about.meta.com/brand/resources/facebook/logo/ lacked an.png, so I had to use
                                                 https://www.logo.wine/logo/Facebook?logo=f_Logo-Blue{% endcomment %}
-                                              	<a href="https://www.facebook.com/FusionPartyAus"><img width="25" height="25" src="Facebook-logo2.png" alt="Facebook" title="Facebook logo" v /></a>
-                                          	</td>
+                                                <a href="https://www.facebook.com/FusionPartyAus"><img width="25" height="25" src="Facebook-logo2.png" alt="Facebook" title="Facebook logo" v /></a>
+                                            </td>
                                             <td align="center">
                                                 {% comment %}https://about.x.com/en/who-we-are/brand-toolkit{% endcomment %}
-																								<a href="https://www.twitter.com/FusionPartyAus"><img width="25" height="25" src="x-logo.png" alt="Twitter" title="Twitter logo" /></a>
-                                          	</td>
+                                                <a href="https://www.twitter.com/FusionPartyAus"><img width="25" height="25" src="x-logo.png" alt="Twitter" title="Twitter logo" /></a>
+                                            </td>
                                             <td align="center">
                                                 {% comment %}https://www.youtube.com/howyoutubeworks/resources/brand-resources/#logos-icons-and-colors has no SVG with the rounded corners,
                                                 so I've used https://seeklogo.com/vector-logo/316067/youtube-2017-icon{% endcomment %}
                                                 <a href="https://www.youtube.com/channel/UCTn5Sxlau1RpT8eA-fEmfig/videos"><img width="25" height="25" src="youtube-logo2.png" alt="YouTube" title="YouTube logo" /></a>
-                                          	</td>
+                                            </td>
                                             <td align="center">
                                                 {% comment %}https://about.meta.com/brand/resources/instagram/instagram-brand/ had an SVG which was invalid, so I've used
                                                 https://seeklogo.com/vector-logo/438567/instagram-new-2022{% endcomment %}
@@ -238,7 +173,7 @@
                                             <td align="center">
                                                 {% comment %}https://discord.com/branding{% endcomment %}
                                                 <a href="https://www.fusionparty.org.au/discord"><img width="25" height="25" src="discord-mark-blue.png" alt="Discord Server" title="Discord Server" /></a>
-                                            </td> </td>
+                                            </td>
                                             <td align="center">
                                                 <a href="https://www.fusionparty.org.au/store"><img width="25" height="25" src="bag.png" alt="Shopping bag icon" title="Fusion merchandise" /></a>
                                             </td>
@@ -258,7 +193,7 @@
         </td>
     </tr>
     <tr>
-        <td align="center" height="100%" valign="top" width="100%" bgcolor="#E4F3F2" style="padding: 0 15px 40px 15px;">
+        <td align="center" height="100%" valign="top" width="100%" bgcolor="#f5f1ff" style="padding: 0 15px 40px 15px;">
             <!--[if (gte mso 9)|(IE)]>
             <table align="center" border="0" cellspacing="0" cellpadding="0" width="600">
             <tr>
