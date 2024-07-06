@@ -4,20 +4,57 @@
   </div>
 {% endif %}
 
+{% assign hasEmailTag = false %}
 {% assign hasHomepageTag = false %}
+{% comment %}
+This signup form is only for joining an email list, not for joining the party.
+{% endcomment %}
 {% for tag in page.tags %}
-    {% if tag.name == "homepage" %}
+    {% if tag.name == "email-list" %}
+      {% assign hasEmailTag = true %}
+    {% elsif tag.name == "homepage" %}
       {% assign hasHomepageTag = true %}
-      {% break %}
     {% endif %}
 {% endfor %}
+{% assign isPressRecipient = false %}
+{% assign isNewsletterRecipient = false %}
+{% for tag in request.current_user.tags %}
+  {% if tag == "Press releases" %}
+    {% assign isPressRecipient = true %}
+  {% elsif tag == "Newsletter" %}
+    {% assign isNewsletterRecipient = true %}
+  {% endif %}
+{% endfor %}
+{% comment %}
+Liquid has no notion of "not" :S
+https://github.com/Shopify/liquid/issues/138
+{% endcomment %}
+{% assign shouldSignUp = false %}
+{% if hasEmailTag %}
+  {% if hasHomepageTag %}
+    {% unless isNewsletterRecipient %}
+      {% assign shouldSignUp = true %}
+    {% endunless %}
+  {% else %}
+    {% unless isPressRecipient %}
+      {% assign shouldSignUp = true %}
+    {% endunless %}
+  {% endif %}
+{% else %}
+  {% unless request.sorta_logged_in? %}
+    {% comment %}
+    If they had signed up, they'd be logged in.
+    {% endcomment %}
+    {% assign shouldSignUp = true %}
+  {% endunless %}
+{% endif %}
 
 {% if page.show_social_slider? and page.public_activities_count > 0 %}
   {% include "social_slider" %}
 {% endif %}
 
 <div class="container my-4">
-  {% if hasHomepageTag %}
+  {% if hasEmailTag %}
     <h2 class="h2-style h-blue h-underline h-underline-animate">Stay in the Loop</h2>
   {% else %}
     <h2 class="h2-style h-blue h-underline h-underline-animate">Sign up</h2>
@@ -29,13 +66,10 @@
 
           {% form_for signup %}
 
-            {% if request.sorta_logged_in? %}
-              {% if hasHomepageTag %}
-                {% comment %}
-                Here we assume that the form on the homepage is only to join the newsletter, not the party.
-                {% endcomment %}
+            {% unless shouldSignUp %}
+              {% if hasEmailTag %}
                 <h4>Thanks for signing up!</h4>
-                <p>The newsletters will be sent to <a href="mailto:{{ request.current_signup.email }}">{{ request.current_signup.email }}</a> to keep you in the loop.</p>
+                <p>The {% if hasHomepageTag %}newsletters{% else %}press releases{% endif %} will be sent to <a href="mailto:{{ request.current_signup.email }}">{{ request.current_signup.email }}</a> to keep you in the loop.</p>
                 <p>If you'd like to unsubscribe, <a href="{{ settings.site.unsubscribe_url }}">click here</a>.</p>
               {% else %}
                 <h4>Hi {{ request.current_signup.name_or_email }}, thanks for joining!</h4>
@@ -43,11 +77,11 @@
               {% if request.logged_in? == false %}
                 <small>If you're not {{ request.current_signup.name_or_email }}, <a href="{{ request.current_signup.logout_url }}">click here to signup</a>.</small>
               {% endif %}
-            {% endif %}
+            {% endunless %}
 
             <div class="form-errors">{% error_messages_for signup %}</div>
 
-              {% if request.sorta_logged_in? == false or request.current_signup.has_name? == false %}
+              {% if shouldSignUp or request.sorta_logged_in? == false or request.current_signup.has_name? == false  %}
                 <div class="{% unless hasHomepageTag %}form-row{% endunless %}">
 
                   <div class="form-group mb-0 {% unless hasHomepageTag %}col-sm-6{% endunless %}">
@@ -61,7 +95,7 @@
                 </div>
               {% endif %}
 
-              {% if request.sorta_logged_in? == false or request.current_signup.has_mobile? == false %}
+              {% if shouldSignUp or request.sorta_logged_in? == false or request.current_signup.has_mobile? == false %}
                 <div class="{% unless hasHomepageTag %}form-row{% endunless %}">
                   <div class="form-group {% if hasHomepageTag %}mb-0{% else %}col-sm-6{% endif %} bg-transparent">
                     {% email_field "email", class:"form-control text p-3", placeholder:"name@example.com" %}
@@ -127,7 +161,7 @@
 
             {% unless site.page_tags contains "no-consent" %}
               {% if page.signup.is_volunteers? and site.ask_for_volunteers? %}
-                {% if request.sorta_logged_in? == false or request.current_signup.is_volunteer == false %}
+                {% if request.sorta_logged_in? == false or request.current_signup.is_volunteer? == false %}
                   <div class="form-group custom-control custom-checkbox">
                     {% check_box "is_volunteer", class:"custom-control-input" %}
                     <label class="custom-control-label" for="signup_is_volunteer">I want to volunteer</label>
@@ -148,18 +182,18 @@
             {% hidden_field_tag "signup[recruiter_id]" %}
             {% hidden_field_tag "signup[author_id]" %}
 
-            {% if hasHomepageTag %}
+            {% if hasEmailTag %}
                 {% comment %}
                 Signing up to the newsletter, not the party.
                 {% endcomment %}
-                {% unless request.sorta_logged_in? %}
+                {% if shouldSignUp %}
                   {% submit_tag "Subscribe", class:"btn btn-primary bg-blue w-100 py-2 glowing-button submit-button" %}
-                {% endunless %}
+                {% endif %}
             {% else %}
-              {% if request.sorta_logged_in? %}
-                {% submit_tag "Update info", class:"btn btn-primary bg-pink btn-lg w-100 py-2 submit-button" %}
-              {% else %}
+              {% if shouldSignUp %}
                 {% submit_tag "Sign up", class:"btn btn-primary bg-pink btn-lg w-100 py-2 submit-button" %}
+              {% else %}
+                {% submit_tag "Update info", class:"btn btn-primary bg-pink btn-lg w-100 py-2 submit-button" %}
               {% endif %}
             {% endif %}
             <div class="form-submit"></div>
@@ -172,10 +206,12 @@
             </div>
           {% endif %}
         </div>
-        {% unless request.sorta_logged_in? %}
+        {% if shouldSignUp %}
+          {% if hasHomepageTag %}
         <p class="align-items-start text-center py-2 py-sm-4">We will only use this information to send you newsletters and campaign
                         updates.</p>
-        {% endunless %}
+          {% endif %}
+        {% endif %}
     </div>
   </div>
   {% if hasHomepageTag %}
