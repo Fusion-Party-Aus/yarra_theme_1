@@ -89,7 +89,9 @@
           referrerpolicy="no-referrer">
     {% endif %}
     <!-- The reCAPTCHA account is managed by Owen. The secret key needs to be updated in Kwes too. -->
+    {% if hasKwesTag %}
     <script src="https://www.google.com/recaptcha/api.js?render=6LcWQvUpAAAAAAKRTxiPPVZuN9VTOSN0vz41zv_0"></script>
+    {% endif %}
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <!-- https://afeld.github.io/bootstrap-toc/ -->
     <link
