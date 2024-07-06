@@ -876,3 +876,16 @@ input.form-control {
 /* todo: turbulence: https://codepen.io/cobra_winfrey/pen/eYOXOdB */
 
 /* todo: charm UI https://codepen.io/TWilson/pen/jOdWqbZ */
+
+/* This works with glowing buttons */
+.animation-sync div:nth-child(1) a::before {
+  animation-delay: 3s;
+}
+
+.animation-sync div:nth-child(2) a::before {
+  animation-delay: 2s;
+}
+
+.animation-sync div:nth-child(3) a::before {
+  animation-delay: 0s;
+}
