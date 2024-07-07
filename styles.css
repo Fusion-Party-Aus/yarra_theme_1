@@ -182,6 +182,48 @@ button.bg-aquamarine:hover {
     background-color: rgba(89, 217, 217, 0.85);
 }
 
+/* Background container */
+.position-relative {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* Background image with greyscale */
+.bg-yarra-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://assets.nationbuilder.com/futureparty/pages/4104/attachments/original/1720352667/owenfm_looking_across_the_Yarra_river_to_the_silhoutte_of_the_A_66b8aed7-8d74-42c8-a606-b185e89a9fdb.png?1720352667');
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(100%);
+    opacity: 0.5; /* Ensure the image is slightly transparent */
+}
+
+/* Overlay */
+.bg-yarra-overlay::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(128, 0, 128, 0.5); /* Purple color with 50% opacity */
+}
+
+/* Ensuring content is above the overlay */
+.floating-text, .floating-text span {
+    position: relative;
+    z-index: calc(var(--z-body) + 1); /* Ensures content is above the overlay */
+}
+
+.tilted {
+    transform: rotate(10deg);
+}
+
 .bg-aquamarine-transparent {
     background-color: rgba(138, 238, 216, 0.24);
     margin: 0;
@@ -205,6 +247,10 @@ button.bg-aquamarine:hover {
 button.bg-opal:hover {
   /* This is the background-color for btn-info in Bootstrap 5 */
   background-color: #31d2f2 !important;
+}
+
+.h-white::after, .h-white span::after {
+    background-color: white;
 }
 
 .h-pink::after {
