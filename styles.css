@@ -1,0 +1,268 @@
+:root {
+    --fusion-aquamarine: #5effd8;
+    --fusion-pink: #ff7fff;
+    --fusion-blue: #5facff;
+    --fusion-purple: #c34df1;
+    --fusion-gray: #949494;
+    --underlining-duration: 0.55s;
+    --font-border-width: 4px;
+    --z-body: 3;
+    --z-nav: 10;  /*  Always above any body content, but not modals */
+    --container-max-width: 800px;
+    --near-top: 300px;  /* When should the nav bar always be visible? 5rem. */
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+html, body {
+    overflow-x: clip;
+}
+
+h1, h2, h3, h4, h5, p {
+    /* Avoid things accidentally covering up our text */
+    z-index: var(--z-body) + 2;
+}
+
+.container {
+    max-width: var(--container-max-width);
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.container, .container-fluid {
+    z-index: var(--z-body);
+    position: relative;
+}
+
+.container-fluid video {
+    /* The video and images are causing the row to become too tall, making the surrounding text ugly*/
+    max-height: 340px;
+}
+
+.container-fluid img.h-100 {
+    max-height: 240px;
+}
+
+.container-fluid img.w-100 {
+    max-width: 450px;
+}
+
+.w-1600 {
+    max-width: 1600px;
+}
+
+.w-inf {
+    max-width: inherit;
+}
+
+figcaption {
+    display: inline-block;
+}
+
+.no-decorate {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.no-decorate:hover {
+    text-decoration: underline;
+}
+
+.video {
+    display: grid;
+    place-items: center;
+    /* Above this width, an ugly, thick black border surrounds the thumbnail */
+    max-width: calc(min(85vw, 639px));
+    box-shadow: 0 4px 14px rgba(176, 175, 175, 0.6),
+                0 -4px 14px rgba(0, 0, 0, 0.1),
+                0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.video iframe {
+    aspect-ratio: calc(560 / 315);
+    width: 100%;
+    z-index: 3;
+}
+
+.open-sans {
+    font-family: "Open Sans", sans-serif;
+}
+
+.fw-500 {
+    font-weight: 500 !important;
+}
+
+.fw-600 {
+    font-weight: 600 !important;
+}
+
+.fw-700 {
+    font-weight: 700 !important;
+}
+
+.fw-900 {
+    /* h2 and smaller */
+    font-weight: 900;
+}
+
+.fw-1000 {
+    /* h1 */
+    font-weight: 1000 !important;
+}
+
+.h-underline {
+    position: relative;
+    display: inline-block; /* Allows the pseudo-element to align with text */
+}
+
+.h-underline::after {
+    content: '';
+    display: block;
+    width: 0;  /* Start invisible */
+    background-color: currentColor; /* Use the color of the text */
+    position: absolute;
+    left: 0;
+    transition: width var(--underlining-duration) ease-in;
+}
+
+.h-underline-animate::after {
+    width: 100%; /* Full underline */
+}
+
+.transition-delay::after {
+    transition-delay: calc(var(--underlining-duration)/2);
+}
+
+h1.h-underline {
+    padding-bottom: 7px;
+}
+
+h2.h-underline {
+    padding-bottom: 5px;
+}
+
+h1::after, h2::after, h3:after, h4:after {
+    height: 5px; /* Thickness of the underline */
+    border-radius: 4px;
+}
+h1::after {
+    height: 7px;
+}
+
+h5.h-underline {
+    padding-bottom: 3px;
+}
+
+.h-underline h5::after {
+    height: 3px;
+}
+
+.h-aquamarine::after {
+    background-color: var(--fusion-aquamarine);
+}
+
+.bg-aquamarine {
+    background-color: rgba(138, 238, 216, 0.73);
+}
+
+button.bg-aquamarine:hover {
+    background-color: rgba(89, 217, 217, 0.85);
+}
+
+.bg-aquamarine-transparent {
+    background-color: rgba(138, 238, 216, 0.24);
+    margin: 0;
+    padding: 0;
+    box-shadow: 0 4px 15px 0 rgba(31, 38, 135, 0.1);
+}
+
+.bg-blue-gray-transparent {
+    background-color: #e9fbfab0;
+}
+
+.bg-gray-transparent {
+    background-color: rgba(167,173,172,0.73);
+    color: white;
+}
+
+.bg-opal {
+    background-color: #46d3e0;
+}
+
+button.bg-opal:hover {
+  /* This is the background-color for btn-info in Bootstrap 5 */
+  background-color: #31d2f2 !important;
+}
+
+.h-pink::after {
+    background-color: var(--fusion-pink);
+}
+
+.h-blue::after {
+    background-color: var(--fusion-blue);
+}
+
+.h-purple::after {
+    background-color: var(--fusion-purple);
+}
+
+.h-gray::after {
+    background-color: var(--fusion-gray);
+}
+
+.bg-blue {
+    background-color: var(--fusion-blue);
+}
+
+.bg-blue-green {
+    background-color: rgba(57, 164, 161, 0.84);
+}
+
+.bg-purple {
+    background-color: var(--fusion-purple);
+    color: white;
+}
+
+.bg-purple:hover {
+    background-color: #a20dd7;
+    color:white;
+}
+
+.bg-pink {
+    background-color: #ff7fff;
+    color: white;
+    border-color: #d249d2;
+}
+
+.bg-pink:hover {
+    background-color: #dc63dc;
+    color: white;
+    border-color: #d249d2;
+}
+
+button.bg-purple, button.bg-purple:hover {
+    border-color: #780a9d;
+}
+
+.bg-transparent {
+    background-color: transparent;
+}
+
+input.bg-white {
+    background-color: white;
+}
+
+
+input.form-control {
+    height: calc(3.5rem + calc(var(--bs-border-width) * 2));
+}
+
+@keyframes spin {
+  100% {transform: rotate(1turn); }
+}
+
+.spin {
+    animation: spin 45s linear infinite reverse;
+}
