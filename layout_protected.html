@@ -4,6 +4,7 @@
   {% assign h_color = 'pink' %}
   {% assign hasClimateRescueTag = false %}
   {% assign hasConversionTag = false %}
+  {% assign hasEventsTag = false %}
   {% assign omitContents = false %}
   {% assign hasKwesTag = false %}
   {% assign hasPhoneTag = false %}
@@ -23,6 +24,8 @@
         {% assign hasClimateRescueTag = true %}
       {% when "conversion" %}
         {% assign hasConversionTag = true %}
+      {% when "events" %}
+        {% assign hasEventsTag = true %}
       {% when "omit-contents" %}
         {% assign omitContents = true %}
       {% when "kwes" %}
@@ -182,7 +185,7 @@
               {% include "features" %}
             {% endif %}
             <main role="main" data-spy="scroll" data-target="#toc">
-              {% include "content", sidebar: request.is_sidebar?, isVideoLanding: isVideoLanding, hasBallotsTag: hasBallotsTag, hasClimateRescueTag: hasClimateRescueTag, hasPoliciesTag: hasPoliciesTag, hasKwesTag: hasKwesTag, omitContents: omitContents, hasPhoneTag: hasPhoneTag %}
+              {% include "content", sidebar: request.is_sidebar?, isVideoLanding: isVideoLanding, hasBallotsTag: hasBallotsTag, hasClimateRescueTag: hasClimateRescueTag, hasPoliciesTag: hasPoliciesTag, hasKwesTag: hasKwesTag, hasEventsTag: hasEventsTag, omitContents: omitContents, hasPhoneTag: hasPhoneTag %}
             </main>
           </div>
           <div class="d-none d-lg-block col-lg-2"></div>
