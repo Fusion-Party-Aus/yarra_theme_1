@@ -4,6 +4,7 @@
     --fusion-blue: #5facff;
     --fusion-purple: #c34df1;
     --fusion-gray: #949494;
+    --yarra-purple: #9b35b7;
     --underlining-duration: 0.55s;
     --font-border-width: 4px;
     --z-body: 3;
@@ -24,6 +25,10 @@ h1, h2, h3, h4, h5 {
     font-family: 'Arial Black';
     text-decoration: underline;
     text-transform: uppercase;
+}
+
+main h1, main h2, main h3, main h4, main h5 {
+    color: var(--yarra-purple);
 }
 
 h1, h2, h3, h4, h5, p {
