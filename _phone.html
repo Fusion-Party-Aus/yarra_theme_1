@@ -1,0 +1,20 @@
+<div class="container">
+    {% comment %}
+    Notice that the next divs replicate pages_show_basic_wide.html
+    {% endcomment %}
+    <div class="row">
+        <div class="{% if page.is_homepage? %}col{% else %}col-12 mx-auto{% endif %}">
+            <div class="py-1 px-0">
+                <div class="px-0 py-2">
+                    <h3 class="h-{{ h_color }} h-underline transition-delay">Let's Chat</h3>
+                    <p>We love staying in touch with our community, getting a sense of what you feel is important and how we can improve Australia's future together.</p>
+                    <p>If you're free in the next few days, let's schedule a time to chat 💁
+                    </p>
+                    <div class="text-center container-fluid px-0">
+                        <a class="w-100 btn btn-info {% if h_color == 'aquamarine' %}bg-opal{% else %}bg-{{ h_color }}{% endif %} my-2" href="https://app.simplymeet.me/hello-fusion">Let's chat!</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,39 +1,179 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="bg-canvas" class="bg-gray-mist h-100">
+  {% assign hasBallotsTag = false %}
+  {% assign h_color = 'pink' %}
+  {% assign hasClimateRescueTag = false %}
+  {% assign hasConversionTag = false %}
+  {% assign hasEventsTag = false %}
+  {% assign omitContents = false %}
+  {% assign hasKwesTag = false %}
+  {% assign hasPhoneTag = false %}
+  {% assign hasPoliciesTag = false %}
+  {% assign stripes = false %}
+  {% assign hasRingsTag = false %}
+  {% assign isVideoLanding = false %}
+  {% assign wide = false %}
+  {% for tag in page.tags %}
+    {% if tag.name contains "_h-" %}
+      {% assign h_color = tag.name | replace: '_h-', '' %}
+    {% endif %}
+    {% case tag.name %}
+      {% when "ballots" %}
+        {% assign hasBallotsTag = true %}
+      {% when "climate-rescue" %}
+        {% assign hasClimateRescueTag = true %}
+      {% when "conversion" %}
+        {% assign hasConversionTag = true %}
+      {% when "events" %}
+        {% assign hasEventsTag = true %}
+      {% when "omit-contents" %}
+        {% assign omitContents = true %}
+      {% when "kwes" %}
+        {% assign hasKwesTag = true %}
+      {% when "phone" %}
+        {% assign hasPhoneTag = true %}
+      {% when "policies" %}
+        {% assign hasPoliciesTag = true %}
+      {% when "rings" %}
+        {% assign hasRingsTag = true %}
+      {% when "stripes" %}
+        {% assign stripes = true %}
+      {% when "video-landing" %}
+        {% assign isVideoLanding = true %}
+      {% when "wide" %}
+        {% assign wide = true %}
+    {% endcase %}
+  {% endfor %}
+  <!-- Meta Pixel Code, managed by Owen. See https://www.facebook.com/business/help/952192354843755?id=1205376682832142 -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '375905657599338');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=375905657599338&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{{ page_title }}</title>
-
     <link href="theme.scss" rel="stylesheet" />
     <!-- By importing our own CSS last, it gives it more precedence -->
     <link rel="stylesheet" href="styles.css">
+    <!-- The reCAPTCHA account is managed by Owen. The secret key needs to be updated in Kwes too. -->
+    {% if hasKwesTag %}
+    <script src="https://www.google.com/recaptcha/api.js?render="></script>
+    {% endif %}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <!-- https://afeld.github.io/bootstrap-toc/ -->
+    <link
+            rel="stylesheet"
+            integrity="sha512-l7ovCvDRjJLlYFtk8GrnQakaDrWlbTYwni0B+tCx+UvtkmeGhNEZSgL9hGMiSuCIXzobun85e6GlOfdZtvB2Fw=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+            href="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.css"
+    />
 
     <!-- start of content for header -->
     {{ content_for_header }}
     <!-- end of content for header -->
+    <!-- Google tag (gtag.js), managed by Drew -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', '');
+    </script>
+    {% if hasConversionTag %}
+      <!-- Event snippet for Website traffic conversion page -->
+      <script>
+        console.log('Conversion tag is present');
+      </script>
+      <script>
+        gtag('event', 'conversion', {'send_to': ''});
+      </script>
+    {% endif %}
 
     <script type="text/javascript">
       NB.appConfig.userIsLoggedIn = {{ request.logged_in? }};
     </script>
 
   </head>
-  <body class="bootstrap-theme v3-theme {%if page.is_homepage %}homepage{% endif %} {{ page.page_class_name }} page-{{ request.template | replace: '_', '-' }} js">
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-    {% unless page.type_name == "Donation (v2)" %}
-      {% include "header" %}
-      {% if site.has_header_image? %}
-        <div class="container mb-4">
-          <img src="{{ site.header_image_url_1026 }}" class="mw-100" border="0" />
+    gtag('config', 'AW-16598463992');
+  </script>
+  <body class="d-flex flex-column h-100 bg-transparent bg-viewport text-gray-900 relative bootstrap-theme v3-theme {%if page.is_homepage %}homepage{% endif %} {{ page.page_class_name }} page-{{ request.template | replace: '_', '-' }} js">
+    {% unless page.type_name contains "Donation" %}
+      {% if hasRingsTag %}
+        <!-- SVG Circle -->
+        <div class="circle">
+            <i style="--ring-color:#949494ff;"></i>
+            <i style="--ring-color:#5facffff;"></i>
+            <i style="--ring-color:#c34df1ff;"></i>
+            <i style="--ring-color:#ff7fffff;"></i>
+            <i style="--ring-color:#5effd8ff;"></i>
         </div>
       {% endif %}
-      {% if page.features_count > 0 %}
-        {% include "features" %}
-      {% endif %}
-      <main id="content" role="main">
-        {% include "content", sidebar: request.is_sidebar? %}
-      </main>
+      {% include "nav" %}
+      <div class="bg-charm"></div>
+      <div class="w-100 pb-4">
+        {% if isVideoLanding %}
+          <div class="container">
+              {% include "video_header", h_color: h_color %}
+          </div>
+        {% else %}
+          {% if wide %}
+            <div class="container w-1600 mb-2">
+              {% include "header", h_color: h_color, wide: wide %}
+            </div>
+          {% else %}
+            <div class="row d-block">
+              {% include "header", h_color: h_color %}
+            </div>
+          {% endif %}
+        {% endif %}
+        {% if isVideoLanding %}
+          {% include "content", sidebar: request.is_sidebar?, isVideoLanding: isVideoLanding, hasBallotsTag: hasBallotsTag, hasClimateRescueTag: hasClimateRescueTag, hasPoliciesTag: hasPoliciesTag, hasEventsTag: hasEventsTag, omitContents: omitContents, hasKwesTag: hasKwesTag, hasPhoneTag: hasPhoneTag, h_color: h_color %}
+          <script src="video_injection.js"></script>
+        {% else %}
+          <div class="row {% if omitContents %}ml-3 ml-md-4 mt-3 mt-lg-4{% endif %}">
+            {% comment %}
+            If we're omitting the table of contents, we need a bit more horizontal margin to avoid the edge of the page.
+            {% endcomment %}
+            {% unless omitContents %}
+            <div class="d-none d-md-block col-0 col-md-3 col-lg-2 sidebar">
+                <nav id="toc" data-toggle="toc"></nav>
+            </div>
+            {% endunless %}
+            <div class="col-12 {% unless wide %}col-md-9 col-lg-8{% endunless %}">
+              {% if page.features_count > 0 %}
+                {% include "features" %}
+              {% endif %}
+              <main id="content" role="main" data-spy="scroll" data-target="#toc">
+                {% include "content", sidebar: request.is_sidebar?, wide: wide %}
+              </main>
+            </div>
+            <div class="d-none d-lg-block col-lg-2">
+              <!-- If we wanted to bring back the sidebar, this is where it would go -->
+            </div>
+          </div>
+        {% endif %}
+      </div>
       {% include "footer" %}
     {% else %}
       {% yield %}
@@ -55,7 +195,36 @@
     </style>
     {% endif %}
 
-    <script src="bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.min.js" integrity="sha512-7rusk8kGPFynZWu26OKbTeI+QPoYchtxsmPeBqkHIEXJxeun4yJ4ISYe7C6sz9wdxeE1Gk3VxsIWgCZTc+vX3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"
+      integrity="sha512-TPh2Oxlg1zp+kz3nFA0C5vVC6leG/6mm1z9+mA81MI5eaUVqasPLO8Cuk4gMF4gUfP5etR73rgU/8PNMsSesoQ=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"
+        integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- jQuery is needed for tilting, for the nav, and for the table of contents -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!--script defer src="underlining.js"></script-->
+    {% unless omitContents %}
+      <!-- https://afeld.github.io/bootstrap-toc/ -->
+      <script defer src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js"></script>
+    {% endunless %}
+    {% if hasBallotsTag %}
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"
+        integrity="sha512-u1L7Dp3BKUP3gijgSRoMTNxmDl/5o+XOHupwwa7jsI1rMzHrllSLKsGOfqjYl8vrEG+8ghnRPNA/SCltmJCZpQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script defer src="tilting.js"></script>
+    {% endif %}
+    {% if stripes %}
+      <script defer src="climateVideoInjection.js"></script>
+    {% endif %}
+    <script defer src="nav.js"></script>
+    {% if hasKwesTag %}
+      <script src="https://kwesforms.com/v2/kwes-script.js" defer></script>
+    {% endif %}
     <script src="bs-custom-file-input.min.js"></script>
     <script src="theme.js"></script>
   </body>

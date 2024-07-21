@@ -84,7 +84,7 @@
           </div>
 
           <div class="form-row">
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-8">
               <label for="donation_billing_address_city">City</label>
               {% text_field "billing_address.city", class:"form-control" %}
             </div>
@@ -327,12 +327,6 @@
         </div>
       </div><!-- /.form -->
     {% endform_for %}
-
-    {% if page.tags_count > 0 %}
-      <div class="page-tags">
-        {% include "page_tags" with page %}
-      </div>
-    {% endif %}
 
     {% if page.show_stream? %}
       {% include "page_stream" %}

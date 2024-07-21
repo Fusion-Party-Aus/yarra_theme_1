@@ -4,7 +4,7 @@
       <div class="col-12 col-md-8">
         {% if site.footer_content.size > 0 %}
           {{ site.footer_content }}
-        {% endif %}
+            {% endif %}
         {% if request.logged_in? %} Hi
         <a href="{{ request.current_signup.settings_url }}">{{
           request.current_signup.name_or_email

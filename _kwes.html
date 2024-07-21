@@ -1,0 +1,29 @@
+<div class="container">
+    <!-- The Kwes form is relying on Owen's account -->
+    <div class="py-1 px-0 p-sm-3">
+        <div class="px-0 py-2">
+            <h2 class="h-blue h-underline transition-delay">Let Us Know</h2>
+            <p>What would you like to see as the future of Australia? 🌈</p>
+            <p>If you'd like to get involved as a volunteer, please see <a href="/volunteer">Volunteer</a>.
+            </p>
+        </div>
+        <form class="kwes-form bg-aquamarine-transparent rounded p-3"
+              has-recaptcha-v3 recaptcha-site-key=""
+              action="https://kwesforms.com/api/foreign/forms/9XrcnhCfN27o6LIFug3c">
+            <div class="mb-3">
+                <label for="kwes_name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="kwes_name" name="name" placeholder="Name" autocomplete="name">
+            </div>
+            <div class="mb-3">
+                <label for="kwes_email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="kwes_email" name="email_address"
+                       placeholder="name@example.com" autocomplete="email">
+            </div>
+            <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control" id="message" name="message" rows="3" autocomplete="off"></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+    </div>
+</div>

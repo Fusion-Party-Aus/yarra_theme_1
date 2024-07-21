@@ -150,15 +150,6 @@
 
     </div> <!-- /.form -->
 
-
-    {% if page.tags_count > 0 %}
-      <div id="page-tags" class="page-tags">
-        {% include "page_tags" with page %}
-      </div>
-    {% endif %}
-
-    {% include "like_page" heading: "Like this to encourage your friends to volunteer." %}
-
     {% if page.show_stream? %}
       {% include "page_stream" %}
     {% endif %}

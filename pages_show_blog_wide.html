@@ -1,7 +1,6 @@
 {% if page.headline.size > 0 %}
 <h2 class="mb-3">{{ page.headline }}</h2>
 {% endif %}
-
 <div id="content">
   {% if page.blog.is_posting_public? %}
     <div class="card bg-light mb-4">
@@ -40,7 +39,8 @@
     {% for post in page.blog.most_recent_blog_posts %}
       <li class="{% unless forloop.last == true %}mb-4 pb-4 border-bottom{% endunless %}" id="blog-post-page-{{ post.id }}">
         <header class="mb-3">
-          <h3 class="mb-1"><a href="{{ post.url }}">{{ post.headline }}</a></h3>
+          <h3 class="mb-1 h-underline h-{{ h_color }}">
+            <h3 class="mb-1"><a href="{{ post.url }}">{{ post.headline }}</a></h3>
 
           <p class="small text-muted">
             Posted by {{ post.author.published_name_linked }} &middot; {{ post.published_at | date: '%B %d, %Y %l:%M %p' }}
@@ -56,7 +56,9 @@
         <div class="mb-2">
           {{ post.blog_post.content }}
           {% if post.blog_post.is_extended? %}
-            <p class="mt-2"><a href="{{ post.url }}">Read more</a></p>
+            <p class="mt-2">
+              <p class="mt-2"><a href="{{ post.url }}">Read more</a></p>
+            </p>
           {% endif %}
         </div>
 

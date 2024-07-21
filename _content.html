@@ -1,11 +1,21 @@
-<div class="container content-{{ request.template  | replace: '_', '-' }}">
-  <div class="row">
-    <div class="col-12 {%if sidebar %}col-md-8{%endif%}">
-      {% include "breadcrumbs" %}
-      {% yield %}
-    </div>
-    {% if sidebar %}
-      {% include "sidebar" %}
-    {% endif %}
-  </div>
+<div class="{% unless isVideoLanding %}container {% if wide %}w-1600{% endif %} {% endunless %}content-{{ request.template  | replace: '_', '-' }}">
+  {% yield %}
 </div>
+{% if hasEventsTag %}
+  {% include "events" %}
+{% endif %}
+{% if hasBallotsTag %}
+  {% include "ballots" %}
+{% endif %}
+{% if hasClimateRescueTag %}
+  {% include "climate_rescue" %}
+{% endif %}
+{% if hasPoliciesTag %}
+  {% include "scrolling_policies" %}
+{% endif %}
+{% if hasKwesTag %}
+  {% include "kwes" %}
+{% endif %}
+{% if hasPhoneTag %}
+  {% include "phone", h_color: h_color, omitContents: omitContents %}
+{% endif %}
