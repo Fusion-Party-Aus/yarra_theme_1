@@ -1,22 +1,33 @@
-<div id="content" class="container">
-  <section class="my-2 py-2">
-    {% if page.has_author? %}
-    <div class="mt-1">
-      {% include "page_byline" %}
-    </div>
-    {% endif %}
-  </section>
+<div class="row">
+  <div class="col-lg-9 mx-auto">
+    <header class="mb-3">
+      <h2 class="mb-0">{{ page.headline }}</h2>
 
-  <div id="intro" class="intro">
-    <div class="content">
-      {{ page.blog_post.content_full }}
+      {% if page.has_author? %}
+      <div class="mt-1">
+        {% include "page_byline" %}
+      </div>
+      {% endif %}
+    </header>
+
+    <div id="content">
+
+      <div id="intro" class="intro">
+        <div class="content">
+          {{ page.blog_post.content_full }}
+        </div>
+      </div>
+
+      {% include "page_tags" with page %}
+
+      {% include "like_page" %}
+
+      {% if page.show_stream? %}
+      <div class="mt-4">
+        {% include "page_stream" %}
+      </div>
+      {% endif %}
+
     </div>
   </div>
-
-  {% if page.show_stream? %}
-  <div class="mt-4">
-    {% include "page_stream" %}
-  </div>
-  {% endif %}
-
 </div>

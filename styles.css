@@ -4,6 +4,7 @@
     --fusion-blue: #5facff;
     --fusion-purple: #c34df1;
     --fusion-gray: #949494;
+    --yarra-purple: #9b35b7;
     --underlining-duration: 0.55s;
     --font-border-width: 4px;
     --z-body: 3;
@@ -20,60 +21,19 @@ html, body {
     overflow-x: clip;
 }
 
+h1, h2, h3, h4, h5 {
+    font-family: 'Arial Black';
+    text-decoration: underline;
+    text-transform: uppercase;
+}
+
+main h1, main h2, main h3, main h4, main h5 {
+    color: var(--yarra-purple);
+}
+
 h1, h2, h3, h4, h5, p {
     /* Avoid things accidentally covering up our text */
     z-index: var(--z-body) + 2;
-}
-
-.massive {
-    font-size:2.5rem;
-}
-/* These were taken from Bootstrap 5 utilities */
-.fs-1 {
-    font-size: calc(1.375rem + 1.5vw) !important;
-}
-
-@media (min-width: 1200px) {
-    .fs-1 {
-        font-size: 2.5rem !important;
-    }
-}
-
-.fs-5 {
-    font-size: 1.25rem !important;
-}
-
-@media (min-width: 768px) {
-    .massive {
-        font-size: 2.75rem;
-    }
-}
-
-@media (min-width: 992px) {
-    .massive {
-        font-size: 3rem;
-    }
-}
-
-@media (min-width: 1200px) {
-    .massive {
-        font-size: 3.25rem;
-    }
-}
-
-@media (min-width: 1400px) {
-    .massive {
-        font-size: 3.5rem;
-    }
-}
-
-.svg-circle {
-    width: 100px;
-    height: 100px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: translate(25%, 25%);
 }
 
 .container {
@@ -108,61 +68,8 @@ h1, h2, h3, h4, h5, p {
     max-width: inherit;
 }
 
-ol, ul {
-    padding-left: 2rem;
-}
-
-
-@media (max-width: 767px) {
-    .rrr_logo {
-        max-width: 200px;
-    }
-}
-
-
-.bg-glass {
-    background-color: rgba(190, 190, 190, 0.3); /* Semi-transparent white for glass effect */
-    backdrop-filter: blur(5px); /* Blur effect for the background */
-    border-width: 1px;
-    border-top-width: 0;
-    border-color: rgba(224, 224, 224, 0.5); /* Light border for the glass edges */
-    box-shadow: inset 0 4px 4px rgba(176, 175, 175, 0.6), /* Inner top light */
-                inset 0 -4px 4px rgba(0, 0, 0, 0.1), /* Inner bottom shadow */
-                0 8px 16px rgba(0, 0, 0, 0.1); /* Drop shadow for depth */
-}
-
-.bg-glass-opaque {
-    background-color: rgba(211, 248, 244, 0.9);
-    border-color: rgba(224, 224, 224, 0.7); /* Light border for the glass edges */
-    box-shadow: inset 0 4px 4px rgba(176, 175, 175, 0.8), /* Inner top light */
-                inset 0 -4px 4px rgba(0, 0, 0, 0.3), /* Inner bottom shadow */
-                0 8px 16px rgba(0, 0, 0, 0.3); /* Drop shadow for depth */
-}
-
-.bg-pink-glass {
-  background: linear-gradient(135deg, rgba(193, 169, 197, 0.53), rgba(221, 157, 232, 0.53));
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 0 2px 35px 0 rgba(31, 38, 135, 0.27);
-}
-
 figcaption {
     display: inline-block;
-}
-
-.tab-caption {
-    padding: 0.5rem 1rem;
-    background-color: #f1f9fc91; /* Light gray background color */
-    border-radius: 0 0 10px 10px; /* Rounded bottom corners */
-    margin-left: 5px;
-    margin-top: 0px; /* Pulls the caption up to cover the gap */
-    position: relative; /* Allows the caption to overlap the image */
-    box-shadow: 0 8px 16px rgba(140, 165, 168, 0.1); /* Drop shadow for depth */;
-}
-
-.tab-caption a {
-    color: var(--bs-secondary-color);
 }
 
 .no-decorate {
@@ -172,244 +79,6 @@ figcaption {
 
 .no-decorate:hover {
     text-decoration: underline;
-}
-
-nav {
-    z-index: var(--z-nav);
-    border-radius: 2px;
-}
-nav.navbar {
-    padding-left: 0;
-    padding-right: 0;
-    position: fixed;
-    transition: transform 0.8s .1s ease,
-    background-color 3s ease,
-    border-color 3s ease,
-    box-shadow 3s ease;
-}
-.nav-link {
-    color: rgba(0,0,0,0.65) !important;
-}
-.hide-nav-bar {
-    transform: translateY(-120%);
-}
-
-nav ul {
-    padding: 0;
-    margin: 0;
-}
-
-nav li {
-    margin-right: 20px;
-    padding: 7px;
-    border-radius: 2px;
-    transition: background-color 0.00s ease-in-out, transform 0.4s ease-in-out;
-}
-
-nav li:hover {
-    color: #000; /* Color of text on hover, change as you like */
-    background: rgba(255, 255, 255, 0.2); /* Slight hover background */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Shadow for depth */
-}
-
-.dropdown {
-  position: relative;
-}
-.dropdown-menu {
-    background-color: rgba(211, 248, 244, 0.97);
-}
-.dropdown-menu li {
-    border-radius: 4px;
-}
-
-.dropdown-item:hover {
-    background-color: rgba(228, 248, 245, 0.83);
-    border-radius: 4px;
-}
-ul.dropdown-menu {
-    margin-top: 0.125rem;
-}
-.dropdown-menu, .dropdown-menu li {
-    z-index: var(--z-body) + 5;
-}
-.dropdown-menu-end {
-    right: 5px;
-}
-.dropdown-divider, hr.divider {
-    border-color: var(--fusion-purple);
-}
-.dropdown-divider:hover {
-    box-shadow: none;
-}
-.divider:hover, hr.divider {
-    box-shadow: none;
-}
-
-.logo {
-    height: 33px;
-    width: auto;
-}
-
-@media (min-width: 576px) {
-    footer ul {
-        list-style: none;
-    }
-}
-
-footer ul a {
-    color: inherit;
-    text-decoration: inherit;
-}
-
-footer ul a:hover {
-    text-decoration: underline;
-}
-
-.icons {
-    font-size: 24px;
-    color: gray;
-}
-
-.icons svg {
-    width: 30px;
-    height: 30px;
-}
-
-.icons svg:hover {
-    cursor: pointer;
-    animation: neon-pink-glow 15s ease-in-out infinite alternate;
-    color: gray;
-}
-
-.icons li {
-    display: inline-block;
-}
-
-.neon-pink:hover {
-    animation: neon-pink-glow 15s ease-in-out infinite alternate;
-}
-
-@keyframes neon-pink-glow {
-  from {
-    filter: drop-shadow(0 0 10px #fff)
-            drop-shadow(0 0 20px #fff)
-            drop-shadow(0 0 30px #fff)
-            drop-shadow(0 0 40px #F897E9EA)
-            /*drop-shadow(0 0 70px #F897E9EA)
-            drop-shadow(0 0 80px #F897E9EA)
-            drop-shadow(0 0 100px #F897E9EA)
-            drop-shadow(0 0 150px #F897E9EA);*/
-  }
-  to {
-    filter: drop-shadow(0 0 5px #F897E9EA)
-            drop-shadow(0 0 10px #F897E9EA)
-            drop-shadow(0 0 15px #fff)
-            drop-shadow(0 0 20px #F897E9EA)
-            drop-shadow(0 0 35px #F897E9EA)
-            drop-shadow(0 0 40px #F897E9EA)
-            /*drop-shadow(0 0 50px #F897E9EA)
-            drop-shadow(0 0 75px #F897E9EA);*/
-  }
-}
-
-header {
-    position: relative;
-    padding-top: 15px;
-}
-
-.header-container {
-    position: relative;
-    min-height: 200px;
-}
-
-.header-container img {
-    /* Our header images are chosen to be 4:1, and we wish for it to be 2.25 × the line height used later. */
-    height: max(200px, calc(1.125 * 0.25 * 100vw));
-    max-height: 240px;
-    width: 100%;
-    object-fit: cover;
-}
-
-.header-content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-}
-
-header h1 {
-    width: 100%;
-    font-size: 4rem;
-    box-decoration-break: clone;
-    -webkit-box-decoration-break: clone;
-}
-
-header .fs-scale {
-    font-size: 3.15rem;
-}
-
-/* These media sizes are based on https://getbootstrap.com/docs/5.0/layout/breakpoints/ */
-@media (min-width: 576px) {
-    header .fs-scale {
-        font-size: 4rem;
-    }
-}
-
-header .fs-scale-3-lines {
-    font-size: 2.5rem;
-}
-
-header .fs-scale-extra-long {
-    font-size: calc(min(4rem, max(5vw, 30px)));
-}
-
-h1.nicokaku {
-    text-shadow: 2px 0 var(--font-border-width) rgba(176, 175, 175, 0.8),
-                 -2px 0 var(--font-border-width) rgba(176, 175, 175, 0.8),
-                 0 2px var(--font-border-width) rgba(176, 175, 175, 0.8),
-                 0 -2px var(--font-border-width) rgba(176, 175, 175, 0.8);
-}
-
-/* These media sizes are based on https://getbootstrap.com/docs/5.0/layout/breakpoints/ */
-@media (min-width: 576px) {
-    header h1 {
-        font-size: 5rem;
-    }
-}
-
-@media (min-width: 768px) {
-    header h1 {
-        font-size: 6rem;
-    }
-}
-
-@media (min-width: 992px) {
-    header h1 {
-        font-size: 7rem;
-    }
-}
-header.container-fluid {
-    /* Space under the horizontal, site nav */
-    padding-top: 5rem;
-}
-
-.sidebar {
-    position: sticky;
-    top: 4.5rem;  /* Enough room for nav */
-    height: calc(100vh - 4.5rem);
-    overflow-y: hidden;
-}
-
-.logo-wrapper {
-    display: inline-flex;
-    width: 65%;
-    position: relative; /* It will be relative to the container now */
-    margin-left: auto;
-}
-
-.logo-wrapper img {
-    width: 100%;
-    height: auto;
 }
 
 .video {
@@ -428,50 +97,8 @@ header.container-fluid {
     z-index: 3;
 }
 
-/* Ensure the value cards are within a container that controls their width */
-.values-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px; /* Adjust gap as needed */
-}
-
-.card-body img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    overflow: hidden;
-    margin-bottom: 0;
-}
-
-.card-title {
-    margin-bottom: 0;
-}
-
-@font-face {
-    font-family: 'NicoKaku_subset';
-    /* This only has the glyphs we're actually using. https://stackoverflow.com/a/66238793/1495729 */
-    src: url('https://fusionparty.space/fonts/nicokaku_v2_subset.ttf') format('truetype');
-}
-
-.nicokaku {
-    color: white;
-    font-family: 'NicoKaku_subset', 'Dosis', sans-serif;
-}
-
 .open-sans {
     font-family: "Open Sans", sans-serif;
-}
-
-.inter {
-  font-family: "Inter", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-  font-variation-settings: "slnt" 0;
-}
-
-h2.inter {
-    font-weight: 500;
 }
 
 .fw-500 {
@@ -480,17 +107,6 @@ h2.inter {
 
 .fw-600 {
     font-weight: 600 !important;
-}
-
-@keyframes bolden {
-    to {
-        font-weight: 700;
-    }
-}
-
-.bolden {
-    font-weight: 600;
-    animation: bolden 0.7s forwards ease;
 }
 
 .fw-700 {
@@ -530,10 +146,6 @@ h2.inter {
     transition-delay: calc(var(--underlining-duration)/2);
 }
 
-h2 {
-    font-weight: bold;
-}
-
 h1.h-underline {
     padding-bottom: 7px;
 }
@@ -562,30 +174,35 @@ h5.h-underline {
     background-color: var(--fusion-aquamarine);
 }
 
-.bg-plasma {
-    background-image: url('https://fusionparty.space/images/horizontal_plasma.webp');
-    background-size: cover; /* Cover the entire area of the element */
-    background-position: center; /* Center the background image */
-}
-
-.bg-plasma-top {
-    background-image: url('https://fusionparty.space/images/horizontal_plasma_top.webp');
-    background-size: cover; /* Cover the entire area of the element */
-    background-position: center; /* Center the background image */
-}
-
-.bg-underwater {
-    background-image: url('https://fusionparty.space/images/underwater_blue.webp');
-    background-size: cover;
-    background-position: center;
-}
-
 .bg-aquamarine {
     background-color: rgba(138, 238, 216, 0.73);
 }
 
 button.bg-aquamarine:hover {
     background-color: rgba(89, 217, 217, 0.85);
+}
+
+/* Background container */
+.position-relative {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.bg-yarra {
+    background-image: url('https://assets.nationbuilder.com/futureparty/pages/4104/attachments/original/1720359534/purple_yarra.png?1720359534');
+    background-size: cover; /* Cover the entire area of the element */
+    background-position: center; /* Center the background image */
+}
+
+/* Ensuring content is above the overlay */
+.floating-text, .floating-text span {
+    position: relative;
+    z-index: calc(var(--z-body) + 1); /* Ensures content is above the overlay */
+}
+
+.tilted {
+    transform: rotate(10deg);
 }
 
 .bg-aquamarine-transparent {
@@ -611,6 +228,10 @@ button.bg-aquamarine:hover {
 button.bg-opal:hover {
   /* This is the background-color for btn-info in Bootstrap 5 */
   background-color: #31d2f2 !important;
+}
+
+.h-white::after, .h-white span::after {
+    background-color: white;
 }
 
 .h-pink::after {
@@ -663,14 +284,6 @@ button.bg-purple, button.bg-purple:hover {
     border-color: #780a9d;
 }
 
-.bg-gray-mist {
-  /* This is the top-left of bg-pink-mist */
-  background-image: url('https://fusionparty.space/images/gray_mist.webp');
-  background-size: cover; /* Cover the entire area of the element */
-  background-position: center; /* Center the background image */
-  background-attachment: fixed;  /* Fixed to the viewport rather than the HTML page, so it doesn't look stretched. */
-}
-
 .bg-transparent {
     background-color: transparent;
 }
@@ -684,212 +297,10 @@ input.form-control {
     height: calc(3.5rem + calc(var(--bs-border-width) * 2));
 }
 
-.page-pages-show-donation-v2-wide .donation-v2-amounts > div {
-    position: relative;
-}
-
-.page-pages-show-donation-v2-wide .donation-v2-amounts input[type="radio"] {
-    display: none;
-}
-
-.page-pages-show-donation-v2-wide .donation-v2-amounts label.radio {
-    border-radius: 2px;
-    /* todo: these labels should be more like the primary hover */
-    background-color: rgba(0, 60, 113, 0.17);
-
-    display: inline-block;
-    min-width: 80px;
-    padding: 15px 5px;
-
-    font-size: 19px;
-    text-align: center;
-
-    margin: 5px 5px 5px 0;
-}
-
-.page-pages-show-donation-v2-wide .donation-v2-amounts .custom-control-label::before {
-    content: none;
-}
-
-.page-pages-show-donation-v2-wide .donation-v2-amounts .custom-control-label::after {
-    content: none;
-}
-
-.page-pages-show-donation-v2-wide .donation-v2-amounts .custom-control {
-    padding-left: 0;
-}
-
-.page-pages-show-donation-v2-wide .donation-v2-amounts .custom-control-inline {
-    margin-right: 0;
-}
-
-.custom-control-input:checked ~ .custom-control-label::before  {
-    background-color: #a5a5a5;
-    color: inherit;
-    border-color: #a5a5a5;
-}
-
-.custom-control-input:focus ~ .custom-control-label::before {
-    box-shadow: 0 0 0 .2rem rgba(230, 0, 255, 0.25)
-}
-
-.custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
-    border-color: #e380ff
-}
-
-.custom-control-input:not(:disabled):active ~ .custom-control-label::before {
-    color: #fff;
-    background-color: #ecb3ff;
-    border-color: #ecb3ff
-}
-
-.page-pages-show-donation-v2-wide .donation-v2-amounts input[type="radio"] + label {
-    background-color: #edcff6;
-    color: inherit;
-    border-color: #d249d2;
-    border-radius: 0.375rem;
-}
-
-.donation_form .donation-v2-amounts input[type="radio"]:hover + label {
-    background-color: #ec60ec;
-    color: white;
-    cursor: pointer;
-}
-
-.page-pages-show-donation-v2-wide .donation-v2-amounts input[type="radio"]:checked + label {
-    background-color: #e05be0;
-    color: white;
-    border-color: #d249d2;
-}
-
-/* See glowing-button.css */
-.page-pages-show-donation-v2-wide .donation-v2-amounts input[type="radio"]:checked + label {
-  border: none;
-  outline: none;
-  cursor: pointer;
-  position: relative;
-  z-index: 0;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
-
-.page-pages-show-donation-v2-wide .donation-v2-amounts input[type="radio"]:checked + label:before {
-  content: "";
-  background: linear-gradient(
-    90deg,
-    #fff,
-    transparent,
-		 transparent,
-		#fff
-
-  );
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  background-size: 400%;
-  z-index: -1;
-  filter: blur(8px);
-  width: calc(100% + 4px);
-  height: calc(100% + 4px);
-  animation: glowing-button-animation 20s linear infinite;
-  transition: opacity 0.3s ease-in-out;
-  border-radius: 10px;
-}
-
-.page-pages-show-donation-v2-wide .progress-bar {
-    background-color: #ff7fff;
-}
-
-/*.page-pages-show-donation-v2-wide .submit-button {
-    background-color: #1A73E8;
-    border-color: #1A73E8;
-}*/
-
-
-
-@keyframes jumbo {
-    from {
-        background-position: 50% 50%, 50% 50%;
-    }
-    to {
-        background-position: 350% 50%, 350% 50%;
-    }
-}
-
-.bg-charm {
-    --stripes: repeating-linear-gradient(
-        100deg,
-        #fff 0%,
-        #fff 7%,
-        transparent 10%,
-        transparent 12%,
-        #fff 16%
-    );
-    --stripesDark: repeating-linear-gradient(
-        100deg,
-        #000 0%,
-        #000 7%,
-        transparent 10%,
-        transparent 12%,
-        #000 16%
-    );
-    --rainbow: repeating-linear-gradient(
-        100deg,
-		#c8dcf6 10%,
-		#efd1ff 15%,
-		#a9c6ec 20%,
-		#85e3ee 25%,
-		#bfddff 30%
-    );
-    background-image: var(--stripes), var(--rainbow);
-    background-size: 300%, 200%;
-    background-position: 50% 50%, 50% 50%;
-
-    filter: blur(10px) invert(100%);
-
-    mask-image: radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
-
-    position: absolute;
-    display: block;
-    pointer-events: none;
-	width: 100%;
-	height: 30vh;
-	z-index: var(--z-body) -1;
-}
-
-.bg-charm::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: var(--stripes), var(--rainbow);
-    background-size: 200%, 100%;
-    animation: jumbo 100s linear infinite;
-    background-attachment: fixed;
-    mix-blend-mode: difference;
-}
-
 @keyframes spin {
   100% {transform: rotate(1turn); }
 }
 
 .spin {
     animation: spin 45s linear infinite reverse;
-}
-
-/* todo: turbulence: https://codepen.io/cobra_winfrey/pen/eYOXOdB */
-
-/* todo: charm UI https://codepen.io/TWilson/pen/jOdWqbZ */
-
-/* This works with glowing buttons */
-.animation-sync div:nth-child(1) a::before {
-  animation-delay: 3s;
-}
-
-.animation-sync div:nth-child(2) a::before {
-  animation-delay: 2s;
-}
-
-.animation-sync div:nth-child(3) a::before {
-  animation-delay: 0s;
 }
