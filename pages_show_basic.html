@@ -8,12 +8,6 @@
 
   {% include "page_tags" with page %}
 
-  {% if page.is_homepage? == true and site.page_tags contains "homepage" %}
-    <div class="mt-4">
-      {% tag "homepage" with "homepage_widget" %}
-    </div>
-  {% endif %}
-
   {% include "like_page" %}
 
   {% if page.show_stream? %}

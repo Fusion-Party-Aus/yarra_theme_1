@@ -5,7 +5,9 @@
     {% include "homepage_excerpt_activity_stream" %}
   <!-- Basic page -->
   {% when "Basic" %}
-    {% include "homepage_excerpt_basic" %}
+    {% comment %}
+      This includes featured pages, which we don't want
+    {% endcomment %}
   <!-- Blog page -->
   {% when "Blog" %}
     {% include "homepage_excerpt_blog" %}
