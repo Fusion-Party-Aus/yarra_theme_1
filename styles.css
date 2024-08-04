@@ -190,9 +190,10 @@ button.bg-aquamarine:hover {
 }
 
 .bg-yarra {
-    background-image: url('https://assets.nationbuilder.com/futureparty/pages/4104/attachments/original/1720359534/purple_yarra.png?1720359534');
+    background-image: url('https://assets.nationbuilder.com/futureparty/pages/4104/attachments/original/1722752319/Yarra_map_colorised.PNG?1722752319');
     background-size: cover; /* Cover the entire area of the element */
-    background-position: center; /* Center the background image */
+    background-position: center;
+    background-attachment: fixed; /* Center the background image */
 }
 
 /* Ensuring content is above the overlay */
