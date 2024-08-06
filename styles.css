@@ -213,6 +213,12 @@ button.bg-aquamarine:hover {
     box-shadow: 0 4px 15px 0 rgba(31, 38, 135, 0.1);
 }
 
+.bg-pastel-purple-transparent {
+    background-color: rgba(182,130,176,0.3);
+    margin: 0;
+    padding: 0;
+}
+
 .bg-blue-gray-transparent {
     background-color: #e9fbfab0;
 }
