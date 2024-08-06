@@ -275,6 +275,19 @@ button.bg-opal:hover {
     color:white;
 }
 
+/* Purple buttons by default */
+.btn-primary {
+    background-color: var(--fusion-purple);
+    color: white;
+}
+.btn-primary:hover {
+    background-color: #a20dd7;
+    color:white;
+}
+button.btn-primary, button.btn-primary:hover, input.btn-primary, input.btn-primary:hover, a.btn-primary, a.btn-primary:hover {
+    border-color: #780a9d;
+}
+
 .bg-pink {
     background-color: #ff7fff;
     color: white;
